@@ -1,8 +1,11 @@
-import { DatePicker } from 'antd';
+import { RouterProvider } from 'react-router-dom';
+import router from './router';
 
-function App() {
-  console.log(12123);
-  return <DatePicker />;
-}
-
+const App = () => {
+  return (
+    <div>
+      <RouterProvider router={router}></RouterProvider>
+    </div>
+  );
+};
 export default App;
