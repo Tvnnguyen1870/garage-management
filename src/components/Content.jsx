@@ -11,7 +11,7 @@ const Content = () => {
           padding: 24,
           minHeight: 280,
           background: colorBgContainer,
-        }}
+        }}  
       >
         Content
       </div>
