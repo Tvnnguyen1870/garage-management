@@ -9,7 +9,11 @@ const LayOut = () => {
     token: { colorBgContainer },
   } = theme.useToken();
   return (
-    <Layout>
+    <Layout
+      style={{
+        width: '100%',
+      }}
+    >
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="demo-logo-vertical" />
         <div
