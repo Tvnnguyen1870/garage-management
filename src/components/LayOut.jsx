@@ -12,8 +12,21 @@ const LayOut = () => {
     <Layout>
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="demo-logo-vertical" />
+        <div
+          style={{
+            color: 'black',
+            backgroundColor: 'white',
+            paddingTop: 4,
+            paddingBottom: 4,
+            paddingLeft: 28,
+            fontSize: 15,
+            fontWeight: 600,
+          }}
+        >
+          <p>Menu</p>
+        </div>
         <Menu
-          theme="dark"
+          theme="light"
           mode="inline"
           defaultSelectedKeys={['1']}
           items={[
