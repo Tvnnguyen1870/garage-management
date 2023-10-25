@@ -1,5 +1,5 @@
 const GarageOwner = () => {
-  return <div></div>;
+  return <div>1</div>;
 };
 
 export default GarageOwner;
