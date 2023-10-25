@@ -74,6 +74,7 @@ const LayOut = () => {
         </Header>
         <Content />
       </Layout>
+      <GarageCreate />
     </Layout>
   );
 };

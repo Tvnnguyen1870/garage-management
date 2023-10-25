@@ -2,9 +2,7 @@ import { useState } from 'react';
 import { MenuFoldOutlined, MenuUnfoldOutlined, GroupOutlined, UserOutlined, IdcardOutlined } from '@ant-design/icons';
 import { Layout, Menu, Button, theme } from 'antd';
 import Content from './Content';
-import GarageCreate from '../Users/GarageCreate';
 const { Header, Sider } = Layout;
-
 const LayOut = () => {
   const [collapsed, setCollapsed] = useState(false);
   const {

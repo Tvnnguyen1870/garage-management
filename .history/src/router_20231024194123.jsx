@@ -1,7 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import LayOut from './components/Layout';
 import Login from './formlogins/Login';
-import GarageCreate from './Users/GarageCreate';
 
 const router = createBrowserRouter([
   {
@@ -11,10 +10,6 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <Login />,
-  },
-  {
-    path: '/garage',
-    element: <GarageCreate />,
   },
 ]);
 

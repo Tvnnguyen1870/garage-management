@@ -55,6 +55,7 @@ const LayOut = () => {
         />
       </Sider>
       <Layout>
+        <GarageCreate />
         <Header
           style={{
             padding: 0,
