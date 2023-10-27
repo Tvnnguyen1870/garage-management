@@ -1,20 +1,31 @@
 import { createBrowserRouter } from 'react-router-dom';
-import LayOut from './components/Layout';
+import LayOut from './components/LayOut';
 import Login from './formlogins/Login';
-import GarageCreate from './Users/GarageCreate';
+import UpdateProfile from './myprofile/UpdateProfile';
+import Profile from './myprofile/Profile';
+import ChangeProfile from './myprofile/ChangeProfile';
+import LayoutLogin from './formlogins/LayoutLogin';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/layout',
     element: <LayOut />,
+    children: [
+      {
+        path: '/profile',
+        element: <Profile />,
+      },
+    ],
   },
   {
-    path: '/login',
-    element: <Login />,
-  },
-  {
-    path: '/garage',
-    element: <GarageCreate />,
+    path: '/',
+    element: <LayoutLogin />,
+    children: [
+      {
+        path: '/login',
+        element: <Login />,
+      },
+    ],
   },
 ]);
 
