@@ -1,7 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom';
 import LayOut from './components/Layout';
 import Login from './formlogins/Login';
-import GarageCreate from './Users/GarageCreate';
+import Forgot from './formlogins/ForgotPassword';
+import Reset from './formlogins/ResetPassword';
 
 const router = createBrowserRouter([
   {
@@ -13,8 +14,12 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: '/garage',
-    element: <GarageCreate />,
+    path: '/forgot',
+    element: <Forgot />,
+  },
+  {
+    path: '/reset',
+    element: <Reset />,
   },
 ]);
 
