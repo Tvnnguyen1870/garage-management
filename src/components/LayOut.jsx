@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { MenuFoldOutlined, MenuUnfoldOutlined, GroupOutlined, UserOutlined, IdcardOutlined } from '@ant-design/icons';
 import { Layout, Menu, Button, theme } from 'antd';
-import Content from './Content';
 import { Outlet } from 'react-router-dom';
 
 const { Header, Sider } = Layout;
