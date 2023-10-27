@@ -5,6 +5,7 @@ import UpdateProfile from '../myprofile/UpdateProfile';
 const Content = () => {
   return (
     <div>
+      content
       <Profile />
       {/* <UpdateProfile /> */}
       {/* <ChangeProfile /> */}
