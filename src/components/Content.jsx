@@ -1,8 +1,12 @@
+import Profile from '../myprofile/Profile';
+
 const Content = () => {
   return (
     <div>
-      <h1>content</h1>
-      <p>content</p>
+      content
+      <Profile />
+      {/* <UpdateProfile /> */}
+      {/* <ChangeProfile /> */}
     </div>
   );
 };

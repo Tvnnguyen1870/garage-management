@@ -1,18 +1,21 @@
 import { useState } from 'react';
 import { MenuFoldOutlined, MenuUnfoldOutlined, GroupOutlined, UserOutlined, IdcardOutlined } from '@ant-design/icons';
 import { Layout, Menu, Button, theme } from 'antd';
-import Content from './Content';
+import { Outlet } from 'react-router-dom';
 
 const { Header, Sider } = Layout;
 
 const LayOut = () => {
   const [collapsed, setCollapsed] = useState(false);
+
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+
   return (
     <Layout
       style={{
+        height: 720,
         width: '100%',
       }}
     >
@@ -20,8 +23,8 @@ const LayOut = () => {
         <div className="demo-logo-vertical" />
         <div
           style={{
-            color: 'black',
-            backgroundColor: 'white',
+            color: 'white',
+            backgroundColor: 'dark',
             paddingTop: 4,
             paddingBottom: 4,
             paddingLeft: 28,
@@ -32,7 +35,7 @@ const LayOut = () => {
           <p>Menu</p>
         </div>
         <Menu
-          theme="light"
+          theme="dark"
           mode="inline"
           defaultSelectedKeys={['1']}
           items={[
@@ -71,8 +74,18 @@ const LayOut = () => {
               height: 64,
             }}
           />
+          <div className="dropdown">
+            <img src="src/assets/witch-155291_640.webp" alt="" className="img" />
+            <p className="nameAdmin">Admin</p>
+            <div className="dropAdmin">
+              <ul>
+                <li>Profile</li>
+                <li style={{ color: 'red' }}>Log Out</li>
+              </ul>
+            </div>
+          </div>
         </Header>
-        <Content />
+        <Outlet />
       </Layout>
     </Layout>
   );
