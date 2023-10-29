@@ -1,10 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom';
 import LayOut from './components/LayOut';
 import Login from './formlogins/Login';
-import UpdateProfile from './myprofile/UpdateProfile';
 import Profile from './myprofile/Profile';
-import ChangeProfile from './myprofile/ChangeProfile';
 import LayoutLogin from './formlogins/LayoutLogin';
+import UpdateProfile from './myprofile/UpdateProfile';
+import ChangeProfile from './myprofile/ChangeProfile';
+import GarageAll from './garageMangagement/GarageAll';
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,18 @@ const router = createBrowserRouter([
       {
         path: '/profile',
         element: <Profile />,
+      },
+      {
+        path: '/updateprofile',
+        element: <UpdateProfile />,
+      },
+      {
+        path: '/changepassword',
+        element: <ChangeProfile />,
+      },
+      {
+        path: '/garageall',
+        element: <GarageAll />,
       },
     ],
   },

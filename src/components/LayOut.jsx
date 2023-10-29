@@ -15,7 +15,7 @@ const LayOut = () => {
   return (
     <Layout
       style={{
-        height: 720,
+        minHeight: 740,
         width: '100%',
       }}
     >
