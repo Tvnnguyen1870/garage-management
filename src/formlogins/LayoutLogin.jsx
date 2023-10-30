@@ -12,7 +12,6 @@ const LayoutLogin = () => {
       }}
     >
       <Card>
-        input
         <Outlet />
       </Card>
     </div>

@@ -1,5 +1,6 @@
 import { Col, Row } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import axiosInstance from '../services/axios.service';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -11,6 +12,13 @@ const Profile = () => {
   const changePass = () => {
     navigate('/changepassword');
   };
+
+  const callApi = axiosInstance.post('auth/sign-in', {
+    email: 'nhom1@grr.la',
+    password: '123456',
+  });
+
+  console.log(callApi.data);
 
   return (
     <div>
