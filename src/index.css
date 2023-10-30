@@ -18,7 +18,7 @@
   margin: 0;
 }
 
-/* img */
+/* Header va dropdown */
 .img {
   margin-right: 12px;
   width: 32px;
@@ -91,37 +91,55 @@
 /* profile */
 
 .headingProfile {
-  margin-left: 80px;
+  margin-left: 60px;
   font-family: Poppins;
   font-size: 28px;
-  font-weight: 800;
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 32px;
 }
 
 .profile {
-  margin-left: 80px;
-  margin-right: 80px;
-  display: flex;
-  padding: 16px 16px;
-  flex-direction: column;
+  margin-left: 60px ;
+  margin-right: 60px;
+  padding: 32px 16px;
   align-items: flex-start;
-  gap: 60px;
   border: 1px solid #ccc;
   border-radius: 16px;
   background-color: #fff;
 }
 
+.profile-one {
+  padding-left: 16px;
+}
+
+.profile-grid {
+  padding-bottom: 36px;
+}
+
+.profile-grid span {
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 300;
+}
+
+.profile-grid p {
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+/* button profile */
+
 .buttonProfile {
-  display: flex;
-  padding-top: 16px;
-  justify-items: flex-start;
-  align-items: flex-end;
-  width: 100%;
-  border-top: 1px solid #95c7ed;
+  padding-top: 24px;
 }
 
 .buttonProfile button {
   min-width: 160px;
   height: 44px;
+  margin-left: 12px;
   border-radius: 8px;
   background-color: #fff;
   border: 1px solid #8b50de;
@@ -138,16 +156,82 @@
   margin-right: 20px;
 }
 
-table {
-  text-align: start;
-  font-family: Poppins;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 40px;
+/* update profile */
+
+.profile-two {
+  width: 450px;
+}
+
+.profile .input-updateProfile {
+  margin-bottom: 16px;
+  font-size: 16px;
   font-weight: 400;
 }
 
-table th, td {
-  min-width: 200px;
+.profile .input-updateProfile input {
+  padding: 16px;
+  width: 420px;
+  height: 24px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.profile .input-date input{
+  width: 378px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.profile .input-gender {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+/* profile changePassword */
+
+.profilePassword {
+  width: 519px;
+  min-height: 398px;
+  margin-left: 60px ;
+  padding: 24px;
+  align-items: flex-start;
+  border: 1px solid #ccc;
+  border-radius: 16px;
+  background-color: #fff;
+}
+
+.profilePassword .input-changePassword{
+  margin-bottom: 18px;
+  position: relative;
+}
+
+.profilePassword .input-changePassword input{
+  padding: 16px;
+  width: 420px;
+  height: 24px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.heading-changePassword {
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+
+.profilePassword .buttonChangePassword button{
+  min-width: 120px;
+  height: 40px;
+  margin-top: 16px;
+  border-radius: 8px;
+  background-color: #fff;
+  border: 1px solid #8b50de;
+  color:#8b50de;
+}
+
+.profilePassword .buttonChangePassword button:hover{
+  cursor: pointer;
+  background-color: #8b50de;
+  color: #fff;
 }
