@@ -1,5 +1,8 @@
-import { Col, Row } from 'antd';
+import { Button, Col, Row } from 'antd';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { getProfile } from '../store/reducers/profile';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -11,6 +14,16 @@ const Profile = () => {
   const changePass = () => {
     navigate('/changepassword');
   };
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProfile());
+  }, []);
+
+  const { profile } = useSelector((state) => state.profile);
+
+  if (!profile) return;
 
   return (
     <div>
@@ -24,13 +37,13 @@ const Profile = () => {
                   <Col span={24}>
                     <div className="profile-grid">
                       <span>Name</span>
-                      <p></p>
+                      <p>{profile.fullName}</p>
                     </div>
                   </Col>
                   <Col span={24}>
                     <div className="profile-grid">
                       <span>Email</span>
-                      <p className="api-return">{}</p>
+                      <p className="api-return">{profile.email}</p>
                     </div>
                   </Col>
                 </Row>
@@ -42,13 +55,13 @@ const Profile = () => {
                   <Col span={24}>
                     <div className="profile-grid">
                       <span>Phone Number</span>
-                      <p className="api-return"></p>
+                      <p className="api-return">{profile.phoneNumber}</p>
                     </div>
                   </Col>
                   <Col span={24}>
                     <div className="profile-grid">
                       <span>DOB</span>
-                      <p className="api-return"></p>
+                      <p className="api-return">{profile.dob}</p>
                     </div>
                   </Col>
                 </Row>
@@ -60,13 +73,13 @@ const Profile = () => {
                   <Col span={24}>
                     <div className="profile-grid">
                       <span>Gender</span>
-                      <p className="api-return"></p>
+                      <p className="api-return">{profile.gender}</p>
                     </div>
                   </Col>
                   <Col span={24}>
                     <div className="profile-grid">
                       <span>Role</span>
-                      <p className="api-return"></p>
+                      <p className="api-return">{profile.role}</p>
                     </div>
                   </Col>
                 </Row>
@@ -75,21 +88,12 @@ const Profile = () => {
           </Row>
         </div>
         <div className="buttonProfile">
-          <Row gutter={24}>
-            <Col className="gutter-row" span={4}>
-              <div>
-                <button className="btnUp" onClick={updateProfile}>
-                  Update Profile
-                </button>
-              </div>
+          <Row gutter={16}>
+            <Col>
+              <Button onClick={updateProfile}>Update Profile</Button>
             </Col>
-            <Col className="gutter-row" span={4}>
-              <div>
-                {' '}
-                <button className="btnChange" onClick={changePass}>
-                  Change Password
-                </button>
-              </div>
+            <Col>
+              <Button onClick={changePass}>Change Password</Button>
             </Col>
           </Row>
         </div>
