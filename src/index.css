@@ -130,31 +130,6 @@
   font-weight: 600;
 }
 
-/* button profile */
-
-.buttonProfile {
-  padding-top: 24px;
-}
-
-.buttonProfile button {
-  min-width: 160px;
-  height: 44px;
-  margin-left: 12px;
-  border-radius: 8px;
-  background-color: #fff;
-  border: 1px solid #8b50de;
-  color:#8b50de;
-}
-
-.buttonProfile button:hover {
-  cursor: pointer;
-  background-color: #8b50de;
-  color: #fff;
-}
-
-.btnUp {
-  margin-right: 20px;
-}
 
 /* update profile */
 
@@ -193,7 +168,7 @@
 
 .profilePassword {
   width: 519px;
-  min-height: 398px;
+  min-height: 360px;
   margin-left: 60px ;
   padding: 24px;
   align-items: flex-start;
@@ -218,20 +193,4 @@
 .heading-changePassword {
   margin-top: 8px;
   margin-bottom: 16px;
-}
-
-.profilePassword .buttonChangePassword button{
-  min-width: 120px;
-  height: 40px;
-  margin-top: 16px;
-  border-radius: 8px;
-  background-color: #fff;
-  border: 1px solid #8b50de;
-  color:#8b50de;
-}
-
-.profilePassword .buttonChangePassword button:hover{
-  cursor: pointer;
-  background-color: #8b50de;
-  color: #fff;
 }
