@@ -7,7 +7,7 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
     function (config) {
       // Do something before request is sent
-      config.headers.Authorization = localStorage.getItem('accessToken') ?? '';
+      config.headers.Authorization = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFlYjJjNzAxLTc4MWYtNDQyZS1hODQyLTc3ZDdlZTIxZmJiMCIsImVtYWlsIjoibmhvbTFAZ3JyLmxhIiwiZnVsbE5hbWUiOiJOaG9tIDEiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2OTg3MTY1ODAsImV4cCI6MTY5ODc1MjU4MH0.hyfGa8O8sKIsW3U5C7Q2p_c6J__mpD67F-EZaFrWAoQ';
       return config;
     },
     function (error) {

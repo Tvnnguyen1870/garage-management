@@ -1,6 +1,5 @@
 import { Col, Row } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import axiosInstance from '../services/axios.service';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -12,13 +11,6 @@ const Profile = () => {
   const changePass = () => {
     navigate('/changepassword');
   };
-
-  const callApi = axiosInstance.post('auth/sign-in', {
-    email: 'nhom1@grr.la',
-    password: '123456',
-  });
-
-  console.log(callApi.data);
 
   return (
     <div>
@@ -32,13 +24,13 @@ const Profile = () => {
                   <Col span={24}>
                     <div className="profile-grid">
                       <span>Name</span>
-                      <p>nguyen</p>
+                      <p></p>
                     </div>
                   </Col>
                   <Col span={24}>
                     <div className="profile-grid">
                       <span>Email</span>
-                      <p>tvn@gmail.com</p>
+                      <p className="api-return">{}</p>
                     </div>
                   </Col>
                 </Row>
@@ -50,13 +42,13 @@ const Profile = () => {
                   <Col span={24}>
                     <div className="profile-grid">
                       <span>Phone Number</span>
-                      <p>0021040</p>
+                      <p className="api-return"></p>
                     </div>
                   </Col>
                   <Col span={24}>
                     <div className="profile-grid">
                       <span>DOB</span>
-                      <p>17/12/2000</p>
+                      <p className="api-return"></p>
                     </div>
                   </Col>
                 </Row>
@@ -68,13 +60,13 @@ const Profile = () => {
                   <Col span={24}>
                     <div className="profile-grid">
                       <span>Gender</span>
-                      <p>Nam</p>
+                      <p className="api-return"></p>
                     </div>
                   </Col>
                   <Col span={24}>
                     <div className="profile-grid">
                       <span>Role</span>
-                      <p>Admin</p>
+                      <p className="api-return"></p>
                     </div>
                   </Col>
                 </Row>
