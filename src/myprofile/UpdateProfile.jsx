@@ -1,5 +1,5 @@
 import { Controller, useForm } from 'react-hook-form';
-import { Col, DatePicker, Radio, Row, Space } from 'antd';
+import { Button, Col, DatePicker, Radio, Row, Space } from 'antd';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useNavigate } from 'react-router-dom';
@@ -141,18 +141,13 @@ const UpdateProfile = () => {
                       </div>
                     </Col>
                   </Row>
-                  <Row gutter={24}>
-                    <div>
-                      <Col className="gutter-row" span={24}>
-                        <div className="buttonProfile">
-                          {' '}
-                          <button onClick={onsubmit}>Save</button>
-                          <button className="btn-cancel" onClick={onCancel}>
-                            Cancel
-                          </button>
-                        </div>
-                      </Col>
-                    </div>
+                  <Row gutter={16}>
+                    <Col>
+                      <Button>Save</Button>
+                    </Col>
+                    <Col>
+                      <Button onClick={onCancel}>Cancel</Button>
+                    </Col>
                   </Row>
                 </form>
               </div>

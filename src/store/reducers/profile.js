@@ -1,65 +1,36 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axiosInstance from "../../services/axios.service";
-import { isRouteErrorResponse } from "react-router-dom";
 
 const initialState = {
-    profiles: [],
+    profile: null,
 }
 
-// export const getProfile = createAsyncThunk(
-//     'profile/getProfile',
-//     async () => {
-//         const result = await axiosInstance.get('auth/profile')
-//             .then(function(response) {
-//                 console.log(response);
-//                 return response.data;
-//             })
-//             .then(function(profiles) {
-//                 var htmls = profiles.map(function(profile){
-//                     return `<p>${profile.name}</p>`
-//                 })
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFlYjJjNzAxLTc4MWYtNDQyZS1hODQyLTc3ZDdlZTIxZmJiMCIsImVtYWlsIjoibmhvbTFAZ3JyLmxhIiwiZnVsbE5hbWUiOiJOaG9tIDEiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2OTg3NTEzNTEsImV4cCI6MTY5ODc4NzM1MX0.lk4v8F5c28Fa6yuCJfi2Xq9HGtMIqellRHqvp_rli6o';
+localStorage.setItem('accessToken', token)
 
-//                 var html = htmls.join(''); 
-//                 document.getElementsByClassName('api-return').innerHTML = html;
-//             })
-//             console.log(result);
-//         return result; 
-//     }
-// )
-
-// export const getProfile = async () => {
-//     const result = await fetch('http://3.1.40.228:3500/auth/profile')
-//         .then(function (response) {
-//             console.log(response);
-//             return response.data
-//         })
-//         .catch(function (error) {
-//             console.log(error);
-//         })
-//         return result
-// }
-
-axiosInstance.get('auth/profile')
-        .then(function (response) {
-            console.log(response);
-            console.log(response.data.data);
-            return isRouteErrorResponse;
-        })
-        .then(function (profile) {
-            console.log(profile);
-        })
+export const getProfile = createAsyncThunk(
+    'profile/getProfile',
+    async () => {
+        try {
+            const result = await axiosInstance('auth/profile')
+            return result.data.data;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+)
         
-
-
-
 export const profileSlice = createSlice({
     name: 'profile',
     initialState,
     reducers: {
-        updateProfile: (state, action) => {
-            state.profiles.push(action.payload)
-        }
+
     },
+    extraReducers: (builder) => {
+        builder.addCase(getProfile.fulfilled, (state, actions) => {
+            state.profile = actions.payload;
+        })
+    }
 })
 
 // Action creators are generated for each case reducer function
