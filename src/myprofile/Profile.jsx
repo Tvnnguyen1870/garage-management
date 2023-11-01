@@ -1,8 +1,9 @@
 import { Button, Col, Row } from 'antd';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getProfile } from '../store/reducers/profile';
+import profile from '../assets/styles/profile.css';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -88,7 +89,12 @@ const Profile = () => {
           </Row>
         </div>
         <div className="buttonProfile">
-          <Row gutter={16}>
+          <Row
+            gutter={16}
+            style={{
+              paddingLeft: 16,
+            }}
+          >
             <Col>
               <Button onClick={updateProfile}>Update Profile</Button>
             </Col>

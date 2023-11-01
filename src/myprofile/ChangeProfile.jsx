@@ -2,6 +2,7 @@ import { Button, Col, Input, Row, Space } from 'antd';
 import React from 'react';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
+import Changepassword from '../assets/styles/changepassword.css';
 
 const ChangeProfile = () => {
   const navigate = useNavigate();
@@ -43,21 +44,10 @@ const ChangeProfile = () => {
             </Col>
 
             <Col>
-              <Button
-                style={{
-                  marginTop: 20,
-                }}
-              >
-                Save
-              </Button>
+              <Button className="btn-changepassword-profile">Save</Button>
             </Col>
             <Col>
-              <Button
-                style={{
-                  marginTop: 20,
-                }}
-                onClick={ClickCancel}
-              >
+              <Button className="btn-changepassword-profile" onClick={ClickCancel}>
                 Cancel
               </Button>
             </Col>

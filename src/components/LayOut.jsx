@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { MenuFoldOutlined, MenuUnfoldOutlined, GroupOutlined, UserOutlined, IdcardOutlined } from '@ant-design/icons';
 import { Layout, Menu, Button, theme } from 'antd';
 import { Outlet } from 'react-router-dom';
+import HeaderLayout from '../assets/styles/headerlayout.css';
 
 const { Header, Sider } = Layout;
 
@@ -80,7 +81,7 @@ const LayOut = () => {
             <div className="dropAdmin">
               <ul>
                 <li>Profile</li>
-                <li style={{ color: 'red' }}>Log Out</li>
+                <li className="logout-profile">Log Out</li>
               </ul>
             </div>
           </div>

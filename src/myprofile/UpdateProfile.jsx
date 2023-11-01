@@ -4,6 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import Updateprofile from '../assets/styles/updateprofile.css';
 
 const schema = yup.object().shape({
   userName: yup.string().required('name is valid'),

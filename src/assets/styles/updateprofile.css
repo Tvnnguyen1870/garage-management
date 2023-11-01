@@ -1,0 +1,32 @@
+
+.profile-two {
+    width: 450px;
+  }
+  
+  .profile .input-updateProfile {
+    margin-bottom: 16px;
+    font-size: 16px;
+    font-weight: 400;
+  }
+  
+  .profile .input-updateProfile input {
+    padding: 16px;
+    width: 420px;
+    height: 24px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+  
+  .profile .input-date input{
+    width: 378px;
+    font-size: 16px;
+    font-weight: 400;
+  }
+  
+  .profile .input-gender {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    font-size: 16px;
+    font-weight: 400;
+  }
+  
