@@ -5,14 +5,14 @@ const initialState = {
     profile: null,
 }
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFlYjJjNzAxLTc4MWYtNDQyZS1hODQyLTc3ZDdlZTIxZmJiMCIsImVtYWlsIjoibmhvbTFAZ3JyLmxhIiwiZnVsbE5hbWUiOiJuZ3V5ZW4iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2OTg5Mzc3MTYsImV4cCI6MTY5ODk3MzcxNn0.0m9ZB0Ta4fe8A5mgPsseEOyYGgCj9PO_ck4atj-V8y4';
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFlYjJjNzAxLTc4MWYtNDQyZS1hODQyLTc3ZDdlZTIxZmJiMCIsImVtYWlsIjoibmhvbTFAZ3JyLmxhIiwiZnVsbE5hbWUiOiJOaG9tIDEiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2OTg4OTIwOTEsImV4cCI6MTY5ODkyODA5MX0.tmFyCO5zvTUa_gKU7C3Mm2tMRflIesgMWb3GJZoeyqE';
 localStorage.setItem('accessToken', token)
 
 export const getProfile = createAsyncThunk(
-    'profile/getProfile',
+    'service/getService',
     async () => {
         try {
-            const result = await axiosInstance('auth/profile')
+            const result = await axiosInstance('auth/service')
             return result.data.data;
         } catch (error) {
             console.log(error);
@@ -20,8 +20,8 @@ export const getProfile = createAsyncThunk(
     }
 )
         
-export const profileSlice = createSlice({
-    name: 'profile',
+export const serviceSlice = createSlice({
+    name: 'service',
     initialState,
     reducers: {
 
@@ -34,8 +34,8 @@ export const profileSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const {updateProfile } = profileSlice.actions;
+export const {updateProfile } = serviceSlice.actions;
 
-const profileReducer = profileSlice.reducer;
+const serviceReducer = serviceSlice.reducer;
 
-export default profileReducer
+export default serviceReducer
