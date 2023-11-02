@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getProfile } from '../store/reducers/profile';
+import '../myprofile/profile.css';
 
 const Profile = () => {
   const navigate = useNavigate();

@@ -1,10 +1,4 @@
-body {
-    display: flex;
 
-justify-content: center;
-align-items: center;
-background-color: #fefefe;
-}
 
 /* .button {
     display: flex;
@@ -109,18 +103,7 @@ margin-top: 0px;
 
 
 
- h1 {
-    color: var(--neutral-dark-1, #111);
-text-align: center;
 
-/* Headline 6/Bold */
-font-family: Poppins;
-
-font-style: normal;
-font-weight: 700;
-line-height: 36px; /* 128.571% */
-margin-bottom: 0px;
- }
 
  .ant-form-item .ant-form-item-label >label {
     color: var(--neutral-dark-1, #111);
