@@ -90,7 +90,7 @@ font-weight: 500;
 line-height: 28px; /* 140% */
 margin-top: 0px;
 
- }
+ /* }
 
 
 
@@ -99,25 +99,25 @@ margin-top: 0px;
 text-align: center;
 
 /* Headline 6/Bold */
-font-family: Poppins;
+/* font-family: Poppins;
 font-size: 28px;
 font-style: normal;
 font-weight: 700;
-line-height: 36px; /* 128.571% */
+line-height: 36px; 
 margin-bottom: 0px;
- }
+ } */
 
- .ant-form-item .ant-form-item-label >label {
+ /* .ant-form-item .ant-form-item-label >label {
     color: var(--neutral-dark-1, #111);
 text-align: center;
 
-/* Headline 7/Medium */
+
 font-family: Poppins;
 font-size: 24px;
 font-style: normal;
 font-weight: 500;
-line-height: 32px; /* 133.333% */
- }
+line-height: 32px
+ } */
 
 
 
@@ -125,18 +125,18 @@ line-height: 32px; /* 133.333% */
 
 
 
- .ant-form-item .ant-form-item-label >label {
+ /* .ant-form-item .ant-form-item-label >label {
     color: var(--neutral-dark-1, #111);
 text-align: center; 
 
- /* Headline 7/Medium */
+ 
 font-family: Poppins;
 font-size: 24px;
 font-style: normal;
 font-weight: 500;
-line-height: 32px; /* 133.333% */ }
+line-height: 32px; 
  
 
 .ant-form-item-with-help {
     margin-bottom: 50px;
-}  */
+}   */
