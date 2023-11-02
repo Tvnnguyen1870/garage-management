@@ -7,7 +7,6 @@ import Profile from './myprofile/Profile';
 import LayoutLogin from './formlogins/LayoutLogin';
 import UpdateProfile from './myprofile/UpdateProfile';
 import ChangeProfile from './myprofile/ChangeProfile';
-import GarageAll from './garageMangagement/GarageAll';
 
 const router = createBrowserRouter([
   {
@@ -25,10 +24,6 @@ const router = createBrowserRouter([
       {
         path: '/changepassword',
         element: <ChangeProfile />,
-      },
-      {
-        path: '/garageall',
-        element: <GarageAll />,
       },
     ],
   },
