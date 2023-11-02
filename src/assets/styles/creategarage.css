@@ -1,0 +1,14 @@
+.garage-create-management {
+    margin-left: 40px ;
+    margin-right: 40px;
+    margin-top: 30px;
+    align-items: flex-start;
+}
+
+.garage-create {
+    border: 1px solid #ccc;
+    border-radius: 16px;
+    background-color: #fff;
+    padding: 24px 16px;
+    margin-top: 20px;
+}

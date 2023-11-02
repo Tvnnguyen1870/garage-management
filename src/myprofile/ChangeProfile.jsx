@@ -2,17 +2,22 @@ import { Button, Col, Input, Row, Space } from 'antd';
 import React from 'react';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import Changepassword from '../assets/styles/changepassword.css';
+import changepassword from '../assets/styles/changepassword.css';
 
 const ChangeProfile = () => {
   const navigate = useNavigate();
 
   // hàm cancel quay lại trang profile
-  const ClickCancel = () => {
+  const clickCancel = () => {
     navigate('/profile');
   };
 
   const [passwordVisible, setPasswordVisible] = React.useState(false);
+
+  // hàm savepassword : lưu trữ, thay đổi passsword và quay lại trang profile
+  const savePassword = () => {
+    navigate('/profile');
+  };
 
   return (
     <div>
@@ -44,10 +49,12 @@ const ChangeProfile = () => {
             </Col>
 
             <Col>
-              <Button className="btn-changepassword-profile">Save</Button>
+              <Button className="btn-changepassword-profile" onClick={savePassword}>
+                Save
+              </Button>
             </Col>
             <Col>
-              <Button className="btn-changepassword-profile" onClick={ClickCancel}>
+              <Button className="btn-changepassword-profile" onClick={clickCancel}>
                 Cancel
               </Button>
             </Col>

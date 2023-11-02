@@ -1,13 +1,19 @@
 import { useState } from 'react';
 import { MenuFoldOutlined, MenuUnfoldOutlined, GroupOutlined, UserOutlined, IdcardOutlined } from '@ant-design/icons';
 import { Layout, Menu, Button, theme } from 'antd';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import HeaderLayout from '../assets/styles/headerlayout.css';
 
 const { Header, Sider } = Layout;
 
 const LayOut = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const navigate = useNavigate();
+
+  // tới trang profile
+  const toProfile = () => {
+    navigate('/profile');
+  };
 
   const {
     token: { colorBgContainer },
@@ -80,7 +86,7 @@ const LayOut = () => {
             <p className="nameAdmin">Admin</p>
             <div className="dropAdmin">
               <ul>
-                <li>Profile</li>
+                <li onClick={toProfile}>Profile</li>
                 <li className="logout-profile">Log Out</li>
               </ul>
             </div>
