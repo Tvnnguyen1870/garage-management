@@ -3,9 +3,11 @@ import axiosInstance from "../../services/axios.service";
 
 const initialState = {
     profile: null,
+    updateProfile: {},
+    profiles: [],
 }
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFlYjJjNzAxLTc4MWYtNDQyZS1hODQyLTc3ZDdlZTIxZmJiMCIsImVtYWlsIjoibmhvbTFAZ3JyLmxhIiwiZnVsbE5hbWUiOiJOaG9tIDEiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2OTg4MjcxNzQsImV4cCI6MTY5ODg2MzE3NH0.0i5J8Nc5ma9WDjDO0uCGvYMQCLXuJlUgPAeMW-qb9MY';
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFlYjJjNzAxLTc4MWYtNDQyZS1hODQyLTc3ZDdlZTIxZmJiMCIsImVtYWlsIjoibmhvbTFAZ3JyLmxhIiwiZnVsbE5hbWUiOiJOaG9tIDEiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2OTg4OTA2MTIsImV4cCI6MTY5ODkyNjYxMn0.XpSL7g0_tnhQXyCLZ-VsEfSyckyTldohIyJJmm33FnA';
 localStorage.setItem('accessToken', token)
 
 export const getProfile = createAsyncThunk(
@@ -24,6 +26,16 @@ export const profileSlice = createSlice({
     name: 'profile',
     initialState,
     reducers: {
+        editProfile: (state, action) => {
+            const index = state.profiles.findIndex(
+                (profile) => profile.id === action.payload.id
+            )
+            if(index < 0) return;
+            state.profiles[index] = action.payload;
+        },
+        addProfile: (state, action) => {
+            state.profiles.push(action.payload)
+        }
 
     },
     extraReducers: (builder) => {
@@ -34,7 +46,7 @@ export const profileSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const {updateProfile } = profileSlice.actions;
+export const {updateProfile, editProfile, addProfile } = profileSlice.actions;
 
 const profileReducer = profileSlice.reducer;
 

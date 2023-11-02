@@ -1,7 +1,7 @@
-import { Col, Input, Pagination, Row, Select, Space } from 'antd';
+import { Button, Col, Input, Pagination, Row, Select, Space } from 'antd';
 import { Option } from 'antd/es/mentions';
 
-const GarageAll = () => {
+const GarageManagementAll = () => {
   return (
     <div
       className="profile"
@@ -16,29 +16,25 @@ const GarageAll = () => {
           </Col>
           <Col className="gutter-row" span={18}></Col>
           <Col className="gutter-row" span={3}>
-            <div>
-              <button>Add Garage</button>
-            </div>
+            <Button>Add Garage</Button>
           </Col>
         </Row>
       </div>
       <div>
         <Row gutter={24}>
           <Col className="gutter-row" span={12}>
-            <div>
-              <Space.Compact block>
-                <Select defaultValue="Zhejiang" allowClear>
-                  <Option value="Zhejiang">Zhejiang</Option>
-                  <Option value="Jiangsu">Jiangsu</Option>
-                </Select>
-                <Input
-                  style={{
-                    width: '50%',
-                  }}
-                  defaultValue="Xihu District, Hangzhou"
-                />
-              </Space.Compact>
-            </div>
+            <Space.Compact block>
+              <Select defaultValue="Zhejiang" allowClear>
+                <Option value="Zhejiang">Zhejiang</Option>
+                <Option value="Jiangsu">Jiangsu</Option>
+              </Select>
+              <Input
+                style={{
+                  width: '50%',
+                }}
+                defaultValue="Xihu District, Hangzhou"
+              />
+            </Space.Compact>
           </Col>
         </Row>
       </div>
@@ -106,4 +102,4 @@ const GarageAll = () => {
   );
 };
 
-export default GarageAll;
+export default GarageManagementAll;
