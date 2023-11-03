@@ -5,7 +5,7 @@ const initialState = {
     profile: null,
 }
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFlYjJjNzAxLTc4MWYtNDQyZS1hODQyLTc3ZDdlZTIxZmJiMCIsImVtYWlsIjoibmhvbTFAZ3JyLmxhIiwiZnVsbE5hbWUiOiJuZ3V5ZW4iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2OTg5Mzc3MTYsImV4cCI6MTY5ODk3MzcxNn0.0m9ZB0Ta4fe8A5mgPsseEOyYGgCj9PO_ck4atj-V8y4';
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFlYjJjNzAxLTc4MWYtNDQyZS1hODQyLTc3ZDdlZTIxZmJiMCIsImVtYWlsIjoibmhvbTFAZ3JyLmxhIiwiZnVsbE5hbWUiOiJuZ3V5ZW4iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2OTg5MzkzMjgsImV4cCI6MTY5ODk3NTMyOH0.G1LnwXkKF-O7ULhMQCnz3CbuSiQTWC6H3mpqjvc6ybQ';
 localStorage.setItem('accessToken', token)
 
 export const getProfile = createAsyncThunk(
@@ -34,7 +34,7 @@ export const profileSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const {updateProfile } = profileSlice.actions;
+export const { addProfile } = profileSlice.actions;
 
 const profileReducer = profileSlice.reducer;
 

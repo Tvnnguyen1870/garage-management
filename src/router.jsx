@@ -7,7 +7,11 @@ import Profile from './myprofile/Profile';
 import LayoutLogin from './formlogins/LayoutLogin';
 import UpdateProfile from './myprofile/UpdateProfile';
 import ChangeProfile from './myprofile/ChangeProfile';
-import GarageAll from './garageMangagement/GarageAll';
+import GarageDetail from './garageMangagement/GarageManagementDetail';
+import GarageManagementAll from './garageMangagement/GarageManagementAll';
+import CreateGarageManagement from './garageMangagement/CreateGarageManagement';
+import CreateService from './garageServices/CreateService';
+import Service from './garageServices/Service';
 
 const router = createBrowserRouter([
   {
@@ -27,8 +31,20 @@ const router = createBrowserRouter([
         element: <ChangeProfile />,
       },
       {
-        path: '/garageall',
-        element: <GarageAll />,
+        path: '/managementall',
+        element: <GarageManagementAll />,
+      },
+      {
+        path: '/managementcreate',
+        element: <CreateGarageManagement />,
+      },
+      {
+        path: '/managementdetail',
+        element: <GarageDetail />,
+      },
+      {
+        path: '/createservice',
+        element: <CreateService />,
       },
     ],
   },
@@ -66,8 +82,8 @@ const router = createBrowserRouter([
         element: <ChangeProfile />,
       },
       {
-        path: '/garageall',
-        element: <GarageAll />,
+        path: '/service',
+        element: <Service />,
       },
     ],
   },

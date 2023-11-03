@@ -5,7 +5,7 @@ const initialState = {
     profile: null,
 }
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFlYjJjNzAxLTc4MWYtNDQyZS1hODQyLTc3ZDdlZTIxZmJiMCIsImVtYWlsIjoibmhvbTFAZ3JyLmxhIiwiZnVsbE5hbWUiOiJOaG9tIDEiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2OTg4OTIwOTEsImV4cCI6MTY5ODkyODA5MX0.tmFyCO5zvTUa_gKU7C3Mm2tMRflIesgMWb3GJZoeyqE';
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFlYjJjNzAxLTc4MWYtNDQyZS1hODQyLTc3ZDdlZTIxZmJiMCIsImVtYWlsIjoibmhvbTFAZ3JyLmxhIiwiZnVsbE5hbWUiOiJuZ3V5ZW4iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2OTg5MzkzMjgsImV4cCI6MTY5ODk3NTMyOH0.G1LnwXkKF-O7ULhMQCnz3CbuSiQTWC6H3mpqjvc6ybQ';
 localStorage.setItem('accessToken', token)
 
 export const getProfile = createAsyncThunk(
