@@ -2,7 +2,7 @@ import { Button, Col, Input, Row, Space } from 'antd';
 import React from 'react';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import changepassword from '../assets/styles/changepassword.css';
+import '../assets/styles/changepassword.css';
 
 const ChangeProfile = () => {
   const navigate = useNavigate();
