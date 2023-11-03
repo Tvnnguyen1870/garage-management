@@ -19,34 +19,15 @@ export const fetchOwners = createAsyncThunk('owner/fetchOwners', async () => {
   }
 });
 
-export const deleteOwners = createAsyncThunk('owner/deleteOwners', async () => {
-  try {
-    const response = await axiosInstance.delete('users');
-    console.log(4, response.data.data);
-    return response.data.data.id;
-  } catch (error) {
-    console.log(error);
-  }
-});
 const ownerSlice = createSlice({
   name: 'owner',
   initialState,
-  reducers: {
-    deleteOwner: (state, action) => {
-      state.phonebooks = state.phonebooks.filter((phonebook) => phonebook.id !== action.payload);
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchOwners.fulfilled, (state, action) => {
       state.manageOwner = action.payload;
     });
-
-    builder.addCase(deleteOwners.fulfilled, (state, action) => {
-      // state.manageOwner = action.payload;
-      (owner) => owner.id !== action.payload.id;
-    });
   },
 });
-export const { deleteOwner } = ownerSlice.actions;
 const ownerReducer = ownerSlice.reducer;
 export default ownerReducer;

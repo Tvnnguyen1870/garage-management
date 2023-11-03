@@ -22,8 +22,8 @@ export const fetchOwners = createAsyncThunk('owner/fetchOwners', async () => {
 export const deleteOwners = createAsyncThunk('owner/deleteOwners', async () => {
   try {
     const response = await axiosInstance.delete('users');
-    console.log(4, response.data.data);
-    return response.data.data.id;
+    console.log(2, response.data.data);
+    return response.data.data;
   } catch (error) {
     console.log(error);
   }

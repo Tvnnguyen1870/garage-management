@@ -4,13 +4,8 @@ import { useNavigate } from 'react-router-dom';
 const { Option } = Select;
 
 //  const Api = axiosInstance.get("", {})
-const options = [];
-for (let i = 10; i < 36; i++) {
-  options.push({
-    label: i.toString(36) + i,
-    value: i.toString(36) + i,
-  });
-}
+const options = ['Garage ABC', 'TLS', 'AHC', 'CB Garage', 'UCQ'];
+
 const handleChange = (value) => {
   console.log(`selected ${value}`);
 };
@@ -221,7 +216,6 @@ const Create = () => {
                     style={{
                       right: '210px',
                       marginTop: '20px',
-                      maxWidth: '300px',
                     }}
                     placeholder="Please select"
                     onChange={handleChange}

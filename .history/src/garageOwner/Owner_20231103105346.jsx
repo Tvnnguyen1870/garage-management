@@ -78,7 +78,7 @@ const Owner = () => {
     <Card style={{ margin: '32px' }}>
       <div>
         <div className="title-container" style={{ display: 'flex', marginBottom: '24px' }}>
-          <h2>All Garage Owners</h2>
+          <h3>All Garage Owners</h3>
           <Button>Add Owner</Button>
         </div>
         <div className="owner-list-content" style={{ marginBottom: '24px' }}>

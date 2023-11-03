@@ -1,0 +1,222 @@
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Segmented, Space, Switch, Table, Typography, Card, Select, Input, Row, Col, Button } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import { fetchOwners } from '../store/reducers/Owner';
+// import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
+// import { api } from '../store/reducers/Owner';
+const { Option } = Select;
+const fixedColumns = [
+  {
+    title: 'ID',
+    dataIndex: 'id',
+    width: 100,
+    fixed: 'left',
+  },
+  {
+    title: 'Name',
+    dataIndex: 'fullName',
+    width: 120,
+    fixed: 'left',
+  },
+  {
+    title: 'email',
+    dataIndex: 'email',
+    width: 120,
+    fixed: 'left',
+  },
+
+  {
+    title: 'Phone Number',
+    dataIndex: 'phoneNumber',
+    width: 300,
+    fixed: 'left',
+  },
+  {
+    title: 'Status',
+    dataIndex: 'status',
+    width: 100,
+    fixed: 'left',
+  },
+
+  {
+    title: 'Action',
+    width: 150,
+    fixed: 'right',
+    render: () => (
+      <Space>
+        <Button> Eye </Button>
+        <Button> Edit </Button>
+        <Button> Detele </Button>
+        {/* <EyeOutlined />
+        <EditOutlined />
+        <DeleteOutlined /> */}
+      </Space>
+    ),
+  },
+];
+
+const selectBefore = (
+  <Select defaultValue="Name">
+    <Option value="http://">http://</Option>
+    <Option value="https://">https://</Option>
+  </Select>
+);
+const selectAfter = (
+  <Select defaultValue="">
+    <Option value="active">Active</Option>
+    <Option value="inactive">Inactive</Option>
+  </Select>
+);
+const columns = [
+  {
+    title: 'ID',
+    dataIndex: 'id',
+    width: 100,
+  },
+  {
+    title: 'Name',
+    dataIndex: 'name',
+    width: 120,
+  },
+  {
+    title: 'email',
+    dataIndex: 'email',
+    width: 120,
+  },
+  {
+    title: 'Phone Number',
+    dataIndex: 'phone',
+    width: 120,
+  },
+];
+const getData = (count) => {
+  const data = new Array(count).fill(null).map((_, index) => ({
+    //chuyền thông tin vào
+    id: index,
+    name: 'sfsdf',
+    email: `sfaf`,
+    phone: 4632646,
+  }));
+  return data;
+};
+
+const Owner = () => {
+  // axiosInstance.get('users', {}), console.log(222, axiosInstance);
+  const [fixed, setFixed] = React.useState(true);
+  const [bordered, setBordered] = React.useState(true);
+  const [expanded, setExpanded] = React.useState(false);
+  const [empty, setEmpty] = React.useState(false);
+  const [count, setCount] = React.useState(10000);
+  const data = React.useMemo(() => getData(count), [count]);
+  const mergedColumns = React.useMemo(() => {
+    if (!fixed) {
+      return columns;
+    }
+    if (!expanded) {
+      return fixedColumns;
+    }
+    return fixedColumns.map((col) => ({
+      ...col,
+      onCell: undefined,
+    }));
+  }, [expanded, fixed]);
+  const expandableProps = React.useMemo(() => {
+    if (!expanded) {
+      return undefined;
+    }
+    return {
+      columnWidth: 48,
+
+      rowExpandable: (record) => record.id % 2 === 0,
+    };
+  }, [expanded]);
+  const navigate = useNavigate();
+
+  const handleAdd = () => {
+    navigate('/create');
+  };
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchOwners());
+  }, []);
+
+  const { manageOwner } = useSelector((state) => state.owner);
+
+  const apiCall = manageOwner.items;
+
+  console.log('api', apiCall);
+
+  return (
+    <div style={{ padding: '40px' }}>
+      <Card>
+        <div style={{ display: 'flex' }}>
+          <h2 style={{ display: 'flex', marginBottom: '24px' }}>All Garages Owner</h2>
+          <Button type="primary" onClick={handleAdd}>
+            Add Owner
+          </Button>
+        </div>
+        <Row gutter={16} style={{ marginBottom: '24px' }}>
+          <Col span={8}>
+            <Input addonBefore={selectBefore} placeholder="Search" />
+          </Col>
+          <Col span={8}>
+            <Input addonAfter={selectAfter} placeholder="Status" />
+          </Col>
+        </Row>
+
+        <div>
+          <Table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {apiCall.map((owner, index) => (
+                <tr key={index}>
+                  <td>{index}</td>
+                  <td>{owner.fullName}</td>
+                  <td>{owner.email}</td>
+                  <td>{owner.phoneNumber}</td>
+                  <td>
+                    <button>Remove</button>
+                    <button>Edit</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+          {/* <Table
+            bordered={bordered}
+            virtual
+            columns={mergedColumns}
+            scroll={{
+              x: 2000,
+              y: 400,
+            }}
+            rowKey="id"
+            dataSource={empty ? [] : data}
+            pagination={false}
+            // rowSelection={
+            //   expanded
+            //     ? undefined
+            //     : {
+            //         type: 'radio',
+            //         columnWidth: 48,
+            //       }
+            // }
+            expandable={expandableProps}
+          /> */}
+        </div>
+      </Card>
+    </div>
+  );
+};
+export default Owner;

@@ -7,7 +7,7 @@ const initialState = {
 };
 
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFlYjJjNzAxLTc4MWYtNDQyZS1hODQyLTc3ZDdlZTIxZmJiMCIsImVtYWlsIjoibmhvbTFAZ3JyLmxhIiwiZnVsbE5hbWUiOiJuZ3V5ZW4iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2OTg5ODAzNzcsImV4cCI6MTY5OTAxNjM3N30.vevWP5taGQ9PCqDUytHRXrdZ_uu9I4R7OLb-5_Vdba4';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFlYjJjNzAxLTc4MWYtNDQyZS1hODQyLTc3ZDdlZTIxZmJiMCIsImVtYWlsIjoibmhvbTFAZ3JyLmxhIiwiZnVsbE5hbWUiOiJuZ3V5ZW4iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2OTg5MzA3MDcsImV4cCI6MTY5ODk2NjcwN30.GyyitaM2BydXGScL-Fu-HLhU8vH_XDzfD7-XcfBjZVg';
 localStorage.setItem('accessToken', token);
 export const fetchOwners = createAsyncThunk('owner/fetchOwners', async () => {
   try {
@@ -19,34 +19,15 @@ export const fetchOwners = createAsyncThunk('owner/fetchOwners', async () => {
   }
 });
 
-export const deleteOwners = createAsyncThunk('owner/deleteOwners', async () => {
-  try {
-    const response = await axiosInstance.delete('users');
-    console.log(4, response.data.data);
-    return response.data.data.id;
-  } catch (error) {
-    console.log(error);
-  }
-});
 const ownerSlice = createSlice({
   name: 'owner',
   initialState,
-  reducers: {
-    deleteOwner: (state, action) => {
-      state.phonebooks = state.phonebooks.filter((phonebook) => phonebook.id !== action.payload);
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchOwners.fulfilled, (state, action) => {
       state.manageOwner = action.payload;
     });
-
-    builder.addCase(deleteOwners.fulfilled, (state, action) => {
-      // state.manageOwner = action.payload;
-      (owner) => owner.id !== action.payload.id;
-    });
   },
 });
-export const { deleteOwner } = ownerSlice.actions;
 const ownerReducer = ownerSlice.reducer;
 export default ownerReducer;

@@ -3,7 +3,7 @@ import Search from 'antd/lib/input/Search';
 const { Option } = Select;
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteOwner, fetchOwners } from '../store/reducers/Owner';
+import { fetchOwners } from '../store/reducers/Owner';
 import { Link } from 'react-router-dom';
 
 const Owner = () => {
@@ -17,9 +17,7 @@ const Owner = () => {
   useEffect(() => {
     dispatch(fetchOwners(params));
   }, [params]);
-  const handleDelete = (id) => {
-    dispatch(deleteOwner(id));
-  };
+
   const columns = [
     {
       title: '#',
@@ -49,7 +47,7 @@ const Owner = () => {
       render: () => (
         <Space size="middle">
           <Link to="/create">Update</Link>
-          <Link onClick={handleDelete}>Delete</Link>
+          <Link>Delete</Link>
         </Space>
       ),
     },
@@ -78,7 +76,7 @@ const Owner = () => {
     <Card style={{ margin: '32px' }}>
       <div>
         <div className="title-container" style={{ display: 'flex', marginBottom: '24px' }}>
-          <h2>All Garage Owners</h2>
+          <h3>All Garage Owners</h3>
           <Button>Add Owner</Button>
         </div>
         <div className="owner-list-content" style={{ marginBottom: '24px' }}>
@@ -99,6 +97,13 @@ const Owner = () => {
             />
             <Search placeholder="input search text" allowClear onSearch={onSearch} style={{ width: 200 }} />
           </Space.Compact>
+
+          <Input placeholder="Status">
+            <Select>
+              <Option>Active</Option>
+              <Option>Inactive</Option>
+            </Select>
+          </Input>
         </div>
         <div>
           <Table

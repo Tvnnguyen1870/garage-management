@@ -221,7 +221,6 @@ const Create = () => {
                     style={{
                       right: '210px',
                       marginTop: '20px',
-                      maxWidth: '300px',
                     }}
                     placeholder="Please select"
                     onChange={handleChange}

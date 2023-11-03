@@ -1,25 +1,25 @@
-import { Button, Select, Space, Table, Card, Input } from 'antd';
+import { Button, Select, Space, Table } from 'antd';
 import Search from 'antd/lib/input/Search';
-const { Option } = Select;
+
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteOwner, fetchOwners } from '../store/reducers/Owner';
+import { fetchOwners } from '../Store/reducers/owner';
+
 import { Link } from 'react-router-dom';
 
-const Owner = () => {
+const OwnerList = () => {
   const [params, setParams] = useState({
     page: 1,
     limit: 2,
   });
   const dispatch = useDispatch();
   const { manageOwner } = useSelector((state) => state.owner);
+  const { Option } = Select;
 
   useEffect(() => {
     dispatch(fetchOwners(params));
   }, [params]);
-  const handleDelete = (id) => {
-    dispatch(deleteOwner(id));
-  };
+
   const columns = [
     {
       title: '#',
@@ -42,22 +42,27 @@ const Owner = () => {
       dataIndex: 'phoneNumber',
       key: 'phoneNumber',
     },
-
+    {
+      title: 'Status',
+      dataIndex: 'status',
+      key: 'status',
+    },
     {
       title: 'Action',
       key: 'action',
       render: () => (
         <Space size="middle">
-          <Link to="/create">Update</Link>
-          <Link onClick={handleDelete}>Delete</Link>
+          <Link>Update</Link>
+          <Link>Delete</Link>
         </Space>
       ),
     },
   ];
   const data = manageOwner?.items;
   const pagination = manageOwner?.pagination;
-  console.log(pagination);
-
+  const handleChange = (value) => {
+    setParams({ ...params, status: value });
+  };
   const onSearch = (value) => {
     setParams({ ...params, name: value });
   };
@@ -75,13 +80,13 @@ const Owner = () => {
   if (!manageOwner) return;
 
   return (
-    <Card style={{ margin: '32px' }}>
+    <>
       <div>
-        <div className="title-container" style={{ display: 'flex', marginBottom: '24px' }}>
-          <h2>All Garage Owners</h2>
+        <div className="title-container">
+          <h3>All Garage Owners</h3>
           <Button>Add Owner</Button>
         </div>
-        <div className="owner-list-content" style={{ marginBottom: '24px' }}>
+        <div className="owner-list-content">
           <Space.Compact className="search-content">
             <Select
               defaultValue="name"
@@ -99,25 +104,36 @@ const Owner = () => {
             />
             <Search placeholder="input search text" allowClear onSearch={onSearch} style={{ width: 200 }} />
           </Space.Compact>
+
+          <Select
+            className="select-content"
+            defaultValue="Status"
+            style={{
+              width: 220,
+            }}
+            onChange={handleChange}
+            allowClear
+          >
+            <Option value="ACTIVE">Active</Option>
+            <Option value="INACTIVE">Inactive</Option>
+          </Select>
         </div>
         <div>
           <Table
             rowKey="id"
             columns={columns}
             dataSource={data}
-            pagination={
-              {
-                // // current: pagination.page,
-                // pageSize: pagination.limit,
-                // total: pagination.total,
-              }
-            }
+            pagination={{
+              current: pagination.page,
+              pageSize: pagination.limit,
+              total: pagination.total,
+            }}
             onChange={onTableChange}
           />
         </div>
       </div>
-    </Card>
+    </>
   );
 };
 
-export default Owner;
+export default OwnerList;

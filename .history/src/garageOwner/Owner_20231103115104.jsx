@@ -17,9 +17,9 @@ const Owner = () => {
   useEffect(() => {
     dispatch(fetchOwners(params));
   }, [params]);
-  const handleDelete = (id) => {
-    dispatch(deleteOwner(id));
-  };
+  // const handleDelete = (id) => {
+  //   dispatch(deleteOwner(id));
+  // };
   const columns = [
     {
       title: '#',
@@ -49,14 +49,14 @@ const Owner = () => {
       render: () => (
         <Space size="middle">
           <Link to="/create">Update</Link>
-          <Link onClick={handleDelete}>Delete</Link>
+          <Link>Delete</Link>
         </Space>
       ),
     },
   ];
   const data = manageOwner?.items;
-  const pagination = manageOwner?.pagination;
-  console.log(pagination);
+  // const pagination = manageOwner?.pagination;
+  // console.log(pagination);
 
   const onSearch = (value) => {
     setParams({ ...params, name: value });

@@ -1,9 +1,9 @@
-import { Button, Select, Space, Table, Card, Input } from 'antd';
+import { Button, Select, Space, Table } from 'antd';
 import Search from 'antd/lib/input/Search';
-const { Option } = Select;
+
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteOwner, fetchOwners } from '../store/reducers/Owner';
+import { fetchOwners } from '../store/reducers/Owner';
 import { Link } from 'react-router-dom';
 
 const Owner = () => {
@@ -17,9 +17,7 @@ const Owner = () => {
   useEffect(() => {
     dispatch(fetchOwners(params));
   }, [params]);
-  const handleDelete = (id) => {
-    dispatch(deleteOwner(id));
-  };
+
   const columns = [
     {
       title: '#',
@@ -48,8 +46,8 @@ const Owner = () => {
       key: 'action',
       render: () => (
         <Space size="middle">
-          <Link to="/create">Update</Link>
-          <Link onClick={handleDelete}>Delete</Link>
+          <Link>Update</Link>
+          <Link>Delete</Link>
         </Space>
       ),
     },
@@ -75,13 +73,13 @@ const Owner = () => {
   if (!manageOwner) return;
 
   return (
-    <Card style={{ margin: '32px' }}>
+    <>
       <div>
-        <div className="title-container" style={{ display: 'flex', marginBottom: '24px' }}>
-          <h2>All Garage Owners</h2>
+        <div className="title-container">
+          <h3>All Garage Owners</h3>
           <Button>Add Owner</Button>
         </div>
-        <div className="owner-list-content" style={{ marginBottom: '24px' }}>
+        <div className="owner-list-content">
           <Space.Compact className="search-content">
             <Select
               defaultValue="name"
@@ -116,7 +114,7 @@ const Owner = () => {
           />
         </div>
       </div>
-    </Card>
+    </>
   );
 };
 
