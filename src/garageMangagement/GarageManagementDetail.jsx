@@ -1,5 +1,5 @@
 import { Breadcrumb, Button, Col, Row } from 'antd';
-import creategarage from '../assets/styles/creategarage.css';
+import '../assets/styles/creategarage.css';
 
 const GarageManagementDetail = () => {
   return (

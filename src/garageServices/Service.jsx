@@ -1,110 +1,158 @@
-import { Button, Col, Row } from 'antd';
-import { useEffect } from 'react';
+import { Button, Col, Input, Pagination, Row, Select, Space } from 'antd';
+import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
+import { Option } from 'antd/es/mentions';
+import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { getProfile } from '../store/reducers/profile';
+import { useEffect } from 'react';
+import { getService } from '../store/reducers/garageservice';
 
 const Service = () => {
   const navigate = useNavigate();
 
-  const updateProfile = () => {
-    navigate('/updateprofile');
-  };
-
-  const changePass = () => {
-    navigate('/changepassword');
-  };
-
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getProfile());
+    dispatch(getService());
   }, []);
 
-  const { profile } = useSelector((state) => state.profile);
+  const { service } = useSelector((state) => state.service);
+  console.log(service);
 
-  if (!profile) return;
+  if (!service) return;
 
+  console.log(service.items);
+  const toAddGarage = () => {
+    navigate('/managementcreate');
+  };
   return (
-    <div>
-      <div className="heading service">
-        <h1 className="allservice"> ALL GARAGE SERVICE</h1>
-        <button type="submit"> ADD SERVICE</button>
+    <div
+      className="service"
+      style={{
+        marginTop: 30,
+      }}
+    >
+      <div
+        style={{
+          marginBottom: 30,
+        }}
+      >
+        <Row gutter={24}>
+          <Col className="gutter-row" span={3}>
+            <h2>All Service</h2>
+          </Col>
+          <Col className="gutter-row" span={18}></Col>
+          <Col className="gutter-row" span={3}>
+            <Button onClick={toAddGarage}>Add service</Button>
+          </Col>
+        </Row>
       </div>
-      <div className="profile">
-        <div className="profile-one">
-          <Row gutter={24}>
-            <Col className="gutter-row" span={8}>
-              <div>
-                <Row>
-                  <Col span={24}>
-                    <div className="profile-grid">
-                      <span>Name</span>
-                      <p>{profile.fullName}</p>
-                    </div>
-                  </Col>
-                  <Col span={24}>
-                    <div className="profile-grid">
-                      <span>Email</span>
-                      <p className="api-return">{profile.email}</p>
-                    </div>
-                  </Col>
-                </Row>
-              </div>
-            </Col>
-            <Col className="gutter-row" span={8}>
-              <div>
-                <Row>
-                  <Col span={24}>
-                    <div className="profile-grid">
-                      <span>Phone Number</span>
-                      <p className="api-return">{profile.phoneNumber}</p>
-                    </div>
-                  </Col>
-                  <Col span={24}>
-                    <div className="profile-grid">
-                      <span>DOB</span>
-                      <p className="api-return">{profile.dob}</p>
-                    </div>
-                  </Col>
-                </Row>
-              </div>
-            </Col>
-            <Col className="gutter-row" span={8}>
-              <div>
-                <Row>
-                  <Col span={24}>
-                    <div className="profile-grid">
-                      <span>Gender</span>
-                      <p className="api-return">{profile.gender}</p>
-                    </div>
-                  </Col>
-                  <Col span={24}>
-                    <div className="profile-grid">
-                      <span>Role</span>
-                      <p className="api-return">{profile.role}</p>
-                    </div>
-                  </Col>
-                </Row>
-              </div>
-            </Col>
-          </Row>
-        </div>
-        <div className="buttonProfile">
-          <Row
-            gutter={16}
-            style={{
-              paddingLeft: 16,
-            }}
-          >
-            <Col>
-              <Button onClick={updateProfile}>Update Profile</Button>
-            </Col>
-            <Col>
-              <Button onClick={changePass}>Change Password</Button>
-            </Col>
-          </Row>
-        </div>
+      <div
+        style={{
+          marginBottom: 20,
+        }}
+      >
+        <Row gutter={24}>
+          <Col className="gutter-row" span={12}>
+            <Space.Compact block>
+              <Select defaultValue="Name" allowClear>
+                <Option value="Name">Name</Option>
+                <Option value="Description">Description</Option>
+              </Select>
+              <Input
+                style={{
+                  width: '50%',
+                }}
+                defaultValue="name"
+              />
+            </Space.Compact>
+          </Col>
+        </Row>
+      </div>
+      <div>
+        <Row
+          gutter={24}
+          style={{
+            height: 54,
+            marginLeft: 2,
+            marginRight: 2,
+            backgroundColor: '#ccc',
+            display: 'flex',
+            alignContent: 'center',
+          }}
+        >
+          <Col className="gutter-row" span={3}>
+            <span>#</span>
+          </Col>
+          <Col className="gutter-row" span={3}>
+            <span>Name</span>
+          </Col>
+          <Col className="gutter-row" span={4}>
+            <span>Description</span>
+          </Col>
+          <Col className="gutter-row" span={4}>
+            <span>Min Price</span>
+          </Col>
+          <Col className="gutter-row" span={4}>
+            <span>Max Price</span>
+          </Col>
+          {/* <Col className="gutter-row" span={3}>
+            <span>actions</span>
+          </Col> */}
+        </Row>
+      </div>
+      <div>
+        <Row
+          gutter={24}
+          style={{
+            height: 54,
+            marginLeft: 2,
+            marginRight: 2,
+            display: 'flex',
+            alignContent: 'center',
+          }}
+        >
+          <Col className="gutter-row" span={3}>
+            <p>{service.items[1].index}</p>
+          </Col>
+          <Col className="gutter-row" span={3}>
+            <p>{service.items[1].name}</p>
+          </Col>
+          <Col className="gutter-row" span={4}>
+            <p>{service.items[1].description}</p>
+          </Col>
+          <Col className="gutter-row" span={4}>
+            <p>{service.items[1].minPrice}</p>
+          </Col>
+          <Col className="gutter-row" span={4}>
+            <p>{service.items[1].maxPrice}</p>
+          </Col>
+          {/* <Col className="gutter-row" span={3}>
+            <span>active</span>
+          </Col> */}
+          {/* <Col className="gutter-row" span={3}>
+            <span>
+              <EyeOutlined />
+
+              <EditOutlined
+                style={{
+                  paddingLeft: 8,
+                  paddingRight: 8,
+                }}
+              />
+              <DeleteOutlined />
+            </span>
+          </Col> */}
+        </Row>
+      </div>
+      <div>
+        <Row gutter={24}>
+          <Col className="gutter-row" span={19}></Col>
+          <Col className="gutter-row" span={5}>
+            <div>
+              <Pagination defaultCurrent={1} total={30} />
+            </div>
+          </Col>
+        </Row>
       </div>
     </div>
   );
