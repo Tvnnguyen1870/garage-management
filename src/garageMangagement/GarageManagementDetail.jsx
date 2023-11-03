@@ -1,7 +1,14 @@
 import { Breadcrumb, Button, Col, Row } from 'antd';
-import creategarage from '../assets/styles/creategarage.css';
+import '../assets/styles/creategarage.css';
+import '../assets/styles/managementdetail.css';
+import { useNavigate } from 'react-router-dom';
 
 const GarageManagementDetail = () => {
+  const navigate = useNavigate();
+
+  const clickEditManagement = () => {
+    navigate('/managementedit');
+  };
   return (
     <div className="garage-create-management">
       <Breadcrumb
@@ -19,46 +26,64 @@ const GarageManagementDetail = () => {
         ]}
       />
       <div className="garage-create ">
-        <Row>
+        <Row className="row-manadetail">
           <Col span={8}>
-            <span>Name</span>
-            <p>Nguyen</p>
+            <div>
+              <span className="name-span">Name</span>
+              <p>Nguyen</p>
+            </div>
           </Col>
           <Col span={8}>
-            <span>Email</span>
-            <p>tvn@gmail.com</p>
+            <div>
+              <span className="name-span">Email</span>
+              <p>tvn@gmail.com</p>
+            </div>
           </Col>
           <Col span={8}>
-            <span>Phone Number</span>
-            <p>023503205</p>
-          </Col>
-        </Row>
-        <Row>
-          <Col span={8}>
-            <span>Address</span>
-            <p>Ha Noi</p>
-          </Col>
-          <Col span={8}>
-            <span>Open time</span>
-            <p>9:00</p>
-          </Col>
-          <Col span={8}>
-            <span>Close time</span>
-            <p>22:00</p>
+            <div>
+              <span className="name-span">Phone Number</span>
+              <p>023503205</p>
+            </div>
           </Col>
         </Row>
-        <Row>
+        <Row className="row-manadetail">
           <Col span={8}>
-            <span>Status</span>
-            <p>Active</p>
+            <div>
+              <span className="name-span">Address</span>
+              <p>Ha Noi</p>
+            </div>
+          </Col>
+          <Col span={8}>
+            <div>
+              <span className="name-span">Open time</span>
+              <p>9:00</p>
+            </div>
+          </Col>
+          <Col span={8}>
+            <div>
+              <span className="name-span">Close time</span>
+              <p>22:00</p>
+            </div>
           </Col>
         </Row>
-        <Row>
-          <Col span={8}>col</Col>
+        <Row className="row-manadetail">
+          <Col span={8}>
+            <div>
+              <span className="name-span">Services</span>
+              <p>TLM</p>
+            </div>
+          </Col>
         </Row>
-        <Row>
+        <Row className="row-manadetail">
           <Col>
-            <Button>Edit</Button>
+            <Button
+              style={{
+                marginRight: 20,
+              }}
+              onClick={clickEditManagement}
+            >
+              Edit
+            </Button>
           </Col>
           <Col>
             <Button>Delete</Button>

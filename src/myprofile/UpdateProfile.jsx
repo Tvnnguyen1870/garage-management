@@ -3,7 +3,7 @@ import { Button, Col, DatePicker, Row, Space } from 'antd';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useNavigate } from 'react-router-dom';
-import updateprofile from '../assets/styles/updateprofile.css';
+import '../assets/styles/updateprofile.css';
 
 const schema = yup.object().shape({
   userName: yup.string().required('name is valid'),
@@ -18,7 +18,6 @@ const UpdateProfile = () => {
     control,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({
     defaultValues: {
       userName: '',
