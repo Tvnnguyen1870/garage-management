@@ -10,8 +10,9 @@ import ChangeProfile from './myprofile/ChangeProfile';
 import GarageDetail from './garageMangagement/GarageManagementDetail';
 import GarageManagementAll from './garageMangagement/GarageManagementAll';
 import CreateGarageManagement from './garageMangagement/CreateGarageManagement';
-import CreateService from './garageServices/CreateService';
-import Service from './garageServices/Service';
+import EditManagement from './garageMangagement/EditManagement';
+import EditGarageService from './garageServices/EditGarageService';
+import DetailGarageService from './garageServices/DetailGarageService';
 
 const router = createBrowserRouter([
   {
@@ -43,8 +44,21 @@ const router = createBrowserRouter([
         element: <GarageDetail />,
       },
       {
+
         path: '/createservice',
         element: <CreateService />,
+      },
+      {
+        path: '/managementedit',
+        element: <EditManagement />,
+      },
+      {
+        path: '/editservice',
+        element: <EditGarageService />,
+      },
+      {
+        path: '/detailservice',
+        element: <DetailGarageService />,
       },
     ],
   },

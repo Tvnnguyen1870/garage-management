@@ -1,29 +1,11 @@
-import { Button, Col, Row, Breadcrumb, Space, Select, TimePicker } from 'antd';
+import { Button, Col, Row, Breadcrumb, TimePicker } from 'antd';
 import '../assets/styles/creategarage.css';
 import { useNavigate } from 'react-router';
 import { Controller, useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
 
-const CreateGarageManagement = () => {
+const EditManagement = () => {
   const navigate = useNavigate();
-
-  // const onFinish = async (values) => {
-  //   let res = await loginAPI(values.email, values.password);
-
-  //   localStorage.setItem('accessToken', res.accessToken);
-
-  //   openNotification();
-
-  //   navigate('/');
-  // };
-  // const onFinishFailed = (errorInfo) => {
-  //   console.log('Failed:', errorInfo);
-  // };
-
-  // const openNotification = () => {
-  //   notification.open({
-  //     message: 'LOGIN SUCCESS',
-  //   });
 
   const {
     control,
@@ -50,9 +32,6 @@ const CreateGarageManagement = () => {
       value: i.toString(24) + i,
     });
   }
-  const handleChange = (value) => {
-    console.log(`selected ${value}`);
-  };
 
   const format = 'HH:mm';
 
@@ -68,7 +47,7 @@ const CreateGarageManagement = () => {
             title: 'All garages',
           },
           {
-            title: 'Add a new garage',
+            title: 'Gara 1',
           },
         ]}
       />
@@ -161,38 +140,9 @@ const CreateGarageManagement = () => {
             </Col>
           </Row>
           <Row className="row-management">
-            <Col span={8}>
-              <div
-                style={{
-                  width: '90%',
-                }}
-              >
-                <span className="name-span">Services</span>
-                <Space
-                  style={{
-                    width: '100%',
-                  }}
-                  direction="vertical"
-                >
-                  <Select
-                    mode="multiple"
-                    allowClear
-                    style={{
-                      width: '100%',
-                    }}
-                    placeholder="Please select"
-                    defaultValue={['a10', 'c12']}
-                    onChange={handleChange}
-                    options={options}
-                  />
-                </Space>
-              </div>
-            </Col>
-          </Row>
-          <Row className="row-management">
             <Col span={12}>
               <div className="des-management">
-                <span className="name-span">Desciption</span>
+                <span>Desciption</span>
                 <Controller
                   name="textAreaManagement"
                   control={control}
@@ -244,4 +194,4 @@ const CreateGarageManagement = () => {
   );
 };
 
-export default CreateGarageManagement;
+export default EditManagement;
