@@ -1,9 +1,8 @@
 import { Button, Col, Input, Pagination, Row, Select, Space } from 'antd';
-import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
 import { Option } from 'antd/es/mentions';
-import { useNavigate } from 'react-router';
-import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 import { getService } from '../store/reducers/garageservice';
 
 const Service = () => {
