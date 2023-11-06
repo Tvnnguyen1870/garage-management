@@ -1,5 +1,3 @@
-import { Breadcrumb, Button, Col, Row } from 'antd';
-import '../assets/styles/creategarage.css';
 import '../assets/styles/managementdetail.css';
 import { useNavigate } from 'react-router-dom';
 

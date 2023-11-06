@@ -1,62 +1,83 @@
-import { Button, Form, Input } from 'antd';
-import '../assets/styles/login.css';
-const onFinish = (values) => {
-  console.log('Success:', values);
-};
-const onFinishFailed = (errorInfo) => {
-  console.log('Failed:', errorInfo);
-};
-const Reset = () => (
-  <div className="loginContainer">
-    <h3>Reset password</h3>
-    <Form
-      name="basic"
-      initialValues={{
-        remember: true,
-      }}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
-      autoComplete="off"
-      layout="horizontal"
-    >
-      <Form.Item
-        label="Password"
-        name="Password"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your Password!',
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
+import { Button, Form, Input, notification } from 'antd';
 
-      <Form.Item
-        label="Re-Password"
-        name="repassword"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your Re-password!',
-          },
-        ]}
+import { forgotAPI, resetAPI } from '../services/UserService';
+import { Link, useNavigate } from 'react-router-dom';
+
+const Login = () => {
+  // const navigate = useNavigate();
+  const token = 'eyJlbWFpbCI6Im5ob20xQGdyci5sYSIsImV4cCI6MTY5OTI4NjcxMzg3MH0=';
+  const navigate = useNavigate();
+  const onFinish = async (values) => {
+    try {
+      let res = await resetAPI(token, values.password, values.confirmPassword);
+
+      console.log(res);
+      navigate(`/login`);
+
+      openNotification();
+    } catch (error) {
+      console.log(222, error);
+      notification.open({
+        message: error.response.data.message,
+      });
+    }
+  };
+  const onFinishFailed = (errorInfo) => {
+    console.log('Failed:', errorInfo);
+  };
+
+  const openNotification = () => {
+    notification.open({
+      message: 'RESET SUCCESS',
+    });
+  };
+  return (
+    <div className="loginContainer">
+      <Form
+        name="basic"
+        style={{
+          width: 400,
+        }}
+        initialValues={{
+          remember: true,
+        }}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        autoComplete="off"
+        layout="vertical"
       >
-        <Input.Password />
-      </Form.Item>
-      <div className="button">
         <Form.Item
-          wrapperCol={{
-            offset: 8,
-            span: 16,
-          }}
+          label="Password"
+          name="password"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your password!',
+            },
+          ]}
         >
-          <Button htmlType="submit" href="http://localhost:5173/login">
-            Reset
-          </Button>
+          <Input />
         </Form.Item>
-      </div>
-    </Form>
-  </div>
-);
-export default Reset;
+
+        <Form.Item
+          label="Confirm Password"
+          name="confirmPassword"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your password!',
+            },
+          ]}
+        >
+          <Input.Password />
+        </Form.Item>
+        <div className="button">
+          <Button block type="primary" htmlType="submit">
+            Login
+          </Button>
+        </div>
+      </Form>
+    </div>
+  );
+};
+export default Login;

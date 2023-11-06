@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { MenuFoldOutlined, MenuUnfoldOutlined, GroupOutlined, UserOutlined, IdcardOutlined } from '@ant-design/icons';
 import { Layout, Menu, Button, theme } from 'antd';
 import { Outlet, useNavigate } from 'react-router-dom';
-import HeaderLayout from '../assets/styles/headerlayout.css';
+import '../assets/styles/headerlayout.css';
 
 const { Header, Sider } = Layout;
 
