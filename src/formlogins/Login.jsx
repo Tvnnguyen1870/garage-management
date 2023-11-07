@@ -1,8 +1,8 @@
 import { Button, Form, Input, notification } from 'antd';
 import '../assets/styles/login.css';
 
-import loginAPI from '../services/UserService';
-import { useNavigate } from 'react-router-dom';
+import { loginAPI } from '../services/UserService';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ const Login = () => {
       <Form
         name="basic"
         style={{
-          maxWidth: 600,
+          width: 400,
         }}
         initialValues={{
           remember: true,
@@ -40,6 +40,7 @@ const Login = () => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
+        layout="vertical"
       >
         <Form.Item
           label="Email"
@@ -67,17 +68,10 @@ const Login = () => {
           <Input.Password />
         </Form.Item>
         <div className="button">
-          <Form.Item
-            wrapperCol={{
-              offset: 8,
-              span: 16,
-            }}
-          >
-            <Button htmlType="submit">Login</Button>
-          </Form.Item>
-          <a style={{ float: 'center' }} href="http://localhost:5173/forgot">
-            Forgot password
-          </a>
+          <Button block type="primary" htmlType="submit">
+            Login
+          </Button>
+          <Link to="/forgot">forgot pass</Link>
         </div>
       </Form>
     </div>

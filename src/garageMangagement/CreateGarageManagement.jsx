@@ -8,6 +8,24 @@ import { Option } from 'antd/es/mentions';
 const CreateGarageManagement = () => {
   const navigate = useNavigate();
 
+  // const onFinish = async (values) => {
+  //   let res = await loginAPI(values.email, values.password);
+
+  //   localStorage.setItem('accessToken', res.accessToken);
+
+  //   openNotification();
+
+  //   navigate('/');
+  // };
+  // const onFinishFailed = (errorInfo) => {
+  //   console.log('Failed:', errorInfo);
+  // };
+
+  // const openNotification = () => {
+  //   notification.open({
+  //     message: 'LOGIN SUCCESS',
+  //   });
+
   const {
     control,
     handleSubmit,

@@ -1,11 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
 import profileReducer from './reducers/profile'
-import passwordReducer from './reducers/changepassword'
+import serviceReducer from './reducers/garageservice'
 
 export const store = configureStore({
   reducer: {
     profile: profileReducer,
-    password: passwordReducer,
-    
+    service: serviceReducer
   },
 })

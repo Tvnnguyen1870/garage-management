@@ -45,6 +45,11 @@ const router = createBrowserRouter([
         element: <GarageDetail />,
       },
       {
+
+        path: '/createservice',
+        element: <CreateService />,
+      },
+      {
         path: '/managementedit',
         element: <EditManagement />,
       },
@@ -76,6 +81,28 @@ const router = createBrowserRouter([
       {
         path: '/reset',
         element: <ResetPassword />,
+      },
+    ],
+  },
+  {
+    path: '/',
+    element: <LayOut />,
+    children: [
+      {
+        path: '/profile',
+        element: <Profile />,
+      },
+      {
+        path: '/updateprofile',
+        element: <UpdateProfile />,
+      },
+      {
+        path: '/changepassword',
+        element: <ChangeProfile />,
+      },
+      {
+        path: '/service',
+        element: <Service />,
       },
     ],
   },
