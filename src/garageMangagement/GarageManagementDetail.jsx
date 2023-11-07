@@ -7,6 +7,7 @@ const GarageManagementDetail = () => {
   const clickEditManagement = () => {
     navigate('/managementedit');
   };
+
   return (
     <div className="garage-create-management">
       <Breadcrumb
@@ -28,19 +29,19 @@ const GarageManagementDetail = () => {
           <Col span={8}>
             <div>
               <span className="name-span">Name</span>
-              <p>Nguyen</p>
+              <p></p>
             </div>
           </Col>
           <Col span={8}>
             <div>
               <span className="name-span">Email</span>
-              <p>tvn@gmail.com</p>
+              <p></p>
             </div>
           </Col>
           <Col span={8}>
             <div>
               <span className="name-span">Phone Number</span>
-              <p>023503205</p>
+              <p></p>
             </div>
           </Col>
         </Row>
@@ -48,19 +49,19 @@ const GarageManagementDetail = () => {
           <Col span={8}>
             <div>
               <span className="name-span">Address</span>
-              <p>Ha Noi</p>
+              <p></p>
             </div>
           </Col>
           <Col span={8}>
             <div>
               <span className="name-span">Open time</span>
-              <p>9:00</p>
+              <p></p>
             </div>
           </Col>
           <Col span={8}>
             <div>
               <span className="name-span">Close time</span>
-              <p>22:00</p>
+              <p></p>
             </div>
           </Col>
         </Row>

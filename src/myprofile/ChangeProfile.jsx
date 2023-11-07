@@ -3,6 +3,8 @@ import React from 'react';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import '../assets/styles/changepassword.css';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { getPassword } from '../store/reducers/changepassword';
 
 const ChangeProfile = () => {
   const navigate = useNavigate();
@@ -16,7 +18,9 @@ const ChangeProfile = () => {
 
   // hàm savepassword : lưu trữ, thay đổi passsword và quay lại trang profile
   const savePassword = () => {
-    navigate('/profile');
+    setPasswordVisible(passwordVisible);
+    console.log('passwordVisible', passwordVisible);
+    // navigate('/profile');
   };
 
   return (

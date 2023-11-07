@@ -13,6 +13,7 @@ import CreateGarageManagement from './garageMangagement/CreateGarageManagement';
 import EditManagement from './garageMangagement/EditManagement';
 import EditGarageService from './garageServices/EditGarageService';
 import DetailGarageService from './garageServices/DetailGarageService';
+import Demo from './garageMangagement/Demo';
 
 const router = createBrowserRouter([
   {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
       {
         path: '/detailservice',
         element: <DetailGarageService />,
+      },
+      {
+        path: '/demo',
+        element: <Demo />,
       },
     ],
   },

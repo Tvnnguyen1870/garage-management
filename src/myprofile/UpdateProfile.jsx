@@ -165,7 +165,7 @@ const UpdateProfile = () => {
                   </Row>
                   <Row gutter={16}>
                     <Col>
-                      <button type="submit">Save</button>
+                      <Button>Save</Button>
                     </Col>
                     <Col>
                       <Button onClick={onCancel}>Cancel</Button>

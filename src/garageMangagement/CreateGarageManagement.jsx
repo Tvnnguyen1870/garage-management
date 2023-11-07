@@ -3,6 +3,7 @@ import '../assets/styles/creategarage.css';
 import { useNavigate } from 'react-router';
 import { Controller, useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
+import { Option } from 'antd/es/mentions';
 
 const CreateGarageManagement = () => {
   const navigate = useNavigate();
@@ -27,6 +28,7 @@ const CreateGarageManagement = () => {
 
   const {
     control,
+    handleSubmit,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -38,6 +40,10 @@ const CreateGarageManagement = () => {
       policyManagement: '',
     },
   });
+
+  const onSave = (values) => {
+    console.log(values);
+  };
 
   const clickCancel = () => {
     navigate('/managementall');
@@ -73,7 +79,7 @@ const CreateGarageManagement = () => {
         ]}
       />
       <div className="garage-create">
-        <form>
+        <form onSubmit={handleSubmit(onSave)}>
           <Row className="row-management">
             <Col span={8}>
               <div className="input-createManagement">
@@ -149,14 +155,24 @@ const CreateGarageManagement = () => {
               <div>
                 <span className="name-span">Open time</span>
                 <br />
-                <TimePicker className="time-management" defaultValue={dayjs('12:08', format)} format={format} />
+                <TimePicker
+                  className="time-management"
+                  allowClear
+                  defaultValue={dayjs('12:08', format)}
+                  format={format}
+                />
               </div>
             </Col>
             <Col span={8}>
               <div>
                 <span className="name-span">Close time</span>
                 <br />
-                <TimePicker className="time-management" defaultValue={dayjs('12:08', format)} format={format} />
+                <TimePicker
+                  className="time-management"
+                  allowClear
+                  defaultValue={dayjs('12:08', format)}
+                  format={format}
+                />
               </div>
             </Col>
           </Row>
@@ -168,24 +184,32 @@ const CreateGarageManagement = () => {
                 }}
               >
                 <span className="name-span">Services</span>
-                <Space
+                <Select
+                  mode="multiple"
                   style={{
                     width: '100%',
                   }}
-                  direction="vertical"
+                  placeholder="select one country"
+                  defaultValue={['TLS']}
+                  onChange={handleChange}
+                  optionLabelProp="label"
                 >
-                  <Select
-                    mode="multiple"
-                    allowClear
-                    style={{
-                      width: '100%',
-                    }}
-                    placeholder="Please select"
-                    defaultValue={['a10', 'c12']}
-                    onChange={handleChange}
-                    options={options}
-                  />
-                </Space>
+                  <Option value="garage" label="Garage">
+                    <Space>Garage</Space>
+                  </Option>
+                  <Option value="TLS" label="TLS">
+                    <Space>TLS</Space>
+                  </Option>
+                  <Option value="AHC" label="AHC">
+                    <Space>AHC</Space>
+                  </Option>
+                  <Option value="CB Garage" label="CB Garage">
+                    <Space>CB Garage</Space>
+                  </Option>
+                  <Option value="UCQ" label="UCQ">
+                    <Space>UCQ</Space>
+                  </Option>
+                </Select>
               </div>
             </Col>
           </Row>
@@ -225,14 +249,14 @@ const CreateGarageManagement = () => {
             </Col>
           </Row>
           <Row className="row-management">
-            <Col>
-              <Button
-                style={{
-                  marginRight: 20,
-                }}
-              >
+            <Col
+              style={{
+                display: 'flex',
+              }}
+            >
+              <button className="btn-add-management" type="submit">
                 Save
-              </Button>
+              </button>
             </Col>
             <Col>
               <Button onClick={clickCancel}>Cancel</Button>
