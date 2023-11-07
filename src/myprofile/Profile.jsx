@@ -3,15 +3,17 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getProfile } from '../store/reducers/profile';
-import profile from '../assets/styles/profile.css';
+import '../assets/styles/profile.css';
 
 const Profile = () => {
   const navigate = useNavigate();
 
+  // truyền dữ liệu qua trang update profile và hiện dữ liệu vào các ô input
   const updateProfile = () => {
     navigate('/updateprofile');
   };
 
+  // tới trang change password
   const changePass = () => {
     navigate('/changepassword');
   };
@@ -23,6 +25,7 @@ const Profile = () => {
   }, []);
 
   const { profile } = useSelector((state) => state.profile);
+  console.log(profile);
 
   if (!profile) return;
 
@@ -31,8 +34,8 @@ const Profile = () => {
       <h1 className="headingProfile">My Profile</h1>
       <div className="profile">
         <div className="profile-one">
-          <Row gutter={24}>
-            <Col className="gutter-row" span={8}>
+          <Row>
+            <Col span={8}>
               <div>
                 <Row>
                   <Col span={24}>
@@ -50,7 +53,7 @@ const Profile = () => {
                 </Row>
               </div>
             </Col>
-            <Col className="gutter-row" span={8}>
+            <Col span={8}>
               <div>
                 <Row>
                   <Col span={24}>
@@ -68,7 +71,7 @@ const Profile = () => {
                 </Row>
               </div>
             </Col>
-            <Col className="gutter-row" span={8}>
+            <Col span={8}>
               <div>
                 <Row>
                   <Col span={24}>
