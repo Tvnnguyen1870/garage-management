@@ -3,15 +3,27 @@ import React from 'react';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import '../assets/styles/changepassword.css';
+import { useSelector } from 'react-redux';
 // import { useDispatch, useSelector } from 'react-redux';
-// import { getPassword } from '../store/reducers/changepassword';
 
 const ChangeProfile = () => {
   const navigate = useNavigate();
 
+  // const [currentPassword, setCurrentPassword] = useState();
+  // const [newPassword, setNewPassword] = useState();
+  // const [confirmPassword, setConfirmPassword] = useState();
+
   // hàm cancel quay lại trang profile
   const clickCancel = () => {
     navigate('/profile');
+  };
+
+  const { password } = useSelector((state) => state.password);
+
+  console.log('password', password);
+
+  const onInputChange = (event) => {
+    const value = event.target.value;
   };
 
   const [passwordVisible, setPasswordVisible] = React.useState(false);
@@ -19,7 +31,7 @@ const ChangeProfile = () => {
   // hàm savepassword : lưu trữ, thay đổi passsword và quay lại trang profile
   const savePassword = () => {
     setPasswordVisible(passwordVisible);
-    console.log('passwordVisible', passwordVisible);
+
     // navigate('/profile');
   };
 
@@ -36,12 +48,14 @@ const ChangeProfile = () => {
                 <Input.Password placeholder="enter current password" />
                 <span>New Password</span>
                 <Input.Password
+                  onChange={onInputChange}
                   placeholder="enter new password"
                   iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                 />
                 <Space direction="vertical">
                   <span>Confirm Password</span>
                   <Input.Password
+                    onChange={onInputChange}
                     placeholder="enter confirm password"
                     visibilityToggle={{
                       visible: passwordVisible,

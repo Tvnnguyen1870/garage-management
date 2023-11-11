@@ -3,8 +3,9 @@ import { Option } from 'antd/es/mentions';
 import { useNavigate } from 'react-router';
 import { useEffect, useState } from 'react';
 import Search from 'antd/es/input/Search';
-import axiosInstance from '../services/axios.service';
 import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { getManagement, removeManagement } from '../store/reducers/management';
 
 const GarageManagementAll = () => {
   //--------------------------------------
@@ -49,36 +50,74 @@ const GarageManagementAll = () => {
       key: 'action',
       render: () => (
         <div>
-          <EyeOutlined onClick={() => toDetail()} />
+          <EyeOutlined onClick={() => toManagementDetail()} />
           <EditOutlined
             style={{
               paddingLeft: 12,
               paddingRight: 12,
             }}
+            onClick={() => toEditManagement()}
           />
-          <DeleteOutlined />
+          <DeleteOutlined onClick={() => deleteManagement} />
         </div>
       ),
     },
   ];
 
   //------------------------------------
-
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const [type, setType] = useState('name');
   const [value, setValue] = useState('');
 
+  //  chuyển trang
+  const toAddGarage = () => {
+    navigate('/managementcreate');
+  };
+  const toManagementDetail = () => {
+    navigate('/managementdetail');
+  };
+  const toEditManagement = () => {
+    navigate('/managementedit');
+  };
+
+  //---------------------------
+  const [params, setParams] = useState({
+    page: 1,
+    limit: 1,
+    name: '',
+    email: '',
+    status: '',
+  });
+
+  // call API
+  const { management } = useSelector((state) => state.management);
+
+  useEffect(() => {
+    dispatch(getManagement(params));
+  }, [params]);
+
+  console.log(management, 'management');
+
+  // tìm kiếm
   const onSearch = () => {
     if (type === 'name') {
-      setQuery({ ...query, name: value });
+      setParams({ ...params, name: value });
     } else {
-      setQuery({ ...query, email: value });
+      setParams({ ...params, email: value });
     }
   };
 
-  const onTableChange = (values) => {
-    setQuery({ ...query, page: values.current });
+  // xoa
+  const deleteManagement = (values) => {
+    dispatch(removeManagement(values));
+  };
+
+  const data = management?.items;
+  const pagination = management?.pagination;
+
+  const onTableChange = (pagination) => {
+    setParams({ ...params, page: pagination.current, limit: pagination.pageSize });
   };
 
   const handleTypeChange = (value) => {
@@ -87,44 +126,11 @@ const GarageManagementAll = () => {
 
   const onInputChange = (event) => {
     const value = event.target.value;
-
     setValue(value);
   };
 
-  const toAddGarage = () => {
-    navigate('/managementcreate');
-  };
-  const toDetail = () => {
-    navigate('/managementdetail');
-  };
+  if (!management) return;
 
-  // --------------------
-  const [query, setQuery] = useState({
-    page: 1,
-    limit: 2,
-    name: '',
-    email: '',
-    status: '',
-  });
-
-  const [management, setManagement] = useState([]);
-
-  // phan trang
-  const [pagination, setPagination] = useState({});
-
-  const fetchManagement = async () => {
-    const response = await axiosInstance.get('/garages', {
-      params: query,
-    });
-
-    setManagement(response.data.data.items);
-    setPagination(response.data.data.pagination);
-  };
-
-  useEffect(() => {
-    // call API
-    fetchManagement();
-  }, [query]);
   return (
     <div
       className="profile"
@@ -184,7 +190,7 @@ const GarageManagementAll = () => {
         <Table
           rowKey="id"
           columns={columns}
-          dataSource={management}
+          dataSource={data}
           pagination={{
             current: pagination.page,
             pageSize: pagination.limit,

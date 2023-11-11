@@ -1,7 +1,7 @@
 import { Button, Form, Input, notification } from 'antd';
 
-import { forgotAPI, resetAPI } from '../services/UserService';
-import { Link, useNavigate } from 'react-router-dom';
+import { resetAPI } from '../services/UserService';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   // const navigate = useNavigate();

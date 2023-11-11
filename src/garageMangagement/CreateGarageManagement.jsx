@@ -23,7 +23,7 @@ const CreateGarageManagement = () => {
 
   // const openNotification = () => {
   //   notification.open({
-  //     message: 'LOGIN SUCCESS',
+  //     message: 'LOGIN SUCCESS', 
   //   });
 
   const {
@@ -158,7 +158,7 @@ const CreateGarageManagement = () => {
                 <TimePicker
                   className="time-management"
                   allowClear
-                  defaultValue={dayjs('12:08', format)}
+                  defaultValue={dayjs('9:00', format)}
                   format={format}
                 />
               </div>
@@ -170,7 +170,7 @@ const CreateGarageManagement = () => {
                 <TimePicker
                   className="time-management"
                   allowClear
-                  defaultValue={dayjs('12:08', format)}
+                  defaultValue={dayjs('23:00', format)}
                   format={format}
                 />
               </div>

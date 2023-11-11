@@ -7,13 +7,12 @@ import Profile from './myprofile/Profile';
 import LayoutLogin from './formlogins/LayoutLogin';
 import UpdateProfile from './myprofile/UpdateProfile';
 import ChangeProfile from './myprofile/ChangeProfile';
-import GarageDetail from './garageMangagement/GarageManagementDetail';
 import GarageManagementAll from './garageMangagement/GarageManagementAll';
 import CreateGarageManagement from './garageMangagement/CreateGarageManagement';
 import EditManagement from './garageMangagement/EditManagement';
 import EditGarageService from './garageServices/EditGarageService';
 import DetailGarageService from './garageServices/DetailGarageService';
-import Demo from './garageMangagement/Demo';
+import GarageManagementDetail from './garageMangagement/GarageManagementDetail';
 
 const router = createBrowserRouter([
   {
@@ -42,12 +41,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/managementdetail',
-        element: <GarageDetail />,
-      },
-      {
-
-        path: '/createservice',
-        element: <CreateService />,
+        element: <GarageManagementDetail />,
       },
       {
         path: '/managementedit',
@@ -60,10 +54,6 @@ const router = createBrowserRouter([
       {
         path: '/detailservice',
         element: <DetailGarageService />,
-      },
-      {
-        path: '/demo',
-        element: <Demo />,
       },
     ],
   },
@@ -99,10 +89,6 @@ const router = createBrowserRouter([
       {
         path: '/changepassword',
         element: <ChangeProfile />,
-      },
-      {
-        path: '/service',
-        element: <Service />,
       },
     ],
   },
