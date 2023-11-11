@@ -1,8 +1,8 @@
 import { Button, Form, Input, notification } from 'antd';
 
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../assets/styles/login.css';
-import axiosInstance from '../services/axios.service';
+
 import { forgotAPI } from '../services/UserService';
 
 const Forgot = () => {

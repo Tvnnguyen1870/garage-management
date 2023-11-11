@@ -10,6 +10,11 @@ const LayOut = () => {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
 
+  // tới trang garagement all
+  const toGaragementAll = () => {
+    navigate('/managementall');
+  };
+
   // tới trang profile
   const toProfile = () => {
     navigate('/profile');

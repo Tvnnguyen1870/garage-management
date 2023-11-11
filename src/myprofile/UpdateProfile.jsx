@@ -1,9 +1,14 @@
 import { Controller, useForm } from 'react-hook-form';
-import { Button, Col, DatePicker, Row, Space } from 'antd';
+import { Button, Col, DatePicker, Row, Select, Space } from 'antd';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import '../assets/styles/updateprofile.css';
+
+// import { useDispatch, useSelector } from 'react-redux';
+// import { addProfile, editProfile, getProfile } from '../store/reducers/profile';
+// import { useEffect, useState } from 'react';
+// import { useFormik } from 'formik';
 
 const schema = yup.object().shape({
   userName: yup.string().required('name is valid'),
@@ -14,27 +19,62 @@ const schema = yup.object().shape({
 const UpdateProfile = () => {
   const navigate = useNavigate();
 
+  // const formik = useFormik({
+  //   initialValues: {
+  //     userName: profile.userName,
+  //     phoneNumber: profile.phoneNumber,
+  //   },
+  // });
+
   const {
     control,
     handleSubmit,
+
     formState: { errors },
   } = useForm({
     defaultValues: {
       userName: '',
       email: '',
       phoneNumber: '',
-      male: false,
-      female: false,
     },
     resolver: yupResolver(schema),
   });
 
   //  hàm save profile: lưu trữ dữ liệu nhập từ ô input và quay lại trang profile và in ra dữ liệu
   const saveProfile = (values) => {
+    // if (profile) {
+    //   dispatch(editProfile({ ...values, name: profile.userName }));
+    // } else {
+    //   dispatch(addProfile(values));
+    // }
+    // reset({
+    //   userName: '',
+    //   email: '',
+    //   phoneNumber: '',
+    // });
+
     console.log(values);
     // navigate('/profile');
   };
 
+  // const dispatch = useDispatch();
+
+  // const { profile } = useSelector((state) => state.profile);
+
+  // useEffect(() => {
+  //   dispatch(getProfile());
+  // }, []);
+
+  // useEffect(() => {
+  //   if (profile) {
+  //     reset({
+  //       userName: profile.userName,
+  //       phoneNumber: profile.phoneNumber,
+  //     });
+  //   }
+  // }, [profile]);
+
+  // date
   const onChange = (date) => {
     console.log(date);
   };
@@ -42,6 +82,11 @@ const UpdateProfile = () => {
   // ấn cancel quay lại trang profile
   const onCancel = () => {
     navigate('/profile');
+  };
+
+  // gender
+  const handleChange = (value) => {
+    console.log(`selected ${value}`);
   };
 
   return (
@@ -108,39 +153,38 @@ const UpdateProfile = () => {
                             );
                           }}
                         />
-
-                        {/* <Space direction="vertical">
-                          <DatePicker onChange={onChange} />
-                        </Space> */}
                       </div>
                     </Col>
                   </Row>
                   <Row gutter={24}>
                     <Col className="gutter-row" span={12}>
                       <div className="input-gender">
-                        <span>Gender</span>
-                        <Controller
-                          name="male"
-                          control={control}
-                          render={({ field }) => (
-                            <div>
-                              <input {...field} type="radio" />
-                              <label htmlFor="">Male</label>
-                            </div>
-                          )}
-                        />
-                        <Controller
-                          name="female"
-                          control={control}
-                          render={({ field }) => {
-                            return (
-                              <div>
-                                <input {...field} type="radio" />
-                                <label htmlFor="">Female</label>
-                              </div>
-                            );
+                        <span
+                          style={{
+                            marginRight: 12,
                           }}
-                        />
+                        >
+                          Gender
+                        </span>
+                        <Space wrap>
+                          <Select
+                            defaultValue="Male"
+                            style={{
+                              width: 420,
+                            }}
+                            onChange={handleChange}
+                            options={[
+                              {
+                                value: 'Male',
+                                label: 'Male',
+                              },
+                              {
+                                value: 'Female',
+                                label: 'Female',
+                              },
+                            ]}
+                          />
+                        </Space>
                       </div>
                     </Col>
                   </Row>
@@ -163,9 +207,11 @@ const UpdateProfile = () => {
                       </div>
                     </Col>
                   </Row>
-                  <Row gutter={16}>
+                  <Row className="btn-row" gutter={16}>
                     <Col>
-                      <Button>Save</Button>
+                      <button className="btn-update-profile" type="submit">
+                        Save
+                      </button>
                     </Col>
                     <Col>
                       <Button onClick={onCancel}>Cancel</Button>
