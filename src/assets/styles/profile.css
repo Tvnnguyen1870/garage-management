@@ -1,0 +1,41 @@
+
+.headingProfile {
+    margin-left: 60px;
+    font-family: Poppins;
+    font-size: 28px;
+    font-weight: 700;
+    margin-top: 16px;
+    margin-bottom: 32px;
+  }
+  
+  .profile {
+    margin-left: 40px ;
+    margin-right: 40px;
+    padding: 24px 16px;
+    align-items: flex-start;
+    border: 1px solid #ccc;
+    border-radius: 16px;
+    background-color: #fff;
+  }
+  
+  .profile-one {
+    padding-left: 16px;
+  }
+  
+  .profile-grid {
+    padding-bottom: 36px;
+  }
+  
+  .profile-grid span {
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 300;
+  }
+  
+  .profile-grid p {
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+  }
+  
