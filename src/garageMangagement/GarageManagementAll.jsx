@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import Search from 'antd/es/input/Search';
 import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { getManagement, removeManagement } from '../store/reducers/management';
+import { getManagement } from '../store/reducers/management';
 
 const GarageManagementAll = () => {
   //--------------------------------------
@@ -58,7 +58,7 @@ const GarageManagementAll = () => {
             }}
             onClick={() => toEditManagement()}
           />
-          <DeleteOutlined onClick={() => deleteManagement} />
+          <DeleteOutlined />
         </div>
       ),
     },
@@ -109,9 +109,9 @@ const GarageManagementAll = () => {
   };
 
   // xoa
-  const deleteManagement = (values) => {
-    dispatch(removeManagement(values));
-  };
+  // const deleteManagement = (values) => {
+  //   dispatch(removeManagement(values));
+  // };
 
   const data = management?.items;
   const pagination = management?.pagination;

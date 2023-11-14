@@ -5,7 +5,7 @@ const initialState = {
     service: null,
 }
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFlYjJjNzAxLTc4MWYtNDQyZS1hODQyLTc3ZDdlZTIxZmJiMCIsImVtYWlsIjoibmhvbTFAZ3JyLmxhIiwiZnVsbE5hbWUiOiJuZ3V5ZW4iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2OTk2Njc0NzcsImV4cCI6MTY5OTcwMzQ3N30.pRZ53rsA3JXqmVVAfjQKkmomVieSytYHPmMxhmzVu20';
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFlYjJjNzAxLTc4MWYtNDQyZS1hODQyLTc3ZDdlZTIxZmJiMCIsImVtYWlsIjoibmhvbTFAZ3JyLmxhIiwiZnVsbE5hbWUiOiJuZ3V5ZW4iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2OTk5NDkyMDksImV4cCI6MTY5OTk4NTIwOX0.rG3rIV5ocEFJHIgju-W3rWWpPNewWw6RxWVY_rFlesE';
 localStorage.setItem('accessToken', token)
 
 export const getService = createAsyncThunk(

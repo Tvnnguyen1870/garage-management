@@ -6,13 +6,14 @@ import ResetPassword from './formlogins/ResetPassword';
 import Profile from './myprofile/Profile';
 import LayoutLogin from './formlogins/LayoutLogin';
 import UpdateProfile from './myprofile/UpdateProfile';
-import ChangeProfile from './myprofile/ChangeProfile';
 import GarageManagementAll from './garageMangagement/GarageManagementAll';
 import CreateGarageManagement from './garageMangagement/CreateGarageManagement';
 import EditManagement from './garageMangagement/EditManagement';
 import EditGarageService from './garageServices/EditGarageService';
 import DetailGarageService from './garageServices/DetailGarageService';
 import GarageManagementDetail from './garageMangagement/GarageManagementDetail';
+import CreateOwner from './garageMangagement/CreateOwner';
+import ChangePassword from './myprofile/ChangePassword';
 
 const router = createBrowserRouter([
   {
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/changepassword',
-        element: <ChangeProfile />,
+        element: <ChangePassword />,
       },
       {
         path: '/managementall',
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
         path: '/detailservice',
         element: <DetailGarageService />,
       },
+      {
+        path: '/demo',
+        element: <CreateOwner />,
+      },
     ],
   },
   {
@@ -71,24 +76,6 @@ const router = createBrowserRouter([
       {
         path: '/reset',
         element: <ResetPassword />,
-      },
-    ],
-  },
-  {
-    path: '/',
-    element: <LayOut />,
-    children: [
-      {
-        path: '/profile',
-        element: <Profile />,
-      },
-      {
-        path: '/updateprofile',
-        element: <UpdateProfile />,
-      },
-      {
-        path: '/changepassword',
-        element: <ChangeProfile />,
       },
     ],
   },
