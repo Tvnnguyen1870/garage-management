@@ -1,12 +1,16 @@
 import { Button, Col, Row } from 'antd';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { getProfile } from '../store/reducers/profile';
 import '../assets/styles/profile.css';
 
 const Profile = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  // const paramLocation = new URLSearchParams(location.search).get('param');
+  const paramLocation = location.state?.param;
+  console.log('cho nguyen ', paramLocation);
 
   // truyền dữ liệu qua trang update profile và hiện dữ liệu vào các ô input
   const updateProfile = () => {
