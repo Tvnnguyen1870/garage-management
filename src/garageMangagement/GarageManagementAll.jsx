@@ -140,7 +140,7 @@ const GarageManagementAll = () => {
     >
       <div
         style={{
-          marginBottom: 30,
+          marginBottom: 16,
         }}
       >
         <Row gutter={24}>

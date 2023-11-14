@@ -13,7 +13,7 @@ export const getManagement = createAsyncThunk(
     'management/getManagement',
     async (payload) => {
         try {
-            const result = await axiosInstance.get('users', {
+            const result = await axiosInstance.get('garages', {
                 params: payload,
             })
             return result.data.data;
@@ -25,7 +25,7 @@ export const getManagement = createAsyncThunk(
 
 export const fetchGarageById = createAsyncThunk('management/fetchGarageById', async (payload) => {
     try {
-      const result = await axiosInstance(`users/${payload.id}`, {
+      const result = await axiosInstance(`garages/${payload.id}`, {
         params: payload,
       });
       return result.data.data.items;
