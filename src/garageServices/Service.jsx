@@ -1,158 +1,118 @@
-import { Button, Col, Input, Pagination, Row, Select, Space } from 'antd';
-import { Option } from 'antd/es/mentions';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router';
-import { getService } from '../store/reducers/garageservice';
+import { Button, Input, Select, Table } from 'antd';
+import { useEffect, useState } from 'react';
+import axiosInstance from '../services/axios.service';
 
 const Service = () => {
-  const navigate = useNavigate();
+  const columns = [
+    {
+      title: '#',
+      dataIndex: 'id',
+      key: 'id',
+    },
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name',
+    },
+    {
+      title: 'Description',
+      dataIndex: 'description',
+      key: 'description',
+    },
+    {
+      title: 'Min price',
+      dataIndex: 'minPrice',
+      key: 'min price',
+    },
+    {
+      title: 'Max price',
+      dataIndex: 'maxPrice',
+      key: 'max price',
+      render: (value) => (
+        <div
+          style={{
+            textTransform: 'lowercase',
+          }}
+        >
+          {value}
+        </div>
+      ),
+    },
+  ];
 
-  const dispatch = useDispatch();
+  const [query, setQuery] = useState({
+    page: 1,
+    limit: 10,
+    name: '',
+    email: '',
+    status: '',
+  });
+
+  const [owners, setService] = useState([]);
+  const [pagination, setPagination] = useState({});
+  const [type, setType] = useState('name');
+  const [value, setValue] = useState('');
+
+  const fetchService = async () => {
+    const response = await axiosInstance.get('/services', {
+      params: query,
+    });
+
+    setService(response.data.data.items);
+    setPagination(response.data.data.pagination);
+  };
+
+  const onTableChange = (values) => {
+    setQuery({ ...query, page: values.current });
+  };
+
+  const handleTypeChange = (value) => {
+    setType(value);
+  };
+
+  const onInputChange = (event) => {
+    const value = event.target.value;
+
+    setValue(value);
+  };
+
+  const onSearch = () => {
+    if (type === 'name') {
+      setQuery({ ...query, name: value });
+    } else {
+      setQuery({ ...query, email: value });
+    }
+  };
 
   useEffect(() => {
-    dispatch(getService());
-  }, []);
+    // call API
+    fetchService();
+  }, [query]);
 
-  const { service } = useSelector((state) => state.service);
-  console.log(service);
-
-  if (!service) return;
-
-  console.log(service.items);
-  const toAddGarage = () => {
-    navigate('/managementcreate');
-  };
   return (
-    <div
-      className="service"
-      style={{
-        marginTop: 30,
-      }}
-    >
-      <div
-        style={{
-          marginBottom: 30,
+    <div>
+      <Select
+        defaultValue={type}
+        style={{ width: 120 }}
+        onChange={handleTypeChange}
+        options={[
+          { value: 'name', label: 'Name' },
+          { value: 'email', label: 'Email' },
+        ]}
+      />
+      <Input value={value} onChange={onInputChange} />
+      <Button onClick={onSearch}>Search</Button>
+      <Table
+        rowKey="id"
+        dataSource={owners}
+        columns={columns}
+        pagination={{
+          current: pagination.page,
+          pageSize: pagination.limit,
+          total: pagination.total,
         }}
-      >
-        <Row gutter={24}>
-          <Col className="gutter-row" span={3}>
-            <h2>All Service</h2>
-          </Col>
-          <Col className="gutter-row" span={18}></Col>
-          <Col className="gutter-row" span={3}>
-            <Button onClick={toAddGarage}>Add service</Button>
-          </Col>
-        </Row>
-      </div>
-      <div
-        style={{
-          marginBottom: 20,
-        }}
-      >
-        <Row gutter={24}>
-          <Col className="gutter-row" span={12}>
-            <Space.Compact block>
-              <Select defaultValue="Name" allowClear>
-                <Option value="Name">Name</Option>
-                <Option value="Description">Description</Option>
-              </Select>
-              <Input
-                style={{
-                  width: '50%',
-                }}
-                defaultValue="name"
-              />
-            </Space.Compact>
-          </Col>
-        </Row>
-      </div>
-      <div>
-        <Row
-          gutter={24}
-          style={{
-            height: 54,
-            marginLeft: 2,
-            marginRight: 2,
-            backgroundColor: '#ccc',
-            display: 'flex',
-            alignContent: 'center',
-          }}
-        >
-          <Col className="gutter-row" span={3}>
-            <span>#</span>
-          </Col>
-          <Col className="gutter-row" span={3}>
-            <span>Name</span>
-          </Col>
-          <Col className="gutter-row" span={4}>
-            <span>Description</span>
-          </Col>
-          <Col className="gutter-row" span={4}>
-            <span>Min Price</span>
-          </Col>
-          <Col className="gutter-row" span={4}>
-            <span>Max Price</span>
-          </Col>
-          {/* <Col className="gutter-row" span={3}>
-            <span>actions</span>
-          </Col> */}
-        </Row>
-      </div>
-      <div>
-        <Row
-          gutter={24}
-          style={{
-            height: 54,
-            marginLeft: 2,
-            marginRight: 2,
-            display: 'flex',
-            alignContent: 'center',
-          }}
-        >
-          <Col className="gutter-row" span={3}>
-            <p>{service.items[1].index}</p>
-          </Col>
-          <Col className="gutter-row" span={3}>
-            <p>{service.items[1].name}</p>
-          </Col>
-          <Col className="gutter-row" span={4}>
-            <p>{service.items[1].description}</p>
-          </Col>
-          <Col className="gutter-row" span={4}>
-            <p>{service.items[1].minPrice}</p>
-          </Col>
-          <Col className="gutter-row" span={4}>
-            <p>{service.items[1].maxPrice}</p>
-          </Col>
-          {/* <Col className="gutter-row" span={3}>
-            <span>active</span>
-          </Col> */}
-          {/* <Col className="gutter-row" span={3}>
-            <span>
-              <EyeOutlined />
-
-              <EditOutlined
-                style={{
-                  paddingLeft: 8,
-                  paddingRight: 8,
-                }}
-              />
-              <DeleteOutlined />
-            </span>
-          </Col> */}
-        </Row>
-      </div>
-      <div>
-        <Row gutter={24}>
-          <Col className="gutter-row" span={19}></Col>
-          <Col className="gutter-row" span={5}>
-            <div>
-              <Pagination defaultCurrent={1} total={30} />
-            </div>
-          </Col>
-        </Row>
-      </div>
+        onChange={onTableChange}
+      />
     </div>
   );
 };
