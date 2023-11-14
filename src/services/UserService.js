@@ -23,6 +23,12 @@ const serviceAPI = async (name, description, minPrice, maxPrice) => {
 
     return res.data.data
 }
- export {loginAPI, serviceAPI, forgotAPI, resetAPI };
+
+const getserviceAPI = async (name, description, minPrice, maxPrice) => {
+    const res = await axiosInstance.get("/services ",{name, description, minPrice, maxPrice})
+
+    return res.data.data
+}
+ export {loginAPI, serviceAPI, forgotAPI, resetAPI, getserviceAPI };
 
 

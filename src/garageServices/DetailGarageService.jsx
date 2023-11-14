@@ -58,7 +58,9 @@ const DetailGarageService = () => {
             </Button>
           </Col>
           <Col>
-            <Button>Delete</Button>
+            <Button htmlType="submit" type="primary">
+              Delete
+            </Button>
           </Col>
         </Row>
       </div>
