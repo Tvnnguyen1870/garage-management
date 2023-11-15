@@ -64,18 +64,20 @@ const router = createBrowserRouter([
       {
         path: '/owner',
         element: <Owners />,
-      },
-      {
-        path: '/owner/create',
-        element: <Create />,
-      },
-      // {
-      //   path: '/owner/:editId',
-      //   element: <Edit />,
-      // },
-      {
-        path: '/detalis/:id',
-        element: <GarageDetails />,
+        children: [
+          {
+            path: '/owner/edit/:id',
+            element: <Edit />,
+          },
+          {
+            path: '/owner/detalis/:id',
+            element: <GarageDetails />,
+          },
+          {
+            path: '/owner/create',
+            element: <Create />,
+          },
+        ],
       },
     ],
   },

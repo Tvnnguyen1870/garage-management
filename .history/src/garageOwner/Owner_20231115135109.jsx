@@ -5,7 +5,7 @@ import axiosInstance from '../services/axios.service';
 import { EyeOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-
+import axios, { Axios } from 'axios';
 const { Option } = Select;
 const Owners = () => {
   const navigate = useNavigate();
@@ -54,16 +54,14 @@ const Owners = () => {
         <Space size="middle">
           {' '}
           <EyeOutlined
-            onClick={() => {
-              navigate('/owner/detalis/detalisId');
-            }}
+            onClick={handleEye}
             // onClick={() => {
             //   navigate('/create');
             // }}
           />
           <EditOutlined
             onClick={() => {
-              navigate('/owner/editId');
+              navigate('/owner/edit/editId');
             }}
           />
           <DeleteOutlined onClick={handleDelete} />

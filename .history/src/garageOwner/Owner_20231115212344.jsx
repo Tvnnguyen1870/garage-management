@@ -5,7 +5,7 @@ import axiosInstance from '../services/axios.service';
 import { EyeOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-
+import axios, { Axios } from 'axios';
 const { Option } = Select;
 const Owners = () => {
   const navigate = useNavigate();
@@ -50,12 +50,12 @@ const Owners = () => {
     {
       title: 'Action',
       key: 'action',
-      render: () => (
+
+      render: (_, param2) => (
         <Space size="middle">
-          {' '}
           <EyeOutlined
             onClick={() => {
-              navigate('/owner/detalis/detalisId');
+              navigate(`/detalis/${param2.id}`);
             }}
             // onClick={() => {
             //   navigate('/create');
@@ -86,16 +86,17 @@ const Owners = () => {
   const [value, setValue] = useState('');
 
   const fetchOwners = async () => {
-    const response = await axiosInstance.get('users', {
+    const response = await axiosInstance.get('/users', {
       params: query,
     });
+    dispatch(fetchOwnersById(response));
 
     setOwners(response.data.data.items);
 
     setPagination(response.data.data.pagination);
   };
 
-  console.log(owners);
+  console.log(34, owners);
 
   console.log(1, columns);
 

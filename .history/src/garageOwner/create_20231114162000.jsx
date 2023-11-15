@@ -47,10 +47,6 @@ const Create = ({ value }) => {
         const payload = { ...values, id: uuidv4() };
         console.log(9, payload);
         setValues(payload);
-        const fetchOwnersAdd = async () => {
-          const response = await axiosInstance.post('users', values);
-          return navigator('owner');
-        };
       })
       .catch((error) => {
         console.error('Form validation error:', error);
@@ -67,6 +63,10 @@ const Create = ({ value }) => {
   });
 
   const dispatch = useDispatch();
+  const fetchOwnersAdd = async () => {
+    const response = await axiosInstance.post('users', values);
+    console.log(5, response.data.data);
+  };
 
   return (
     <Card>

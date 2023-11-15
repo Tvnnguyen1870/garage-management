@@ -3,13 +3,12 @@ import { Button, Card, Checkbox, Col, DatePicker, Form, Input, Row, Select, Spac
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import axiosInstance from '../services/axios.service';
 // import { AddfetchOwners, fetchOwners } from '../store/reducers/Owner';
 const { Option } = Select;
 const Create = ({ value }) => {
   const [form] = Form.useForm();
   const dateFormat = 'YYYY/MM/DD';
+  const dispatch = useDispatch();
 
   const [formSubmitted, setFormSubmitted] = useState(false);
 
@@ -36,7 +35,16 @@ const Create = ({ value }) => {
       </Space>
     );
   };
-  const [values, setValues] = useState({});
+  const [values, setValues] = useState({
+    email: '',
+    password: '',
+    fullName: '',
+    phoneName: '',
+    gender: '',
+    role: '',
+    dob: '',
+    garageIds: [],
+  });
   // const [owner, setOwner] = useState({});
   const handleSubmit = () => {
     setFormSubmitted(true);
@@ -47,10 +55,6 @@ const Create = ({ value }) => {
         const payload = { ...values, id: uuidv4() };
         console.log(9, payload);
         setValues(payload);
-        const fetchOwnersAdd = async () => {
-          const response = await axiosInstance.post('users', values);
-          return navigator('owner');
-        };
       })
       .catch((error) => {
         console.error('Form validation error:', error);
@@ -66,7 +70,24 @@ const Create = ({ value }) => {
     limit: 2,
   });
 
-  const dispatch = useDispatch();
+]
+
+  // const { manageOwner } = useSelector((state) => state.owner);
+
+  // useEffect(() => {
+  //   dispatch(fetchOwners(params));
+  // }, [params]);
+
+  // useEffect(() => {
+  //   dispatch(AddOwner(values));
+  // }, [values]);
+
+  // const data = manageOwner?.items;
+  // console.log(4, data);
+
+  // const pagination = manageOwner?.pagination;
+
+  // if (!manageOwner) return;
 
   return (
     <Card>
