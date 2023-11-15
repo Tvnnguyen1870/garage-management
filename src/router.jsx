@@ -9,7 +9,7 @@ import UpdateProfile from './myprofile/UpdateProfile';
 import GarageManagementAll from './garageMangagement/GarageManagementAll';
 import CreateGarageManagement from './garageMangagement/CreateGarageManagement';
 import EditManagement from './garageMangagement/EditManagement';
-import EditGarageService from './garageServices/EditGarageService';
+// import EditGarageService from './garageServices/EditGarageService';
 import DetailGarageService from './garageServices/DetailGarageService';
 import GarageManagementDetail from './garageMangagement/GarageManagementDetail';
 import ChangePassword from './myprofile/ChangePassword';
@@ -17,6 +17,11 @@ import Service from './garageServices/Service';
 import CreateService from './garageServices/CreateService';
 import Owners from './garageOwner/Owner';
 import Create from './garageOwner/create';
+import Owners from './garageOwner/Owner';
+import Edit from './garageOwner/edit';
+import GarageDetails from './garageOwner/detalis';
+// import Edit from './garageOwner/edit';
+// import GarageDetails from './garageOwner/detalis';
 
 const router = createBrowserRouter([
   {
@@ -51,12 +56,12 @@ const router = createBrowserRouter([
         path: '/managementedit',
         element: <EditManagement />,
       },
+      // {
+      //   path: '/editservice',
+      //   element: <EditGarageService />,
+      // },
       {
-        path: '/editservice',
-        element: <EditGarageService />,
-      },
-      {
-        path: '/detailservice',
+        path: '/detailservice/:id',
         element: <DetailGarageService />,
       },
       {
@@ -72,8 +77,20 @@ const router = createBrowserRouter([
         element: <Owners />,
       },
       {
-        path: '/create',
+        path: '/owner',
+        element: <Owners />,
+      },
+      {
+        path: '/owner/create',
         element: <Create />,
+      },
+      // {
+      //   path: '/owner/:editId',
+      //   element: <Edit />,
+      // },
+      {
+        path: '/detalis/:id',
+        element: <GarageDetails />,
       },
     ],
   },

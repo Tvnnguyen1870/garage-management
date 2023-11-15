@@ -1,8 +1,12 @@
 import { Button, Col, Row, Select, Space, Table } from 'antd';
 import { useEffect, useState } from 'react';
 import axiosInstance from '../services/axios.service';
-import { useNavigate } from 'react-router-dom';
-import { Option } from 'antd/es/mentions';
+
+import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
+import { fetchServicesById } from '../store/reducers/service';
+import { useDispatch } from 'react-redux';
+import { Option } from 'rc-select';
 import Search from 'antd/es/input/Search';
 
 const Service = () => {
@@ -25,12 +29,13 @@ const Service = () => {
     {
       title: 'Min price',
       dataIndex: 'minPrice',
-      key: 'min price',
+      key: 'minPrice',
     },
     {
       title: 'Max price',
       dataIndex: 'maxPrice',
-      key: 'max price',
+      key: 'maxPrice',
+
       render: (value) => (
         <div
           style={{
@@ -41,9 +46,28 @@ const Service = () => {
         </div>
       ),
     },
+    {
+      title: 'Action',
+      dataIndex: 'action',
+      key: 'action',
+      render: (_, param2) => (
+        <div>
+          <Link to={`/detailservice/${param2.id}`}>View</Link>
+
+          {/* <EditOutlined
+            style={{
+              paddingLeft: 12,
+              paddingRight: 12,
+            }}
+            onClick={() => toEditManagement()}
+          />
+          <DeleteOutlined onClick={() => toManagementDetail()} /> */}
+        </div>
+      ),
+    },
   ];
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [query, setQuery] = useState({
     page: 1,
@@ -58,10 +82,13 @@ const Service = () => {
   const [type, setType] = useState('name');
   const [value, setValue] = useState('');
 
+  const dispatch = useDispatch();
   const fetchService = async () => {
     const response = await axiosInstance.get('/services', {
       params: query,
     });
+
+    dispatch(fetchServicesById(response));
 
     setService(response.data.data.items);
     setPagination(response.data.data.pagination);
@@ -81,6 +108,20 @@ const Service = () => {
     setValue(value);
   };
 
+  const handleSubmit = (a) => {
+    console.log(a);
+  };
+
+  // const toAddGarage = () => {
+  //   navigate('/managementcreate');
+  // };
+  const toServiceDetail = () => {
+    // navigate('/managementdetail');
+  };
+  const toEditService = () => {
+    // navigate('/managementedit');
+  };
+
   const onSearch = () => {
     if (type === 'name') {
       setQuery({ ...query, name: value });
@@ -90,7 +131,7 @@ const Service = () => {
   };
 
   const toCreateService = () => {
-    navigate('/createservice');
+    // navigate('/createservice');
   };
 
   useEffect(() => {

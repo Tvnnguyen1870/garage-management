@@ -1,41 +1,65 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axiosInstance from "../../services/axios.service";
 
-const initialState = {
-    service: null,
-}
+// }
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjcxYzM1M2Q1LWQxOGMtNGJjOC05MWQ2LWI1ZjM5Mzk5ZjljMyIsImVtYWlsIjoibmhvbTJAZ3JyLmxhIiwiZnVsbE5hbWUiOiJOaMOzbSAyIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzAwMDQzNDg5LCJleHAiOjE3MDAwNzk0ODl9.F1K7YsyPqlgs4A7qLbhUUDXUkWTt3xHG5Bdx-TZdpuU';
-localStorage.setItem('accessToken', token)
+// const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjcxYzM1M2Q1LWQxOGMtNGJjOC05MWQ2LWI1ZjM5Mzk5ZjljMyIsImVtYWlsIjoibmhvbTJAZ3JyLmxhIiwiZnVsbE5hbWUiOiJOaMOzbSAyIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzAwMDI1MTI2LCJleHAiOjE3MDAwNjExMjZ9.8CcCP24zMlRD4lFd3LaaSaT8EaP5fIB_wjWWF1bOtbM'
+// localStorage.setItem('accessToken', token )
 
-export const getService = createAsyncThunk(
-    'service/getService',
-    async () => {
-        try {
-            const result = await axiosInstance('/services')
-            return result.data.data;
-        } catch (error) {
-            console.log(error);
-        }
-    }
-)
-        
-export const serviceSlice = createSlice({
-    name: 'service',
-    initialState,
-    reducers: {
+// export const fetchServices = createAsyncThunk('service/fetchServices', async (payload) => {
+//   try {
+//     const response = await axiosInstance.get('services', {
+//       params: payload
+//     });
+//     return response.data.data; 
+//   } catch (error) {
+//     throw error; 
+//   }
+// });
 
-    },
-    extraReducers: (builder) => {
-        builder.addCase(getService.fulfilled, (state, actions) => {
-            state.service = actions.payload;
-        })
-    }
-})
+// export const fetchServicesById = createAsyncThunk('service/fetchServicesById', async (payload) => {
+//   try {
+//     const response = await axiosInstance.get(`/services/${payload}`)
+//     console.log(response);
+//     return response.data.data; 
+   
+//   } catch (error) {
+//     throw error; 
+//   }
+// });
+ 
 
-// Action creators are generated for each case reducer function
-export const {updateProfile } = serviceSlice.actions;
+// export const createNewService = createAsyncThunk('service/createNewService', async (serviceData) => {
+//   try {
+//     const response = await axiosInstance.post('services', serviceData);
+//     return response.data.data;
+//   } catch (error) {
+//     throw error;
+//   }
+// });
 
-const serviceReducer = serviceSlice.reducer;
 
-export default serviceReducer
+// console.log(fetchServicesById)
+
+
+// const ownerSlice = createSlice({
+//   name: 'service',
+//   initialState,
+//   reducers: {
+    
+
+//   },
+//   extraReducers: (builder) => {
+//     builder.addCase(fetchServices.fulfilled, (state, action) => {
+//       state.manageService = action.payload;
+//     });
+//     builder.addCase(fetchServicesById.fulfilled, (state, action) => {
+//       state.serviceByIdData = action.payload;
+//     });
+//     // builder.addCase(fetchServicesById.fulfilled, (state, action) => {
+//     //     state.userByIdData = action.payload;
+//     //   });
+  
+//   },
+// })
+// const serviceReducer = ownerSlice.reducer
+// export default serviceReducer
+

@@ -1,34 +1,45 @@
 
-import { Button, Input, Select, Table } from 'antd';
+import { Button, Input, Select, Table, Card, Space } from 'antd';
 import { useEffect, useState } from 'react';
 import axiosInstance from '../services/axios.service';
+// import { deleteOwners, fetchOwners, removeOwner }
+import { EyeOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
+const { Option } = Select;
 const Owners = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const {} = useParams();
   const columns = [
     {
-      title: '#',
+      title: 'ID',
+
       dataIndex: 'id',
       key: 'id',
     },
     {
       title: 'Name',
-      dataIndex: 'name',
+
+      dataIndex: 'fullName',
       key: 'name',
     },
     {
-      title: 'Description',
-      dataIndex: 'description',
-      key: 'description',
+      title: 'Email',
+      dataIndex: 'email',
+      key: 'email',
     },
     {
-      title: 'Min price',
-      dataIndex: 'minPrice',
-      key: 'min price',
+      title: 'Phone Number',
+      dataIndex: 'phoneNumber',
+      key: 'phoneNumber',
     },
     {
-      title: 'Max price',
-      dataIndex: 'maxPrice',
-      key: 'max price',
+      title: 'status',
+      dataIndex: 'status',
+      key: 'status',
+
       render: (value) => (
         <div
           style={{
@@ -39,29 +50,67 @@ const Owners = () => {
         </div>
       ),
     },
+
+
+    {
+      title: 'Action',
+      key: 'action',
+      render: () => (
+        <Space size="middle">
+          {' '}
+          <EyeOutlined
+            onClick={() => {
+              navigate('/owner/detalis/detalisId');
+            }}
+            // onClick={() => {
+            //   navigate('/create');
+            // }}
+          />
+          <EditOutlined
+            onClick={() => {
+              navigate('/owner/editId');
+            }}
+          />
+          <DeleteOutlined onClick={handleDelete} />
+        </Space>
+      ),
+    },
+
   ];
 
   const [query, setQuery] = useState({
     page: 1,
-    limit: 10,
+
+    limit: 2,
+
     name: '',
     email: '',
     status: '',
   });
 
-  const [owners, setService] = useState([]);
+
+  const [owners, setOwners] = useState([]);
+
   const [pagination, setPagination] = useState({});
   const [type, setType] = useState('name');
   const [value, setValue] = useState('');
 
-  const fetchService = async () => {
-    const response = await axiosInstance.get('/services', {
+
+  const fetchOwners = async () => {
+    const response = await axiosInstance.get('users', {
       params: query,
     });
 
-    setService(response.data.data.items);
+    setOwners(response.data.data.items);
+
     setPagination(response.data.data.pagination);
   };
+
+  console.log(owners);
+
+  console.log(1, columns);
+
+  // console.log(3, a);
 
   const onTableChange = (values) => {
     setQuery({ ...query, page: values.current });
@@ -87,33 +136,62 @@ const Owners = () => {
 
   useEffect(() => {
     // call API
-    fetchService();
+    fetchOwners();
   }, [query]);
 
+  const handleEye = () => {
+    // navigate('/details');
+  };
+  const handleAdd = () => {
+    navigate('/owner/create');
+  };
+  const handleDelete = async (owners) => {
+    // try {
+    //   setOwners(owners.filter(owner=>owner._id !== owners._id))
+    //   await axios.delete(`${}`)
+    // }catch(error){
+    //   return error
+    // }
+  };
   return (
-    <div>
-      <Select
-        defaultValue={type}
-        style={{ width: 120 }}
-        onChange={handleTypeChange}
-        options={[
-          { value: 'name', label: 'Name' },
-          { value: 'email', label: 'Email' },
-        ]}
-      />
-      <Input value={value} onChange={onInputChange} />
-      <Button onClick={onSearch}>Search</Button>
-      <Table
-        rowKey="id"
-        dataSource={owners}
-        columns={columns}
-        pagination={{
-          current: pagination.page,
-          pageSize: pagination.limit,
-          total: pagination.total,
-        }}
-        onChange={onTableChange}
-      />
+    <div style={{ padding: '30px 20px 0 20px' }}>
+      <Card>
+        <div>
+          <h2> All Garage Owners</h2>
+
+          <Button onClick={handleAdd}>Add Owner</Button>
+          <Select
+            defaultValue={type}
+            style={{ width: 120 }}
+            onChange={handleTypeChange}
+            options={[
+              { value: 'name', label: 'Name' },
+              { value: 'email', label: 'Email' },
+            ]}
+          />
+          <Input value={value} onChange={onInputChange} />
+          <Button onClick={onSearch}>Search</Button>
+          <Select
+            style={{
+              width: '200px',
+            }}
+          >
+            <Option value="">active</Option>
+            <Option value="">inactive</Option>
+          </Select>
+          <Table
+            rowKey="id"
+            dataSource={owners}
+            columns={columns}
+            pagination={{
+              current: pagination.page,
+              pageSize: pagination.limit,
+              total: pagination.total,
+            }}
+            onChange={onTableChange}
+          />
+        </div>
+      </Card>
     </div>
   );
 };

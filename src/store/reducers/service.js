@@ -3,16 +3,12 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import axiosInstance from "../../services/axios.service"
 axiosInstance.defaults.headers.common['Authorization'] = localStorage.getItem('accessToken') ?? '';
 const initialState = {
- manageService: null,
- serviceByIdData: null,
- createServiceData: {
-  name: 'string',
-  description: 'string',
-  minPrice: 0,
-  maxPrice: 0,
+
+
 }
-}
+
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjcxYzM1M2Q1LWQxOGMtNGJjOC05MWQ2LWI1ZjM5Mzk5ZjljMyIsImVtYWlsIjoibmhvbTJAZ3JyLmxhIiwiZnVsbE5hbWUiOiJOaMOzbSAyIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzAwMDQzNDg5LCJleHAiOjE3MDAwNzk0ODl9.F1K7YsyPqlgs4A7qLbhUUDXUkWTt3xHG5Bdx-TZdpuU'
+
 localStorage.setItem('accessToken', token )
 export const fetchServices = createAsyncThunk('service/fetchServices', async (payload) => {
   try {
@@ -24,10 +20,23 @@ export const fetchServices = createAsyncThunk('service/fetchServices', async (pa
     throw error; 
   }
 });
-export const fetchServicesById = createAsyncThunk('owner/fetchServicesById', async (payload) => {
+
+
+// export const fetchServicesById = createAsyncThunk('owner/fetchServicesById', async (payload) => {
+//   try {
+//     const response = await axiosInstance.get(`/services/${payload}`)
+//     return response.data.data; 
+//   } catch (error) {
+//     throw error; 
+//   }
+// });
+
+export const fetchServicesById = createAsyncThunk('service/fetchServicesById', async (payload) => {
   try {
     const response = await axiosInstance.get(`/services/${payload}`)
+    console.log(response);
     return response.data.data; 
+   
   } catch (error) {
     throw error; 
   }
