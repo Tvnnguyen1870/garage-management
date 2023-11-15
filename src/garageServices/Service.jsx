@@ -1,6 +1,10 @@
 import { Button, Input, Select, Table } from 'antd';
 import { useEffect, useState } from 'react';
 import axiosInstance from '../services/axios.service';
+import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
+import { fetchServicesById } from '../store/reducers/service';
+import { useDispatch } from 'react-redux';
 
 const Service = () => {
   const columns = [
@@ -22,12 +26,13 @@ const Service = () => {
     {
       title: 'Min price',
       dataIndex: 'minPrice',
-      key: 'min price',
+      key: 'minPrice',
     },
     {
       title: 'Max price',
       dataIndex: 'maxPrice',
-      key: 'max price',
+      key: 'maxPrice',
+
       render: (value) => (
         <div
           style={{
@@ -38,11 +43,30 @@ const Service = () => {
         </div>
       ),
     },
+    {
+      title: 'Action',
+      dataIndex: 'action',
+      key: 'action',
+      render: (_, param2) => (
+        <div>
+          <Link to={`/detailservice/${param2.id}`}>View</Link>
+          <button onClick={() => handleSubmit(param2)}></button>
+          {/* <EditOutlined
+            style={{
+              paddingLeft: 12,
+              paddingRight: 12,
+            }}
+            onClick={() => toEditManagement()}
+          />
+          <DeleteOutlined onClick={() => toManagementDetail()} /> */}
+        </div>
+      ),
+    },
   ];
 
   const [query, setQuery] = useState({
     page: 1,
-    limit: 10,
+    limit: 5,
     name: '',
     email: '',
     status: '',
@@ -53,10 +77,13 @@ const Service = () => {
   const [type, setType] = useState('name');
   const [value, setValue] = useState('');
 
+  const dispatch = useDispatch();
   const fetchService = async () => {
     const response = await axiosInstance.get('/services', {
       params: query,
     });
+
+    dispatch(fetchServicesById(response));
 
     setService(response.data.data.items);
     setPagination(response.data.data.pagination);
@@ -74,6 +101,20 @@ const Service = () => {
     const value = event.target.value;
 
     setValue(value);
+  };
+
+  const handleSubmit = (a) => {
+    console.log(a);
+  };
+
+  // const toAddGarage = () => {
+  //   navigate('/managementcreate');
+  // };
+  const toServiceDetail = () => {
+    navigate('/managementdetail');
+  };
+  const toEditService = () => {
+    navigate('/managementedit');
   };
 
   const onSearch = () => {

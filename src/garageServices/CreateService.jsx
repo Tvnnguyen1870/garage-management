@@ -3,6 +3,7 @@ import { Col } from 'antd';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createNewService } from '../../src/store/reducers/service';
+import { useNavigate } from 'react-router-dom';
 
 const CreateService = () => {
   const [formData, setFormData] = useState({
@@ -29,7 +30,7 @@ const CreateService = () => {
         setShowAlert(true);
       });
   }, [form]);
-
+  const navigate = useNavigate();
   const handleSubmit = () => {
     setIsSubmited(true);
     form
@@ -63,6 +64,8 @@ const CreateService = () => {
         setShowAlert(true);
         console.error('Lỗi khi xác thực biểu mẫu', error);
       });
+
+    navigate('/service');
   };
 
   const handleFormReset = () => {
@@ -83,7 +86,7 @@ const CreateService = () => {
       {showAlert && isSubmited && (
         <Alert
           message="Error"
-          description="Please fill in the form correctly."
+          description="Please fill form."
           type="error"
           showIcon
           closable
@@ -103,7 +106,7 @@ const CreateService = () => {
                 <Form.Item
                   name="minPrice"
                   label="Min price"
-                  rules={[{ required: true, message: 'Please enter the maximum price' }, { validator: validateNumber }]}
+                  rules={[{ required: true, message: 'enter min price' }, { validator: validateNumber }]}
                 >
                   <Input placeholder="Enter min price" />
                 </Form.Item>
@@ -112,7 +115,7 @@ const CreateService = () => {
                 <Form.Item
                   name="maxPrice"
                   label="Max price"
-                  rules={[{ required: true, message: 'Please enter the maximum price' }, { validator: validateNumber }]}
+                  rules={[{ required: true, message: 'enter maxprice' }, { validator: validateNumber }]}
                 >
                   <Input placeholder="Enter max price" />
                 </Form.Item>
