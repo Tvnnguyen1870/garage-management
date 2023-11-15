@@ -49,7 +49,7 @@ const router = createBrowserRouter([
         element: <CreateGarageManagement />,
       },
       {
-        path: '/managementdetail',
+        path: '/managementdetail/:id',
         element: <GarageManagementDetail />,
       },
       {
