@@ -1,6 +1,7 @@
-import { Button, Input, Select, Table } from 'antd';
+import { Button, Col, Row, Select, Space, Table } from 'antd';
 import { useEffect, useState } from 'react';
 import axiosInstance from '../services/axios.service';
+
 import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import { fetchServicesById } from '../store/reducers/service';
@@ -64,6 +65,8 @@ const Service = () => {
     },
   ];
 
+  const navigate = useNavigate();
+
   const [query, setQuery] = useState({
     page: 1,
     limit: 5,
@@ -125,24 +128,67 @@ const Service = () => {
     }
   };
 
+  const toCreateService = () => {
+    navigate('/createservice');
+  };
+
   useEffect(() => {
     // call API
     fetchService();
   }, [query]);
 
   return (
-    <div>
-      <Select
-        defaultValue={type}
-        style={{ width: 120 }}
-        onChange={handleTypeChange}
-        options={[
-          { value: 'name', label: 'Name' },
-          { value: 'email', label: 'Email' },
-        ]}
-      />
-      <Input value={value} onChange={onInputChange} />
-      <Button onClick={onSearch}>Search</Button>
+    <div
+      className="profile"
+      style={{
+        marginTop: 30,
+      }}
+    >
+      <div>
+        <Row gutter={24}>
+          <Col className="gutter-row" span={6}>
+            <h2>All Garage Services</h2>
+          </Col>
+          <Col className="gutter-row" span={15}></Col>
+          <Col className="gutter-row" span={3}>
+            <Button onClick={toCreateService}>Add Service</Button>
+          </Col>
+        </Row>
+      </div>
+
+      {/* --------------------------- */}
+      <div
+        style={{
+          marginBottom: 20,
+        }}
+      >
+        <Row gutter={24}>
+          <Col className="gutter-row" span={8}>
+            <Space.Compact
+              style={{
+                position: 'relative',
+              }}
+              block
+            >
+              <Select defaultValue={type} allowClear onChange={handleTypeChange}>
+                <Option value="Name">Name</Option>
+                <Option value="Email">Email</Option>
+              </Select>
+              <Search
+                onChange={onInputChange}
+                value={value}
+                allowClear
+                onSearch={onSearch}
+                style={{
+                  width: '100%',
+                }}
+              />
+            </Space.Compact>
+          </Col>
+          <Col span={10}></Col>
+        </Row>
+      </div>
+
       <Table
         rowKey="id"
         dataSource={owners}
