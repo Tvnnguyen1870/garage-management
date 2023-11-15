@@ -8,17 +8,20 @@ import { fetchGarageById } from '../store/reducers/management';
 const GarageManagementDetail = () => {
   const navigate = useNavigate();
 
-  // call api
-  const dispatch = useDispatch();
   const params = useParams();
+  // console.log(params, 'param');
 
-  const { garageById } = useSelector((state) => state.management);
-  console.log(garageById, 'garage');
+  const dispatch = useDispatch();
+
+  const garageById = useSelector((state) => state.management?.garageById);
 
   useEffect(() => {
     dispatch(fetchGarageById(params.id));
-  }, [dispatch, params.id]);
+  }, []);
 
+  console.log('12345', garageById);
+
+  //---------------------------
   const [form] = Form.useForm();
 
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -29,7 +32,7 @@ const GarageManagementDetail = () => {
   };
 
   const clickEditManagement = () => {
-    navigate(`/managementedit/${params.id}`);
+    navigate('/managementedit');
   };
 
   return (
@@ -68,41 +71,41 @@ const GarageManagementDetail = () => {
           <Row className="row-manadetail">
             <Col span={8}>
               <Form.Item name="name" label="Name">
-                <div>Nguyen</div>
+                <div>{garageById?.name}</div>
               </Form.Item>
             </Col>
             <Col span={8}>
               <Form.Item name="email" label="Email">
-                <div>tvn@gmail.com</div>
+                <div>{garageById?.email}</div>
               </Form.Item>
             </Col>
             <Col span={8}>
               <Form.Item name="phone" label="Phone Number">
-                <div>Example</div>
+                <div>{garageById?.phoneNumber}</div>
               </Form.Item>
             </Col>
           </Row>
           <Row className="row-manadetail">
             <Col span={8}>
               <Form.Item name="address" label="Address">
-                <div>Ha Noi</div>
+                <div>{garageById?.address}</div>
               </Form.Item>
             </Col>
             <Col span={8}>
               <Form.Item name="open time" label="Open Time">
-                <div>time</div>
+                <div>{garageById?.openTime}</div>
               </Form.Item>
             </Col>
             <Col span={8}>
               <Form.Item name="close Time" label="Close Time">
-                <div>time</div>
+                <div>{garageById?.closeTime}</div>
               </Form.Item>
             </Col>
           </Row>
           <Row className="row-manadetail">
             <Col span={8}>
               <Form.Item name="status" label="Status">
-                <div>status</div>
+                <div>{garageById?.status}</div>
               </Form.Item>
             </Col>
           </Row>

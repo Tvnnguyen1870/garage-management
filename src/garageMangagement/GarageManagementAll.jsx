@@ -6,6 +6,7 @@ import Search from 'antd/es/input/Search';
 import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { getManagement } from '../store/reducers/management';
+import { Link } from 'react-router-dom';
 
 const GarageManagementAll = () => {
   //--------------------------------------
@@ -48,9 +49,11 @@ const GarageManagementAll = () => {
       title: 'Action',
       dataIndex: 'action',
       key: 'action',
-      render: () => (
+      render: (_, param2) => (
         <div>
-          <EyeOutlined onClick={() => toManagementDetail()} />
+          <Link to={`/managementdetail/${param2.id}`}>
+            <EyeOutlined />
+          </Link>
           <EditOutlined
             style={{
               paddingLeft: 12,
@@ -74,9 +77,7 @@ const GarageManagementAll = () => {
   const toAddGarage = () => {
     navigate('/managementcreate');
   };
-  const toManagementDetail = () => {
-    navigate(`/managementdetail/${row.id}`);
-  };
+
   const toEditManagement = () => {
     navigate('/managementedit');
   };
