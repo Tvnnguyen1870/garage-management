@@ -6,13 +6,16 @@ import ResetPassword from './formlogins/ResetPassword';
 import Profile from './myprofile/Profile';
 import LayoutLogin from './formlogins/LayoutLogin';
 import UpdateProfile from './myprofile/UpdateProfile';
-import ChangeProfile from './myprofile/ChangeProfile';
 import GarageManagementAll from './garageMangagement/GarageManagementAll';
 import CreateGarageManagement from './garageMangagement/CreateGarageManagement';
 import EditManagement from './garageMangagement/EditManagement';
-import EditGarageService from './garageServices/EditGarageService';
+// import EditGarageService from './garageServices/EditGarageService';
 import DetailGarageService from './garageServices/DetailGarageService';
 import GarageManagementDetail from './garageMangagement/GarageManagementDetail';
+import ChangePassword from './myprofile/ChangePassword';
+import Service from './garageServices/Service';
+import CreateService from './garageServices/CreateService';
+import Owners from './garageOwner/Owner';
 import Create from './garageOwner/create';
 import Owners from './garageOwner/Owner';
 import Edit from './garageOwner/edit';
@@ -35,7 +38,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/changepassword',
-        element: <ChangeProfile />,
+        element: <ChangePassword />,
       },
       {
         path: '/managementall',
@@ -53,13 +56,25 @@ const router = createBrowserRouter([
         path: '/managementedit',
         element: <EditManagement />,
       },
+      // {
+      //   path: '/editservice',
+      //   element: <EditGarageService />,
+      // },
       {
-        path: '/editservice',
-        element: <EditGarageService />,
+        path: '/detailservice/:id',
+        element: <DetailGarageService />,
       },
       {
-        path: '/detailservice',
-        element: <DetailGarageService />,
+        path: '/service',
+        element: <Service />,
+      },
+      {
+        path: '/createservice',
+        element: <CreateService />,
+      },
+      {
+        path: '/owners',
+        element: <Owners />,
       },
       {
         path: '/owner',
@@ -93,24 +108,6 @@ const router = createBrowserRouter([
       {
         path: '/reset',
         element: <ResetPassword />,
-      },
-    ],
-  },
-  {
-    path: '/',
-    element: <LayOut />,
-    children: [
-      {
-        path: '/profile',
-        element: <Profile />,
-      },
-      {
-        path: '/updateprofile',
-        element: <UpdateProfile />,
-      },
-      {
-        path: '/changepassword',
-        element: <ChangeProfile />,
       },
     ],
   },

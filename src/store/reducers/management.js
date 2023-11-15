@@ -5,7 +5,7 @@ const initialState = {
     management: null,
 }
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFlYjJjNzAxLTc4MWYtNDQyZS1hODQyLTc3ZDdlZTIxZmJiMCIsImVtYWlsIjoibmhvbTFAZ3JyLmxhIiwiZnVsbE5hbWUiOiJuZ3V5ZW4iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2OTk2Njc0NzcsImV4cCI6MTY5OTcwMzQ3N30.pRZ53rsA3JXqmVVAfjQKkmomVieSytYHPmMxhmzVu20';
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFlYjJjNzAxLTc4MWYtNDQyZS1hODQyLTc3ZDdlZTIxZmJiMCIsImVtYWlsIjoibmhvbTFAZ3JyLmxhIiwiZnVsbE5hbWUiOiJuZ3V5ZW4iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2OTk5NTE4NjIsImV4cCI6MTY5OTk4Nzg2Mn0.0FPKLl0NZGLosf_PKZuO57JbFrTRWZQp_j32C0XhSA0';
 
 localStorage.setItem('accessToken', token)
 
@@ -13,7 +13,7 @@ export const getManagement = createAsyncThunk(
     'management/getManagement',
     async (payload) => {
         try {
-            const result = await axiosInstance.get('users', {
+            const result = await axiosInstance.get('garages', {
                 params: payload,
             })
             return result.data.data;
@@ -25,7 +25,9 @@ export const getManagement = createAsyncThunk(
 
 export const fetchGarageById = createAsyncThunk('management/fetchGarageById', async (payload) => {
     try {
-      const result = await axiosInstance(`users/${payload.id}`, {
+
+      const result = await axiosInstance(`users/${payload}`, {
+
         params: payload,
       });
       return result.data.data.items;

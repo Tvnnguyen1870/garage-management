@@ -1,19 +1,15 @@
 import { useState } from 'react';
 import { MenuFoldOutlined, MenuUnfoldOutlined, GroupOutlined, UserOutlined, IdcardOutlined } from '@ant-design/icons';
 import { Layout, Menu, Button, theme } from 'antd';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import '../assets/styles/headerlayout.css';
+import { key } from 'localforage';
 
 const { Header, Sider } = Layout;
 
 const LayOut = () => {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
-
-  // tới trang garagement all
-  const toGaragementAll = () => {
-    navigate('/managementall');
-  };
 
   // tới trang profile
   const toProfile = () => {
@@ -31,12 +27,12 @@ const LayOut = () => {
         width: '100%',
       }}
     >
-      <Sider trigger={null} collapsible collapsed={collapsed}>
+      <Sider trigger={null} theme="light" collapsible collapsed={collapsed}>
         <div className="demo-logo-vertical" />
         <div
           style={{
-            color: 'white',
-            backgroundColor: 'dark',
+            color: 'black',
+            backgroundColor: 'white',
             paddingTop: 4,
             paddingBottom: 4,
             paddingLeft: 28,
@@ -47,14 +43,14 @@ const LayOut = () => {
           <p>Menu</p>
         </div>
         <Menu
-          theme="dark"
+          theme="light"
           mode="inline"
           defaultSelectedKeys={['1']}
           items={[
             {
               key: '1',
               icon: <IdcardOutlined />,
-              label: 'Garage',
+              label: <Link to="/managementall">Garages</Link>,
             },
             {
               key: '2',
@@ -64,7 +60,7 @@ const LayOut = () => {
             {
               key: '3',
               icon: <GroupOutlined />,
-              label: 'Garage Services',
+              label: <Link to="/service">Garage Service</Link>,
             },
           ]}
         />
