@@ -6,6 +6,8 @@ import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import { fetchServicesById } from '../store/reducers/service';
 import { useDispatch } from 'react-redux';
+import { Option } from 'rc-select';
+import Search from 'antd/es/input/Search';
 
 const Service = () => {
   const columns = [
@@ -51,7 +53,7 @@ const Service = () => {
       render: (_, param2) => (
         <div>
           <Link to={`/detailservice/${param2.id}`}>View</Link>
-          <button onClick={() => handleSubmit(param2)}></button>
+
           {/* <EditOutlined
             style={{
               paddingLeft: 12,
@@ -65,7 +67,7 @@ const Service = () => {
     },
   ];
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [query, setQuery] = useState({
     page: 1,
@@ -114,10 +116,10 @@ const Service = () => {
   //   navigate('/managementcreate');
   // };
   const toServiceDetail = () => {
-    navigate('/managementdetail');
+    // navigate('/managementdetail');
   };
   const toEditService = () => {
-    navigate('/managementedit');
+    // navigate('/managementedit');
   };
 
   const onSearch = () => {
@@ -129,7 +131,7 @@ const Service = () => {
   };
 
   const toCreateService = () => {
-    navigate('/createservice');
+    // navigate('/createservice');
   };
 
   useEffect(() => {
