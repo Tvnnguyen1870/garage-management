@@ -9,7 +9,7 @@ import UpdateProfile from './myprofile/UpdateProfile';
 import GarageManagementAll from './garageMangagement/GarageManagementAll';
 import CreateGarageManagement from './garageMangagement/CreateGarageManagement';
 import EditManagement from './garageMangagement/EditManagement';
-import EditGarageService from './garageServices/EditGarageService';
+// import EditGarageService from './garageServices/EditGarageService';
 import DetailGarageService from './garageServices/DetailGarageService';
 import GarageManagementDetail from './garageMangagement/GarageManagementDetail';
 import ChangePassword from './myprofile/ChangePassword';
@@ -51,12 +51,12 @@ const router = createBrowserRouter([
         path: '/managementedit',
         element: <EditManagement />,
       },
+      // {
+      //   path: '/editservice',
+      //   element: <EditGarageService />,
+      // },
       {
-        path: '/editservice',
-        element: <EditGarageService />,
-      },
-      {
-        path: '/detailservice',
+        path: '/detailservice/:id',
         element: <DetailGarageService />,
       },
       {

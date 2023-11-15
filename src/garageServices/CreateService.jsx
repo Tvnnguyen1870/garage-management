@@ -31,7 +31,7 @@ const CreateService = () => {
         setShowAlert(true);
       });
   }, [form]);
-
+  const navigate = useNavigate();
   const handleSubmit = () => {
     setIsSubmited(true);
     form
@@ -65,6 +65,8 @@ const CreateService = () => {
         setShowAlert(true);
         console.error('Lỗi khi xác thực biểu mẫu', error);
       });
+
+    navigate('/service');
   };
 
   const handleFormReset = () => {
@@ -79,6 +81,7 @@ const CreateService = () => {
   };
 
   return (
+
     <div className="garage-create-management">
       <Breadcrumb
         style={{

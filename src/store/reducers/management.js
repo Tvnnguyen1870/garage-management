@@ -25,7 +25,9 @@ export const getManagement = createAsyncThunk(
 
 export const fetchGarageById = createAsyncThunk('management/fetchGarageById', async (payload) => {
     try {
-      const result = await axiosInstance(`garages/${payload.id}`, {
+
+      const result = await axiosInstance(`users/${payload}`, {
+
         params: payload,
       });
       return result.data.data.items;
