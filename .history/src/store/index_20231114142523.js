@@ -2,8 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import profileReducer from './reducers/profile';
 import serviceReducer from './reducers/garageservice';
 import managementReducer from './reducers/management';
-import ownerReducer from './reducers/owner';
-
+import ownerReducer from './reducers/Owner';
 
 export const store = configureStore({
   reducer: {

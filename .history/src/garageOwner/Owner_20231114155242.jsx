@@ -1,4 +1,3 @@
-
 import { Button, Input, Select, Table, Card, Space } from 'antd';
 import { useEffect, useState } from 'react';
 import axiosInstance from '../services/axios.service';
@@ -6,7 +5,7 @@ import axiosInstance from '../services/axios.service';
 import { EyeOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-
+import axios, { Axios } from 'axios';
 const { Option } = Select;
 const Owners = () => {
   const navigate = useNavigate();
@@ -15,13 +14,11 @@ const Owners = () => {
   const columns = [
     {
       title: 'ID',
-
       dataIndex: 'id',
       key: 'id',
     },
     {
       title: 'Name',
-
       dataIndex: 'fullName',
       key: 'name',
     },
@@ -39,7 +36,6 @@ const Owners = () => {
       title: 'status',
       dataIndex: 'status',
       key: 'status',
-
       render: (value) => (
         <div
           style={{
@@ -51,7 +47,6 @@ const Owners = () => {
       ),
     },
 
-
     {
       title: 'Action',
       key: 'action',
@@ -59,42 +54,34 @@ const Owners = () => {
         <Space size="middle">
           {' '}
           <EyeOutlined
-            onClick={() => {
-              navigate('/owner/detalis/detalisId');
-            }}
+            onClick={handleEye}
             // onClick={() => {
             //   navigate('/create');
             // }}
           />
           <EditOutlined
             onClick={() => {
-              navigate('/owner/editId');
+              navigate(`/owner/${owners._id}`);
             }}
           />
           <DeleteOutlined onClick={handleDelete} />
         </Space>
       ),
     },
-
   ];
 
   const [query, setQuery] = useState({
     page: 1,
-
     limit: 2,
-
     name: '',
     email: '',
     status: '',
   });
 
-
   const [owners, setOwners] = useState([]);
-
   const [pagination, setPagination] = useState({});
   const [type, setType] = useState('name');
   const [value, setValue] = useState('');
-
 
   const fetchOwners = async () => {
     const response = await axiosInstance.get('users', {
@@ -195,5 +182,4 @@ const Owners = () => {
     </div>
   );
 };
-
 export default Owners;

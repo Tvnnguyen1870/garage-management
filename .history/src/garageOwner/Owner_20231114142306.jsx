@@ -1,12 +1,10 @@
-
 import { Button, Input, Select, Table, Card, Space } from 'antd';
 import { useEffect, useState } from 'react';
 import axiosInstance from '../services/axios.service';
-// import { deleteOwners, fetchOwners, removeOwner }
+import { deleteOwners, fetchOwners, removeOwner } from '../store/reducers/Owner';
 import { EyeOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-
 const { Option } = Select;
 const Owners = () => {
   const navigate = useNavigate();
@@ -15,13 +13,11 @@ const Owners = () => {
   const columns = [
     {
       title: 'ID',
-
       dataIndex: 'id',
       key: 'id',
     },
     {
       title: 'Name',
-
       dataIndex: 'fullName',
       key: 'name',
     },
@@ -39,7 +35,6 @@ const Owners = () => {
       title: 'status',
       dataIndex: 'status',
       key: 'status',
-
       render: (value) => (
         <div
           style={{
@@ -51,7 +46,6 @@ const Owners = () => {
       ),
     },
 
-
     {
       title: 'Action',
       key: 'action',
@@ -59,42 +53,34 @@ const Owners = () => {
         <Space size="middle">
           {' '}
           <EyeOutlined
-            onClick={() => {
-              navigate('/owner/detalis/detalisId');
-            }}
+            onClick={handleEye}
             // onClick={() => {
             //   navigate('/create');
             // }}
           />
           <EditOutlined
             onClick={() => {
-              navigate('/owner/editId');
+              navigate('/edit');
             }}
           />
           <DeleteOutlined onClick={handleDelete} />
         </Space>
       ),
     },
-
   ];
 
   const [query, setQuery] = useState({
     page: 1,
-
     limit: 2,
-
     name: '',
     email: '',
     status: '',
   });
 
-
   const [owners, setOwners] = useState([]);
-
   const [pagination, setPagination] = useState({});
   const [type, setType] = useState('name');
   const [value, setValue] = useState('');
-
 
   const fetchOwners = async () => {
     const response = await axiosInstance.get('users', {
@@ -143,15 +129,10 @@ const Owners = () => {
     // navigate('/details');
   };
   const handleAdd = () => {
-    navigate('/owner/create');
+    navigate('/create');
   };
-  const handleDelete = async (owners) => {
-    // try {
-    //   setOwners(owners.filter(owner=>owner._id !== owners._id))
-    //   await axios.delete(`${}`)
-    // }catch(error){
-    //   return error
-    // }
+  const handleDelete = (id) => {
+    dispatch(deleteOwners(id));
   };
   return (
     <div style={{ padding: '30px 20px 0 20px' }}>
@@ -195,5 +176,4 @@ const Owners = () => {
     </div>
   );
 };
-
 export default Owners;

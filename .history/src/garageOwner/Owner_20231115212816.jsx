@@ -1,4 +1,3 @@
-
 import { Button, Input, Select, Table, Card, Space } from 'antd';
 import { useEffect, useState } from 'react';
 import axiosInstance from '../services/axios.service';
@@ -15,13 +14,11 @@ const Owners = () => {
   const columns = [
     {
       title: 'ID',
-
       dataIndex: 'id',
       key: 'id',
     },
     {
       title: 'Name',
-
       dataIndex: 'fullName',
       key: 'name',
     },
@@ -39,7 +36,6 @@ const Owners = () => {
       title: 'status',
       dataIndex: 'status',
       key: 'status',
-
       render: (value) => (
         <div
           style={{
@@ -50,7 +46,6 @@ const Owners = () => {
         </div>
       ),
     },
-
 
     {
       title: 'Action',
@@ -75,26 +70,20 @@ const Owners = () => {
         </Space>
       ),
     },
-
   ];
 
   const [query, setQuery] = useState({
     page: 1,
-
     limit: 2,
-
     name: '',
     email: '',
     status: '',
   });
 
-
   const [owners, setOwners] = useState([]);
-
   const [pagination, setPagination] = useState({});
   const [type, setType] = useState('name');
   const [value, setValue] = useState('');
-
 
   const fetchOwners = async () => {
     const response = await axiosInstance.get('users', {
@@ -195,5 +184,4 @@ const Owners = () => {
     </div>
   );
 };
-
 export default Owners;
