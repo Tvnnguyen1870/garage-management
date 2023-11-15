@@ -1,6 +1,6 @@
 import { Breadcrumb, Button, Col, Form, Row } from 'antd';
 import '../assets/styles/managementdetail.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import { fetchGarageById } from '../store/reducers/management';
@@ -8,22 +8,16 @@ import { fetchGarageById } from '../store/reducers/management';
 const GarageManagementDetail = () => {
   const navigate = useNavigate();
 
-  const clickEditManagement = () => {
-    navigate('/managementedit');
-  };
-
-  const garageId = '5fc89ad7-28b1-4c36-b79e-a7704edf2e2a';
-
   // call api
   const dispatch = useDispatch();
-  const { management123 } = useSelector((state) => state.management);
+  const params = useParams();
 
-  console.log(management123, '113');
+  const { garageById } = useSelector((state) => state.management);
+  console.log(garageById, 'garage');
 
   useEffect(() => {
-    garageId;
-    dispatch(fetchGarageById(garageId));
-  }, []);
+    dispatch(fetchGarageById(params.id));
+  }, [dispatch, params.id]);
 
   const [form] = Form.useForm();
 
@@ -32,6 +26,10 @@ const GarageManagementDetail = () => {
   const SubmitButton = ({ form }) => {
     const values = Form.useWatch([], form);
     React.useEffect(() => {}, [values, formSubmitted]);
+  };
+
+  const clickEditManagement = () => {
+    navigate(`/managementedit/${params.id}`);
   };
 
   return (

@@ -75,7 +75,7 @@ const GarageManagementAll = () => {
     navigate('/managementcreate');
   };
   const toManagementDetail = () => {
-    navigate('/managementdetail');
+    navigate(`/managementdetail/${row.id}`);
   };
   const toEditManagement = () => {
     navigate('/managementedit');
