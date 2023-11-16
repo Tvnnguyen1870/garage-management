@@ -9,7 +9,6 @@ const GarageManagementDetail = () => {
   const navigate = useNavigate();
 
   const params = useParams();
-  // console.log(params, 'param');
 
   const dispatch = useDispatch();
 
@@ -19,7 +18,7 @@ const GarageManagementDetail = () => {
     dispatch(fetchGarageById(params.id));
   }, []);
 
-  console.log('12345', garageById);
+  console.log('12345', garageById?.id);
 
   //---------------------------
   const [form] = Form.useForm();

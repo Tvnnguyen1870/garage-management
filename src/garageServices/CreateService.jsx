@@ -3,6 +3,7 @@ import { Col } from 'antd';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createNewService } from '../../src/store/reducers/service';
+import { useNavigate } from 'react-router-dom';
 
 const CreateService = () => {
   const [formData, setFormData] = useState({
@@ -46,13 +47,14 @@ const CreateService = () => {
           .then((result) => {
             setShowAlert(false);
             setIsSubmited(false);
-            notification.success({
-              message: 'Successfull',
-              description: 'The service has been created successfully !',
-              placement: 'topLeft',
-            });
 
-            setTimeout(() => {}, 3000);
+            setTimeout(() => {
+              notification.success({
+                message: 'Successfull',
+                description: 'The service has been created successfully !',
+                placement: 'topLeft',
+              });
+            }, 500);
           })
           .catch((error) => {
             console.error('Lỗi khi tạo dịch vụ', error);
@@ -67,11 +69,18 @@ const CreateService = () => {
     // navigate('/service');
   };
 
-  const handleFormReset = () => {
-    form.resetFields();
-    setIsSubmited(false);
-    setShowAlert(false);
+  const navigate = useNavigate();
+
+  const clickCancel = () => {
+    navigate('/service');
   };
+
+  // const handleFormReset = () => {
+  //   form.resetFields();
+  //   setIsSubmited(false);
+  //   setShowAlert(false);
+  // };
+
   const validateNumber = async (rule, value) => {
     if (value === '') {
       return;
@@ -81,7 +90,12 @@ const CreateService = () => {
   };
 
   return (
-    <>
+    <div
+      className="profile"
+      style={{
+        marginTop: 32,
+      }}
+    >
       {showAlert && isSubmited && (
         <Alert
           message="Error"
@@ -131,13 +145,11 @@ const CreateService = () => {
             <Button type="primary" htmlType="button" onClick={handleSubmit}>
               Create
             </Button>
-            <Button type="default" onClick={handleFormReset}>
-              Reset
-            </Button>
+            <Button onClick={clickCancel}>Cancel</Button>
           </Space>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 export default CreateService;
