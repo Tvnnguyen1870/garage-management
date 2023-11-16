@@ -7,6 +7,7 @@ import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { getManagement } from '../store/reducers/management';
 import { Link } from 'react-router-dom';
+import axiosInstance from '../services/axios.service';
 
 const GarageManagementAll = () => {
   //--------------------------------------
@@ -61,7 +62,7 @@ const GarageManagementAll = () => {
             }}
             onClick={() => toEditManagement()}
           />
-          <DeleteOutlined />
+          <DeleteOutlined onClick={deleteManagement} />
         </div>
       ),
     },
@@ -91,14 +92,14 @@ const GarageManagementAll = () => {
     status: '',
   });
 
+  //-------------------------
+
   // call API
   const { management } = useSelector((state) => state.management);
 
   useEffect(() => {
     dispatch(getManagement(params));
   }, [params]);
-
-  console.log(management, 'management');
 
   // tìm kiếm
   const onSearch = () => {
@@ -108,13 +109,32 @@ const GarageManagementAll = () => {
       setParams({ ...params, email: value });
     }
   };
-
-  // xoa
-  // const deleteManagement = (values) => {
-  //   dispatch(removeManagement(values));
-  // };
-
+  let idNew = null;
   const data = management?.items;
+  if (data && data.length > 0) {
+    idNew = data[0].id;
+  }
+  //xoa
+  const token = localStorage.getItem('accessToken') ?? '';
+
+  const apiURL = `garages/${idNew}`;
+
+  const deleteManagement = () => {
+    axiosInstance
+      .delete(apiURL, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   const pagination = management?.pagination;
 
   const onTableChange = (pagination) => {

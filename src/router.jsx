@@ -17,8 +17,6 @@ import Service from './garageServices/Service';
 import CreateService from './garageServices/CreateService';
 import Owners from './garageOwner/Owner';
 import Create from './garageOwner/create';
-import Owners from './garageOwner/Owner';
-import Edit from './garageOwner/edit';
 import GarageDetails from './garageOwner/detalis';
 // import Edit from './garageOwner/edit';
 // import GarageDetails from './garageOwner/detalis';
