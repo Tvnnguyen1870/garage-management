@@ -3,14 +3,11 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { fetchOwnersById } from '../store/reducers/owner';
-import { useState } from 'react';
 // import { fetchOwners, fetchOwnersById } from '../store/reducers/owner';
 
 const GarageDetails = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [garages, setGarages] = useState([]);
-
   const ownerByIdData = useSelector((state) => state.owner?.ownerByIdData);
 
   const params = useParams();
@@ -22,10 +19,7 @@ const GarageDetails = () => {
   const handleEdit = () => {
     navigate(`/editowner/${params.id}`);
   };
-  console.log(66, ownerByIdData);
-  // const [garagesId, setGaragesId] = useState(ownerByIdData.garages);
-  // console.log(33, garagesId);
-
+  console.log(ownerByIdData);
   const handleDelete = () => {
     navigate('/owner');
   };
@@ -63,7 +57,7 @@ const GarageDetails = () => {
               </Col>
               <Col span={12}>
                 <div className="detail-label">Role:</div>
-                <div className="detail-value">{ownerByIdData?.role}</div>
+                <div className="detail-value">{ownerByIdData?.Role}</div>
               </Col>
             </Row>
 
@@ -74,9 +68,7 @@ const GarageDetails = () => {
               </Col>
               <Col span={12}>
                 <div className="detail-label">Garages:</div>
-                {/* {garagesId.garageArray.map((a, b) => {
-                  return <div key={b}>{a.name}</div>;
-                })} */}
+                <div className="detail-value">{ownerByIdData?.garages}</div>
               </Col>
             </Row>
           </Card>
