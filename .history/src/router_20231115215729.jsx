@@ -73,13 +73,12 @@ const router = createBrowserRouter([
         element: <CreateService />,
       },
       {
-        path: '/owner',
+        path: '/owners',
         element: <Owners />,
       },
-
       {
-        path: '/detailowner/:id',
-        element: <GarageDetails />,
+        path: '/owner',
+        element: <Owners />,
       },
       {
         path: '/owner/create',
@@ -89,6 +88,10 @@ const router = createBrowserRouter([
       //   path: '/owner/:editId',
       //   element: <Edit />,
       // },
+      {
+        path: '/detalis/:id',
+        element: <GarageDetails />,
+      },
     ],
   },
   {

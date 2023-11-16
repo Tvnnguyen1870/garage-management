@@ -73,7 +73,7 @@ const router = createBrowserRouter([
         element: <CreateService />,
       },
       {
-        path: '/owner',
+        path: '/owners',
         element: <Owners />,
       },
 

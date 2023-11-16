@@ -51,7 +51,7 @@ const Owners = () => {
     {
       title: 'Action',
       key: 'action',
-      render: (_, param2) => (
+      render: () => (
         <Space size="middle">
           {' '}
           <EyeOutlined

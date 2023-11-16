@@ -5,7 +5,6 @@ import axiosInstance from '../../services/axios.service';
 axiosInstance.defaults.headers.common['Authorization'] = localStorage.getItem('accessToken') ?? '';
 const initialState = {
   manageOwner: null,
-  garageArray: [],
 
   // ownerIdData: null,
   // createOwnerData: {
