@@ -52,6 +52,7 @@
     border-top: none;
     border-right: none;
     display: none;
+    z-index: 999;
   }
   
   .dropAdmin ul li {

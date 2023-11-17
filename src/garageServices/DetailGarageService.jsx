@@ -23,7 +23,7 @@ const DetailService = () => {
 
   console.log(serviceByIdData);
   return (
-    <div className="detail-container">
+    <div className="profile">
       <Row gutter={[16, 24]}>
         <Col span={24}>
           <Card title="Infomation" bordered={false}>

@@ -1,6 +1,6 @@
 import { Breadcrumb, Button, Col, Form, Row } from 'antd';
 import '../assets/styles/managementdetail.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import { fetchGarageById } from '../store/reducers/management';
@@ -8,23 +8,19 @@ import { fetchGarageById } from '../store/reducers/management';
 const GarageManagementDetail = () => {
   const navigate = useNavigate();
 
-  const clickEditManagement = () => {
-    navigate('/managementedit');
-  };
+  const params = useParams();
 
-  const garageId = '5fc89ad7-28b1-4c36-b79e-a7704edf2e2a';
-
-  // call api
   const dispatch = useDispatch();
-  const { management123 } = useSelector((state) => state.management);
 
-  console.log(management123, '113');
+  const garageById = useSelector((state) => state.management?.garageById);
 
   useEffect(() => {
-    garageId;
-    dispatch(fetchGarageById(garageId));
+    dispatch(fetchGarageById(params.id));
   }, []);
 
+  console.log('12345', garageById?.id);
+
+  //---------------------------
   const [form] = Form.useForm();
 
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -32,6 +28,10 @@ const GarageManagementDetail = () => {
   const SubmitButton = ({ form }) => {
     const values = Form.useWatch([], form);
     React.useEffect(() => {}, [values, formSubmitted]);
+  };
+
+  const clickEditManagement = () => {
+    navigate('/managementedit');
   };
 
   return (
@@ -70,41 +70,41 @@ const GarageManagementDetail = () => {
           <Row className="row-manadetail">
             <Col span={8}>
               <Form.Item name="name" label="Name">
-                <div>Nguyen</div>
+                <div>{garageById?.name}</div>
               </Form.Item>
             </Col>
             <Col span={8}>
               <Form.Item name="email" label="Email">
-                <div>tvn@gmail.com</div>
+                <div>{garageById?.email}</div>
               </Form.Item>
             </Col>
             <Col span={8}>
               <Form.Item name="phone" label="Phone Number">
-                <div>Example</div>
+                <div>{garageById?.phoneNumber}</div>
               </Form.Item>
             </Col>
           </Row>
           <Row className="row-manadetail">
             <Col span={8}>
               <Form.Item name="address" label="Address">
-                <div>Ha Noi</div>
+                <div>{garageById?.address}</div>
               </Form.Item>
             </Col>
             <Col span={8}>
               <Form.Item name="open time" label="Open Time">
-                <div>time</div>
+                <div>{garageById?.openTime}</div>
               </Form.Item>
             </Col>
             <Col span={8}>
               <Form.Item name="close Time" label="Close Time">
-                <div>time</div>
+                <div>{garageById?.closeTime}</div>
               </Form.Item>
             </Col>
           </Row>
           <Row className="row-manadetail">
             <Col span={8}>
               <Form.Item name="status" label="Status">
-                <div>status</div>
+                <div>{garageById?.status}</div>
               </Form.Item>
             </Col>
           </Row>

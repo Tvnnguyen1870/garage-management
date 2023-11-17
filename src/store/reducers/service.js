@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import axiosInstance from "../../services/axios.service"
 axiosInstance.defaults.headers.common['Authorization'] = localStorage.getItem('accessToken') ?? '';
 const initialState = {
-
+  service: null,
 
 }
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjcxYzM1M2Q1LWQxOGMtNGJjOC05MWQ2LWI1ZjM5Mzk5ZjljMyIsImVtYWlsIjoibmhvbTJAZ3JyLmxhIiwiZnVsbE5hbWUiOiJOaMOzbSAyIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzAwMTkyODMzLCJleHAiOjE3MDAyMjg4MzN9.UB6iHmxAELaEy0VOMJ7ZMd4h6gKhDneI5s24Ax56cxE'
@@ -13,7 +13,7 @@ export const fetchServices = createAsyncThunk('service/fetchServices', async (pa
     const response = await axiosInstance.get('services', {
       params: payload
     });
-    return response.data.data; 
+    return response.data.data;
   } catch (error) {
     throw error; 
   }
@@ -39,6 +39,7 @@ export const fetchServicesById = createAsyncThunk('service/fetchServicesById', a
     throw error; 
   }
 });
+
 export const createNewService = createAsyncThunk('service/createNewService', async (serviceData) => {
   try {
     const response = await axiosInstance.post('services', serviceData);

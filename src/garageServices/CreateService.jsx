@@ -1,4 +1,4 @@
-import { Alert, Breadcrumb, Button, Form, Input, Row, Space, notification } from 'antd';
+import { Alert, Button, Form, Input, Row, Space, notification } from 'antd';
 import { Col } from 'antd';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -31,7 +31,7 @@ const CreateService = () => {
         setShowAlert(true);
       });
   }, [form]);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const handleSubmit = () => {
     setIsSubmited(true);
     form
@@ -48,13 +48,14 @@ const CreateService = () => {
           .then((result) => {
             setShowAlert(false);
             setIsSubmited(false);
-            notification.success({
-              message: 'Successfull',
-              description: 'The service has been created successfully !',
-              placement: 'topLeft',
-            });
 
-            setTimeout(() => {}, 3000);
+            setTimeout(() => {
+              notification.success({
+                message: 'Successfull',
+                description: 'The service has been created successfully !',
+                placement: 'topLeft',
+              });
+            }, 500);
           })
           .catch((error) => {
             console.error('Lỗi khi tạo dịch vụ', error);
@@ -66,12 +67,21 @@ const CreateService = () => {
         console.error('Lỗi khi xác thực biểu mẫu', error);
       });
 
+    // navigate('/service');
+  };
+
+  const navigate = useNavigate();
+
+  const clickCancel = () => {
     navigate('/service');
   };
 
-  const handleFormReset = () => {
-    navigate('/service');
-  };
+  // const handleFormReset = () => {
+  //   form.resetFields();
+  //   setIsSubmited(false);
+  //   setShowAlert(false);
+  // };
+
   const validateNumber = async (rule, value) => {
     if (value === '') {
       return;
@@ -81,84 +91,63 @@ const CreateService = () => {
   };
 
   return (
-
-    <div className="garage-create-management">
-      <Breadcrumb
-        style={{
-          fontSize: 22,
-        }}
-        separator=">"
-        items={[
-          {
-            title: 'All garages',
-          },
-          {
-            title: 'Add a new service',
-          },
-        ]}
-      />
-
-      <div className="garage-create">
-        {showAlert && isSubmited && (
-          <Alert
-            message="Error"
-            description="Please fill in the form correctly."
-            type="error"
-            showIcon
-            closable
-            onClose={() => setShowAlert(false)}
-          />
-        )}
+    <div
+      className="profile"
+      style={{
+        marginTop: 32,
+      }}
+    >
+      {showAlert && isSubmited && (
+        <Alert
+          message="Error"
+          description="Please fill form."
+          type="error"
+          showIcon
+          closable
+          onClose={() => setShowAlert(false)}
+        />
+      )}
+      <div>
         <div>
-          <div>
-            <Form form={form} name="validateOnly" layout="vertical" autoComplete="off">
-              <Row gutter={16}>
-                <Col className="gutter-row" span={8}>
-                  <Form.Item name="name" label="Name" rules={[{ required: true }]}>
-                    <Input placeholder="Enter your name" />
-                  </Form.Item>
-                </Col>
-                <Col className="gutter-row" span={8}>
-                  <Form.Item
-                    name="minPrice"
-                    label="Min price"
-                    rules={[
-                      { required: true, message: 'Please enter the maximum price' },
-                      { validator: validateNumber },
-                    ]}
-                  >
-                    <Input placeholder="Enter min price" />
-                  </Form.Item>
-                </Col>
-                <Col className="gutter-row" span={8}>
-                  <Form.Item
-                    name="maxPrice"
-                    label="Max price"
-                    rules={[
-                      { required: true, message: 'Please enter the maximum price' },
-                      { validator: validateNumber },
-                    ]}
-                  >
-                    <Input placeholder="Enter max price" />
-                  </Form.Item>
-                </Col>
-              </Row>
-              <div>
-                <Form.Item name="description" label="Description" rules={[{ required: true }]}>
-                  <Input.TextArea autoSize={{ minRows: 5, maxRows: 10 }} placeholder="Description" />
+          <Form form={form} name="validateOnly" layout="vertical" autoComplete="off">
+            <Row gutter={16}>
+              <Col className="gutter-row" span={6}>
+                <Form.Item name="name" label="Name" rules={[{ required: true }]}>
+                  <Input placeholder="Enter your name" />
                 </Form.Item>
-              </div>
-            </Form>
+              </Col>
+              <Col className="gutter-row" span={6}>
+                <Form.Item
+                  name="minPrice"
+                  label="Min price"
+                  rules={[{ required: true, message: 'enter min price' }, { validator: validateNumber }]}
+                >
+                  <Input placeholder="Enter min price" />
+                </Form.Item>
+              </Col>
+              <Col className="gutter-row" span={6}>
+                <Form.Item
+                  name="maxPrice"
+                  label="Max price"
+                  rules={[{ required: true, message: 'enter maxprice' }, { validator: validateNumber }]}
+                >
+                  <Input placeholder="Enter max price" />
+                </Form.Item>
+              </Col>
+            </Row>
+            <div>
+              <Form.Item name="description" label="Description" rules={[{ required: true }]}>
+                <Input.TextArea autoSize={{ minRows: 5, maxRows: 10 }} placeholder="Description" />
+              </Form.Item>
+            </div>
+          </Form>
 
-            <Space>
-              <Button type="primary" htmlType="button" onClick={handleSubmit}>
-                Create
-              </Button>
-              <Button type="default" onClick={handleFormReset}>
-                Cancel
-              </Button>
-            </Space>
-          </div>
+          <Space>
+            <Button type="primary" htmlType="button" onClick={handleSubmit}>
+              Create
+            </Button>
+            <Button onClick={clickCancel}>Cancel</Button>
+          </Space>
         </div>
       </div>
     </div>

@@ -18,6 +18,12 @@ import CreateService from './garageServices/CreateService';
 import Owners from './garageOwner/Owner';
 import Create from './garageOwner/create';
 
+
+import Edit from './garageOwner/edit';
+import GarageDetails from './garageOwner/detalis';
+// import Edit from './garageOwner/edit';
+// import GarageDetails from './garageOwner/detalis';
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -44,7 +50,7 @@ const router = createBrowserRouter([
         element: <CreateGarageManagement />,
       },
       {
-        path: '/managementdetail',
+        path: '/managementdetail/:id',
         element: <GarageManagementDetail />,
       },
       {
@@ -68,13 +74,22 @@ const router = createBrowserRouter([
         element: <CreateService />,
       },
       {
-        path: '/owners',
+        path: '/owner',
         element: <Owners />,
       },
+
       {
-        path: '/create',
+        path: '/detailowner/:id',
+        element: <GarageDetails />,
+      },
+      {
+        path: '/owner/create',
         element: <Create />,
       },
+      // {
+      //   path: '/owner/:editId',
+      //   element: <Edit />,
+      // },
     ],
   },
   {
