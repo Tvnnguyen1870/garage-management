@@ -5,7 +5,6 @@ import axiosInstance from '../../services/axios.service';
 axiosInstance.defaults.headers.common['Authorization'] = localStorage.getItem('accessToken') ?? '';
 const initialState = {
   manageOwner: null,
-  garageArray: [],
 
   // ownerIdData: null,
   // createOwnerData: {
@@ -21,9 +20,7 @@ const initialState = {
 };
 
 const token =
-
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjcxYzM1M2Q1LWQxOGMtNGJjOC05MWQ2LWI1ZjM5Mzk5ZjljMyIsImVtYWlsIjoibmhvbTJAZ3JyLmxhIiwiZnVsbE5hbWUiOiJOaMOzbSAyIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzAwMTg3NjA3LCJleHAiOjE3MDAyMjM2MDd9.muqeQwFcHw0gs0HWMYQIyj2tkA3SWqHaAMJpHsjRG0w';
-
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjcxYzM1M2Q1LWQxOGMtNGJjOC05MWQ2LWI1ZjM5Mzk5ZjljMyIsImVtYWlsIjoibmhvbTJAZ3JyLmxhIiwiZnVsbE5hbWUiOiJOaMOzbSAyIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzAwMTA3MTkxLCJleHAiOjE3MDAxNDMxOTF9.DNSs_WSQYKnTQypojV66e-v2IeEQW_8XEwxvh4v7rQ0';
 localStorage.setItem('accessToken', token);
 
 export const fetchOwners = createAsyncThunk('owner/fetchOwners', async () => {

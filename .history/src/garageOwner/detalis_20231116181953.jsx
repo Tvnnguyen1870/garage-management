@@ -74,9 +74,9 @@ const GarageDetails = () => {
               </Col>
               <Col span={12}>
                 <div className="detail-label">Garages:</div>
-                {/* {garagesId.garageArray.map((a, b) => {
+                {garagesId.garageArray.map((a, b) => {
                   return <div key={b}>{a.name}</div>;
-                })} */}
+                })}
               </Col>
             </Row>
           </Card>

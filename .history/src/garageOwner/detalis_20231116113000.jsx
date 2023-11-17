@@ -22,13 +22,19 @@ const GarageDetails = () => {
   const handleEdit = () => {
     navigate(`/editowner/${params.id}`);
   };
-  console.log(66, ownerByIdData);
-  // const [garagesId, setGaragesId] = useState(ownerByIdData.garages);
-  // console.log(33, garagesId);
-
+  console.log(6, ownerByIdData);
+  const a = ownerByIdData.garages;
+  console.log(66, ownerByIdData.garages);
+  setGarages(a);
+  // setGarages(ownerByIdData.garages);
+  // console.log(33, garages);
   const handleDelete = () => {
     navigate('/owner');
   };
+  // const a = ownerByIdData.garages.map((garages, index) => {
+  //   return garages.id;
+  // });
+  // console.log(4, a);
 
   return (
     <div className="profile">
@@ -74,9 +80,7 @@ const GarageDetails = () => {
               </Col>
               <Col span={12}>
                 <div className="detail-label">Garages:</div>
-                {/* {garagesId.garageArray.map((a, b) => {
-                  return <div key={b}>{a.name}</div>;
-                })} */}
+                <div className="detail-value">{}</div>
               </Col>
             </Row>
           </Card>
