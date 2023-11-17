@@ -78,7 +78,7 @@ const Service = () => {
   });
 
   const navigate = useNavigate();
-  const [owners, setService] = useState([]);
+  const [service, setService] = useState([]);
   const [pagination, setPagination] = useState({});
   const [type, setType] = useState('name');
   const [value, setValue] = useState('');
@@ -135,11 +135,11 @@ const Service = () => {
   useEffect(() => {
     // call API
     fetchService();
-  }, [query, owners]);
+  }, [query]);
 
   //-------------------------
   let idNew = null;
-  const data = owners;
+  const data = service;
   if (data && data.length > 0) {
     idNew = data[0].id;
   }
@@ -220,7 +220,7 @@ const Service = () => {
 
       <Table
         rowKey="id"
-        dataSource={owners}
+        dataSource={service}
         columns={columns}
         pagination={{
           current: pagination.page,
