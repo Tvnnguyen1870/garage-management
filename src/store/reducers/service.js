@@ -7,7 +7,7 @@ const initialState = {
 
 }
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjcxYzM1M2Q1LWQxOGMtNGJjOC05MWQ2LWI1ZjM5Mzk5ZjljMyIsImVtYWlsIjoibmhvbTJAZ3JyLmxhIiwiZnVsbE5hbWUiOiJOaMOzbSAyIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzAwMTg3NjA3LCJleHAiOjE3MDAyMjM2MDd9.muqeQwFcHw0gs0HWMYQIyj2tkA3SWqHaAMJpHsjRG0w'
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjcxYzM1M2Q1LWQxOGMtNGJjOC05MWQ2LWI1ZjM5Mzk5ZjljMyIsImVtYWlsIjoibmhvbTJAZ3JyLmxhIiwiZnVsbE5hbWUiOiJOaMOzbSAyIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzAwMTkyMTUwLCJleHAiOjE3MDAyMjgxNTB9.XReUZVlQg2vLPuO5bleu5Ayz7Kb0ngv5DOGPYgS9BVM'
 
 localStorage.setItem('accessToken', token )
 export const fetchServices = createAsyncThunk('service/fetchServices', async (payload) => {
@@ -33,12 +33,13 @@ export const fetchServices = createAsyncThunk('service/fetchServices', async (pa
 
 export const fetchServicesById = createAsyncThunk('service/fetchServicesById', async (payload) => {
   try {
-    const response = await axiosInstance.get(`/services/${payload}`)
+    const response = await axiosInstance(`/services/${payload}`)
     console.log(response);
     return response.data.data; 
    
   } catch (error) {
-    throw error; 
+    console.log(error); 
+    
   }
 });
 
