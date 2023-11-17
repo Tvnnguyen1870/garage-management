@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react';
 import axiosInstance from '../services/axios.service';
 
 import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { fetchServicesById } from '../store/reducers/service';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Option } from 'rc-select';
 import Search from 'antd/es/input/Search';
 
@@ -52,16 +52,16 @@ const Service = () => {
       key: 'action',
       render: (_, param2) => (
         <div>
-          <Link to={`/detailservice/${param2.id}`}>View</Link>
-
-          {/* <EditOutlined
+          <Link to={`/detailservice/${param2.id}`}>
+            <EyeOutlined />
+          </Link>
+          <EditOutlined
             style={{
               paddingLeft: 12,
               paddingRight: 12,
             }}
-            onClick={() => toEditManagement()}
           />
-          <DeleteOutlined onClick={() => toManagementDetail()} /> */}
+          <DeleteOutlined onClick={deleteService} />
         </div>
       ),
     },
@@ -77,6 +77,7 @@ const Service = () => {
     status: '',
   });
 
+  const navigate = useNavigate();
   const [owners, setService] = useState([]);
   const [pagination, setPagination] = useState({});
   const [type, setType] = useState('name');
@@ -112,9 +113,6 @@ const Service = () => {
     console.log(a);
   };
 
-  // const toAddGarage = () => {
-  //   navigate('/managementcreate');
-  // };
   const toServiceDetail = () => {
     // navigate('/managementdetail');
   };
@@ -131,13 +129,42 @@ const Service = () => {
   };
 
   const toCreateService = () => {
-    // navigate('/createservice');
+    navigate('/createservice');
   };
 
   useEffect(() => {
     // call API
     fetchService();
-  }, [query]);
+  }, [query, owners]);
+
+  //-------------------------
+  let idNew = null;
+  const data = owners;
+  if (data && data.length > 0) {
+    idNew = data[0].id;
+  }
+  // //xoa
+  const token = localStorage.getItem('accessToken') ?? '';
+
+  const apiURL = `services/${idNew}`;
+
+  const deleteService = () => {
+    axiosInstance
+      .delete(apiURL, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    onTableChange();
+  };
 
   return (
     <div
