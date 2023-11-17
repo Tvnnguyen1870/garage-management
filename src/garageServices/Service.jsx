@@ -65,7 +65,7 @@ const Service = () => {
     },
   ];
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [query, setQuery] = useState({
     page: 1,

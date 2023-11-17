@@ -6,7 +6,7 @@ import { createNewService } from '../../src/store/reducers/service';
 import { useNavigate } from 'react-router-dom';
 
 const CreateService = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: 'string',
     description: 'string',
