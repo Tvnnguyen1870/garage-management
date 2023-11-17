@@ -86,7 +86,7 @@ const GarageManagementAll = () => {
   //---------------------------
   const [params, setParams] = useState({
     page: 1,
-    limit: 1,
+    limit: 2,
     name: '',
     email: '',
     status: '',

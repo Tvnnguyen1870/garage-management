@@ -1,48 +1,63 @@
-import { Button, Col, Row, Breadcrumb, Space, Select, TimePicker } from 'antd';
+import { Button, Col, Row, Breadcrumb, Space, TimePicker, Form, Input, Checkbox } from 'antd';
 import '../assets/styles/creategarage.css';
 import { useNavigate } from 'react-router';
-import { Controller, useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
-import { Option } from 'antd/es/mentions';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { createGarage } from '../store/reducers/management';
+import axiosInstance from '../services/axios.service';
 
-const CreateGarageManagement = () => {
+const CreateGarageManagement = ({ value }) => {
   const navigate = useNavigate();
-
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      garageName: '',
-      emailManagement: '',
-      phoneNumberManagement: '',
-      addressManagement: '',
-      textAreaManagement: '',
-      policyManagement: '',
-    },
-  });
-
-  const onSave = (values) => {
-    console.log(values);
-  };
 
   const clickCancel = () => {
     navigate('/managementall');
   };
 
-  const options = [];
-  for (let i = 0; i < 24; i++) {
-    options.push({
-      label: i.toString(24) + i,
-      value: i.toString(24) + i,
-    });
-  }
-  const handleChange = (value) => {
-    console.log(`selected ${value}`);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
+  const allServices = ['Service 1', 'Service 2', 'Service 3', 'Service 4', 'Service 5'];
+  const [filterValue, setFilterValue] = useState('');
+  const filteredServices = allServices.filter((service) => service.includes(filterValue));
+
+  const handleInputChange = (e) => {
+    setFilterValue(e.target.value);
   };
 
+  const [form] = Form.useForm();
+
   const format = 'HH:mm';
+
+  const SubmitButton = ({ form }) => {
+    const values = Form.useWatch([], form);
+    React.useEffect(() => {}, [values, formSubmitted]);
+
+    return (
+      <Space>
+        <Button type="primary" htmlType="button" onClick={handleSubmit}>
+          Save
+        </Button>
+      </Space>
+    );
+  };
+
+  const dispatch = useDispatch();
+
+  const handleSubmit = () => {
+    setFormSubmitted(true);
+    form
+      .validateFields()
+      .then((values) => {
+        // console.log('Form values:', values.closeTime.toString());
+        values.closeTime = values.closeTime.toString();
+        values.openTime = values.openTime.toString();
+        // console.log('Form values:', values);
+        dispatch(createGarage(values));
+      })
+      .catch((error) => {
+        console.log('Form validation error:', error);
+      });
+  };
 
   return (
     <div className="garage-create-management">
@@ -61,100 +76,76 @@ const CreateGarageManagement = () => {
         ]}
       />
       <div className="garage-create">
-        <form onSubmit={handleSubmit(onSave)}>
+        <Form
+          form={form}
+          name="validateOnly"
+          layout="vertical"
+          autoComplete="off"
+          initialValues={{
+            name: '',
+            email: '',
+            phoneNumber: '',
+            address: '',
+            openTime: '',
+            closeTime: '',
+            description: '',
+            policy: '',
+            services: [''],
+          }}
+        >
           <Row className="row-management">
             <Col span={8}>
               <div className="input-createManagement">
-                <span className="name-span">Name</span>
-                <Controller
-                  name="garageName"
-                  control={control}
-                  render={({ field }) => {
-                    return (
-                      <div>
-                        <input {...field} type="text" placeholder="enter garage name" />
-                        {errors['userName'] && <p>({errors.garageName.message})</p>}
-                      </div>
-                    );
-                  }}
-                />
+                <Form.Item name="name" label="Name">
+                  <Input placeholder="Enter your name" />
+                </Form.Item>
               </div>
             </Col>
             <Col span={8}>
               <div className="input-createManagement">
-                <span className="name-span">Email</span>
-                <Controller
-                  name="emailManagement"
-                  control={control}
-                  render={({ field }) => {
-                    return (
-                      <div>
-                        <input {...field} type="email" placeholder="enter garage email" />
-                        {errors['emailManagement'] && <p>({errors.emailManagement.message})</p>}
-                      </div>
-                    );
-                  }}
-                />
+                <Form.Item name="email" label="Email">
+                  <Input placeholder="Enter your email" />
+                </Form.Item>
               </div>
             </Col>
             <Col span={8}>
               <div className="input-createManagement">
-                <span className="name-span">Phone Number</span>
-                <Controller
-                  name="phoneNumberManagement"
-                  control={control}
-                  render={({ field }) => {
-                    return (
-                      <div>
-                        <input {...field} type="tel" placeholder="enter garage name" />
-                        {errors['phoneNumberManagement'] && <p>({errors.phoneNumberManagement.message})</p>}
-                      </div>
-                    );
-                  }}
-                />
+                <Form.Item name="phoneNumber" label="Phone Number">
+                  <Input placeholder="Enter your phone" />
+                </Form.Item>
               </div>
             </Col>
           </Row>
           <Row className="row-management">
             <Col span={8}>
               <div className="input-createManagement">
-                <span className="name-span">Address</span>
-                <Controller
-                  name="addressManagement"
-                  control={control}
-                  render={({ field }) => {
-                    return (
-                      <div>
-                        <input {...field} type="text" placeholder="enter garage name" />
-                        {errors['addressManagement'] && <p>({errors.addressManagement.message})</p>}
-                      </div>
-                    );
-                  }}
-                />
+                <Form.Item name="address" label="Address">
+                  <Input placeholder="Enter your address" />
+                </Form.Item>
               </div>
             </Col>
             <Col span={8}>
               <div>
-                <span className="name-span">Open time</span>
-                <br />
-                <TimePicker
-                  className="time-management"
-                  allowClear
-                  defaultValue={dayjs('9:00', format)}
-                  format={format}
-                />
+                <Form.Item name="openTime" label="Open Time">
+                  <TimePicker
+                    className="time-management"
+                    allowClear
+                    defaultValue={dayjs('9:00', format)}
+                    format={format}
+                  />
+                </Form.Item>
               </div>
             </Col>
             <Col span={8}>
               <div>
-                <span className="name-span">Close time</span>
-                <br />
-                <TimePicker
-                  className="time-management"
-                  allowClear
-                  defaultValue={dayjs('23:00', format)}
-                  format={format}
-                />
+                <Form.Item name="closeTime" label="Close Time">
+                  <TimePicker
+                    className="time-management"
+                    allowClear
+                    defaultValue={dayjs('23:00', format)}
+                    format={format}
+                  />
+                </Form.Item>
               </div>
             </Col>
           </Row>
@@ -165,86 +156,51 @@ const CreateGarageManagement = () => {
                   width: '90%',
                 }}
               >
-                <span className="name-span">Services</span>
-                <Select
-                  mode="multiple"
-                  style={{
-                    width: '100%',
-                  }}
-                  placeholder="select one country"
-                  defaultValue={['TLS']}
-                  onChange={handleChange}
-                  optionLabelProp="label"
-                >
-                  <Option value="garage" label="Garage">
-                    <Space>Garage</Space>
-                  </Option>
-                  <Option value="TLS" label="TLS">
-                    <Space>TLS</Space>
-                  </Option>
-                  <Option value="AHC" label="AHC">
-                    <Space>AHC</Space>
-                  </Option>
-                  <Option value="CB Garage" label="CB Garage">
-                    <Space>CB Garage</Space>
-                  </Option>
-                  <Option value="UCQ" label="UCQ">
-                    <Space>UCQ</Space>
-                  </Option>
-                </Select>
+                <Form.Item name="services" label="Services">
+                  <Input placeholder="Enter your services " onChange={handleInputChange} value={filterValue} />
+                  <Checkbox.Group>
+                    {filteredServices.map((service) => (
+                      <div key={service}>
+                        <Checkbox value={service}>{service}</Checkbox>
+                      </div>
+                    ))}
+                  </Checkbox.Group>
+                </Form.Item>
               </div>
             </Col>
           </Row>
           <Row className="row-management">
             <Col span={12}>
               <div className="des-management">
-                <span className="name-span">Desciption</span>
-                <Controller
-                  name="textAreaManagement"
-                  control={control}
-                  render={({ field }) => {
-                    return (
-                      <div>
-                        <textarea {...field} type="text" placeholder="this is description" />
-                      </div>
-                    );
-                  }}
-                />
+                <Form.Item name="description" label="Description">
+                  <Input.TextArea autoSize={{ minRows: 5, maxRows: 10 }} placeholder="Description" />
+                </Form.Item>
               </div>
             </Col>
             <Col span={12}>
               <div className="des-management">
-                <span className="name-span">Policy</span>
-                <Controller
-                  name="policyManagement"
-                  control={control}
-                  render={({ field }) => {
-                    return (
-                      <div>
-                        <textarea {...field} type="text" placeholder="enter garage policy" />
-                        {errors['policyManagement'] && <p>({errors.policyManagement.message})</p>}
-                      </div>
-                    );
-                  }}
-                />
+                <Form.Item name="policy" label="Policy">
+                  <Input.TextArea autoSize={{ minRows: 5, maxRows: 10 }} placeholder="Policy" />
+                </Form.Item>
               </div>
             </Col>
           </Row>
-          <Row className="row-management">
-            <Col
+        </Form>
+        <Row className="row-management">
+          <Col>
+            <SubmitButton form={form} />
+          </Col>
+          <Col>
+            <Button
               style={{
-                display: 'flex',
+                marginLeft: 20,
               }}
+              onClick={clickCancel}
             >
-              <button className="btn-add-management" type="submit">
-                Save
-              </button>
-            </Col>
-            <Col>
-              <Button onClick={clickCancel}>Cancel</Button>
-            </Col>
-          </Row>
-        </form>
+              Cancel
+            </Button>
+          </Col>
+        </Row>
       </div>
     </div>
   );
