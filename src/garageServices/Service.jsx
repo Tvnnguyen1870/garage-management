@@ -53,7 +53,7 @@ const Service = () => {
       render: (_, param2) => (
         <div>
           <Link to={`/detailservice/${param2.id}`}>View</Link>
-          <button onClick={() => handleSubmit(param2)}></button>
+
           <EditOutlined
             style={{
               paddingLeft: 12,
@@ -77,12 +77,7 @@ const Service = () => {
     status: '',
   });
 
-<<<<<<< HEAD
   const [owners, setService] = useState([]);
-=======
-  const navigate = useNavigate();
-  const [service, setService] = useState([]);
->>>>>>> develop
   const [pagination, setPagination] = useState({});
   const [type, setType] = useState('name');
   const [value, setValue] = useState('');
@@ -143,12 +138,9 @@ const Service = () => {
     // call API
     fetchService();
   }, [query]);
-<<<<<<< HEAD
-=======
 
-  //-------------------------
   let idNew = null;
-  const data = service;
+  const data = owners;
   if (data && data.length > 0) {
     idNew = data[0].id;
   }
@@ -174,7 +166,6 @@ const Service = () => {
 
     onTableChange();
   };
->>>>>>> develop
 
   return (
     <div
@@ -230,7 +221,7 @@ const Service = () => {
 
       <Table
         rowKey="id"
-        dataSource={service}
+        dataSource={owners}
         columns={columns}
         pagination={{
           current: pagination.page,
