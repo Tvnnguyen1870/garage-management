@@ -1,25 +1,10 @@
-import { Button, Col, Row, Breadcrumb, TimePicker } from 'antd';
+import { Button, Col, Row, Breadcrumb, TimePicker, Form, Input } from 'antd';
 import '../assets/styles/creategarage.css';
 import { useNavigate } from 'react-router';
-import { Controller, useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
 
 const EditManagement = () => {
   const navigate = useNavigate();
-
-  const {
-    control,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      garageName: '',
-      emailManagement: '',
-      phoneNumberManagement: '',
-      addressManagement: '',
-      textAreaManagement: '',
-      policyManagement: '',
-    },
-  });
 
   const clickCancel = () => {
     navigate('/managementall');
@@ -52,76 +37,36 @@ const EditManagement = () => {
         ]}
       />
       <div className="garage-create">
-        <form>
+        <Form name="validateOnly" layout="vertical" autoComplete="off">
           <Row className="row-management">
             <Col span={8}>
               <div className="input-createManagement">
-                <span className="name-span">Name</span>
-                <Controller
-                  name="garageName"
-                  control={control}
-                  render={({ field }) => {
-                    return (
-                      <div>
-                        <input {...field} type="text" placeholder="enter garage name" />
-                        {errors['userName'] && <p>({errors.garageName.message})</p>}
-                      </div>
-                    );
-                  }}
-                />
+                <Form.Item name="name" label="Name" rules={[{ required: true }]}>
+                  <Input placeholder="Enter your name" />
+                </Form.Item>
               </div>
             </Col>
             <Col span={8}>
               <div className="input-createManagement">
-                <span className="name-span">Email</span>
-                <Controller
-                  name="emailManagement"
-                  control={control}
-                  render={({ field }) => {
-                    return (
-                      <div>
-                        <input {...field} type="email" placeholder="enter garage email" />
-                        {errors['emailManagement'] && <p>({errors.emailManagement.message})</p>}
-                      </div>
-                    );
-                  }}
-                />
+                <Form.Item name="email" label="Email" rules={[{ required: true }]}>
+                  <Input placeholder="Enter your email" />
+                </Form.Item>
               </div>
             </Col>
             <Col span={8}>
               <div className="input-createManagement">
-                <span className="name-span">Phone Number</span>
-                <Controller
-                  name="phoneNumberManagement"
-                  control={control}
-                  render={({ field }) => {
-                    return (
-                      <div>
-                        <input {...field} type="tel" placeholder="enter garage name" />
-                        {errors['phoneNumberManagement'] && <p>({errors.phoneNumberManagement.message})</p>}
-                      </div>
-                    );
-                  }}
-                />
+                <Form.Item name="phone" label="Phone Number" rules={[{ required: true }]}>
+                  <Input placeholder="Enter your phone" />
+                </Form.Item>
               </div>
             </Col>
           </Row>
           <Row className="row-management">
             <Col span={8}>
               <div className="input-createManagement">
-                <span className="name-span">Address</span>
-                <Controller
-                  name="addressManagement"
-                  control={control}
-                  render={({ field }) => {
-                    return (
-                      <div>
-                        <input {...field} type="text" placeholder="enter garage name" />
-                        {errors['addressManagement'] && <p>({errors.addressManagement.message})</p>}
-                      </div>
-                    );
-                  }}
-                />
+                <Form.Item name="address" label="Address" rules={[{ required: true }]}>
+                  <Input placeholder="Enter your address" />
+                </Form.Item>
               </div>
             </Col>
             <Col span={8}>
@@ -142,53 +87,34 @@ const EditManagement = () => {
           <Row className="row-management">
             <Col span={12}>
               <div className="des-management">
-                <span>Desciption</span>
-                <Controller
-                  name="textAreaManagement"
-                  control={control}
-                  render={({ field }) => {
-                    return (
-                      <div>
-                        <textarea {...field} type="text" placeholder="this is description" />
-                      </div>
-                    );
-                  }}
-                />
+                <Form.Item name="description" label="Description" rules={[{ required: true }]}>
+                  <Input.TextArea autoSize={{ minRows: 5, maxRows: 10 }} placeholder="Description" />
+                </Form.Item>
               </div>
             </Col>
             <Col span={12}>
               <div className="des-management">
-                <span className="name-span">Policy</span>
-                <Controller
-                  name="policyManagement"
-                  control={control}
-                  render={({ field }) => {
-                    return (
-                      <div>
-                        <textarea {...field} type="text" placeholder="enter garage policy" />
-                        {errors['policyManagement'] && <p>({errors.policyManagement.message})</p>}
-                      </div>
-                    );
-                  }}
-                />
+                <Form.Item name="policy" label="Policy" rules={[{ required: true }]}>
+                  <Input.TextArea autoSize={{ minRows: 5, maxRows: 10 }} placeholder="Policy" />
+                </Form.Item>
               </div>
             </Col>
           </Row>
-          <Row className="row-management">
-            <Col>
-              <Button
-                style={{
-                  marginRight: 20,
-                }}
-              >
-                Save
-              </Button>
-            </Col>
-            <Col>
-              <Button onClick={clickCancel}>Cancel</Button>
-            </Col>
-          </Row>
-        </form>
+        </Form>
+        <Row className="row-management">
+          <Col>
+            <Button
+              style={{
+                marginRight: 20,
+              }}
+            >
+              Save
+            </Button>
+          </Col>
+          <Col>
+            <Button onClick={clickCancel}>Cancel</Button>
+          </Col>
+        </Row>
       </div>
     </div>
   );
