@@ -54,14 +54,14 @@ const Service = () => {
         <div>
           <Link to={`/detailservice/${param2.id}`}>View</Link>
           <button onClick={() => handleSubmit(param2)}></button>
-          {/* <EditOutlined
+          <EditOutlined
             style={{
               paddingLeft: 12,
               paddingRight: 12,
             }}
             onClick={() => toEditManagement()}
           />
-          <DeleteOutlined onClick={() => toManagementDetail()} /> */}
+          <DeleteOutlined onClick={() => toManagementDetail()} />
         </div>
       ),
     },
