@@ -6,6 +6,8 @@ import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import { fetchServicesById } from '../store/reducers/service';
 import { useDispatch } from 'react-redux';
+import Search from 'antd/es/input/Search';
+import { Option } from 'antd/es/mentions';
 
 const Service = () => {
   const columns = [

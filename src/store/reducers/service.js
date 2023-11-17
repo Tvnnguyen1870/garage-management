@@ -6,18 +6,18 @@ const initialState = {
 
 
 }
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjcxYzM1M2Q1LWQxOGMtNGJjOC05MWQ2LWI1ZjM5Mzk5ZjljMyIsImVtYWlsIjoibmhvbTJAZ3JyLmxhIiwiZnVsbE5hbWUiOiJOaMOzbSAyIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzAwMDUwMDQ5LCJleHAiOjE3MDAwODYwNDl9.mIA_lBko4ncqFUUmS9v_fDclHIK_zFUxBGjgnOwV9To'
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjcxYzM1M2Q1LWQxOGMtNGJjOC05MWQ2LWI1ZjM5Mzk5ZjljMyIsImVtYWlsIjoibmhvbTJAZ3JyLmxhIiwiZnVsbE5hbWUiOiJOaMOzbSAyIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzAwMTkyODMzLCJleHAiOjE3MDAyMjg4MzN9.UB6iHmxAELaEy0VOMJ7ZMd4h6gKhDneI5s24Ax56cxE'
 localStorage.setItem('accessToken', token )
-// export const fetchServices = createAsyncThunk('service/fetchServices', async (payload) => {
-//   try {
-//     const response = await axiosInstance.get('services', {
-//       params: payload
-//     });
-//     return response.data.data; 
-//   } catch (error) {
-//     throw error; 
-//   }
-// });
+export const fetchServices = createAsyncThunk('service/fetchServices', async (payload) => {
+  try {
+    const response = await axiosInstance.get('services', {
+      params: payload
+    });
+    return response.data.data; 
+  } catch (error) {
+    throw error; 
+  }
+});
 
 
 // export const fetchServicesById = createAsyncThunk('owner/fetchServicesById', async (payload) => {
