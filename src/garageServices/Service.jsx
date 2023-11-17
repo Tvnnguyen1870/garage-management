@@ -77,7 +77,12 @@ const Service = () => {
     status: '',
   });
 
+<<<<<<< HEAD
   const [owners, setService] = useState([]);
+=======
+  const navigate = useNavigate();
+  const [service, setService] = useState([]);
+>>>>>>> develop
   const [pagination, setPagination] = useState({});
   const [type, setType] = useState('name');
   const [value, setValue] = useState('');
@@ -138,6 +143,38 @@ const Service = () => {
     // call API
     fetchService();
   }, [query]);
+<<<<<<< HEAD
+=======
+
+  //-------------------------
+  let idNew = null;
+  const data = service;
+  if (data && data.length > 0) {
+    idNew = data[0].id;
+  }
+  // //xoa
+  const token = localStorage.getItem('accessToken') ?? '';
+
+  const apiURL = `services/${idNew}`;
+
+  const deleteService = () => {
+    axiosInstance
+      .delete(apiURL, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    onTableChange();
+  };
+>>>>>>> develop
 
   return (
     <div
@@ -193,7 +230,7 @@ const Service = () => {
 
       <Table
         rowKey="id"
-        dataSource={owners}
+        dataSource={service}
         columns={columns}
         pagination={{
           current: pagination.page,
