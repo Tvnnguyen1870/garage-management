@@ -1,4 +1,4 @@
-import { Button, Col, Row, Select, Space, Table } from 'antd';
+import { Button, Col, Row, Select, Space, Table, notification } from 'antd';
 import { useEffect, useState } from 'react';
 import axiosInstance from '../services/axios.service';
 
@@ -90,7 +90,7 @@ const Service = () => {
     });
 
     dispatch(fetchServicesById(response));
-
+    console.log(response);
     setService(response.data.data.items);
     setPagination(response.data.data.pagination);
   };
@@ -135,7 +135,7 @@ const Service = () => {
   useEffect(() => {
     // call API
     fetchService();
-  }, [query, owners]);
+  }, [query]);
 
   //-------------------------
   let idNew = null;
@@ -161,6 +161,9 @@ const Service = () => {
       })
       .catch((error) => {
         console.error(error);
+        notification.open({
+          message: error.response.data.message,
+        });
       });
 
     onTableChange();
