@@ -1,27 +1,29 @@
-import { Button, Input, Select, Table, Card, Space } from 'antd';
+
+import { Button, Col, Row, Select, Space, Table } from 'antd';
 import { useEffect, useState } from 'react';
 import axiosInstance from '../services/axios.service';
-// import { deleteOwners, fetchOwners, removeOwner }
-import { EyeOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { fetchOwnersById } from '../store/reducers/owner';
 
-const { Option } = Select;
-const Owners = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const {} = useParams();
+
+import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
+import { Link, useNavigate } from 'react-router-dom';
+import { fetchOwners, fetchOwnersById } from '../store/reducers/owner';
+import { useDispatch, useSelector } from 'react-redux';
+import { Option } from 'rc-select';
+import Search from 'antd/es/input/Search';
+
+const Owner = () => {
   const columns = [
     {
-      title: 'ID',
+
+      title: '#',
+
       dataIndex: 'id',
       key: 'id',
     },
     {
       title: 'Name',
       dataIndex: 'fullName',
-      key: 'name',
+      key: 'fullName',
     },
     {
       title: 'Email',
@@ -34,7 +36,7 @@ const Owners = () => {
       key: 'phoneNumber',
     },
     {
-      title: 'status',
+      title: 'Status',
       dataIndex: 'status',
       key: 'status',
       render: (value) => (
@@ -50,58 +52,61 @@ const Owners = () => {
 
     {
       title: 'Action',
+      dataIndex: 'action',
       key: 'action',
       render: (_, param2) => (
-        <Space size="middle">
-          {' '}
-          <EyeOutlined
-            onClick={() => {
-              navigate(`/detailowner/${param2.id}`);
-            }}
-            // onClick={() => {
-            //   navigate('/create');
-            // }}
-          />
+
+        <div>
+          <Link to={`/detailowner/${param2.id}`}>
+            <EyeOutlined />
+          </Link>
+
           <EditOutlined
-            onClick={() => {
-              navigate('/owner/editId');
+            style={{
+              paddingLeft: 12,
+              paddingRight: 12,
             }}
           />
-          <DeleteOutlined onClick={handleDelete} />
-        </Space>
+          <DeleteOutlined onClick={deleteOwner} />
+        </div>
       ),
     },
   ];
 
+  // const navigate = useNavigate();
+
   const [query, setQuery] = useState({
     page: 1,
-    limit: 3,
+
+    limit: 5,
+
     name: '',
     email: '',
     status: '',
   });
+
+
+  const navigate = useNavigate();
 
   const [owners, setOwners] = useState([]);
   const [pagination, setPagination] = useState({});
   const [type, setType] = useState('name');
   const [value, setValue] = useState('');
 
+
+  const dispatch = useDispatch();
+
   const fetchOwners = async () => {
-    const response = await axiosInstance.get('users', {
+    const response = await axiosInstance.get('/users', {
       params: query,
     });
     dispatch(fetchOwnersById(response));
 
-    setOwners(response.data.data.items);
+    dispatch(fetchOwnersById(response));
 
+    setOwners(response.data.data.items);
     setPagination(response.data.data.pagination);
   };
-
-  console.log(owners);
-
-  console.log(1, columns);
-
-  // console.log(3, a);
 
   const onTableChange = (values) => {
     setQuery({ ...query, page: values.current });
@@ -117,6 +122,17 @@ const Owners = () => {
     setValue(value);
   };
 
+  const handleSubmit = (a) => {
+    console.log(a);
+  };
+
+  const toServiceDetail = () => {
+    // navigate('/managementdetail');
+  };
+  const toEditService = () => {
+    // navigate('/managementedit');
+  };
+
   const onSearch = () => {
     if (type === 'name') {
       setQuery({ ...query, name: value });
@@ -125,65 +141,111 @@ const Owners = () => {
     }
   };
 
+  const handleAdd = () => {
+    navigate('/createowner');
+  };
+
   useEffect(() => {
     // call API
     fetchOwners();
   }, [query]);
 
-  const handleEye = () => {
-    // navigate('/details');
-  };
-  const handleAdd = () => {
-    navigate('/owner/create');
-  };
-  const handleDelete = async (owners) => {
-    // try {
-    //   setOwners(owners.filter(owner=>owner._id !== owners._id))
-    //   await axios.delete(`${}`)
-    // }catch(error){
-    //   return error
-    // }
-  };
-  return (
-    <div style={{ padding: '30px 20px 0 20px' }}>
-      <Card>
-        <div>
-          <h2> All Garage Owners</h2>
+  //-------------------------
+  let idNew = null;
+  const data = owners;
+  if (data && data.length > 0) {
+    idNew = data[0].id;
+  }
+  // //xoa
+  const token = localStorage.getItem('accessToken') ?? '';
 
-          <Button onClick={handleAdd}>Add Owner</Button>
-          <Select
-            defaultValue={type}
-            style={{ width: 120 }}
-            onChange={handleTypeChange}
-            options={[
-              { value: 'name', label: 'Name' },
-              { value: 'email', label: 'Email' },
-            ]}
-          />
-          <Input value={value} onChange={onInputChange} />
-          <Button onClick={onSearch}>Search</Button>
-          <Select
-            style={{
-              width: '200px',
-            }}
-          >
-            <Option value="">active</Option>
-            <Option value="">inactive</Option>
-          </Select>
-          <Table
-            rowKey="id"
-            dataSource={owners}
-            columns={columns}
-            pagination={{
-              current: pagination.page,
-              pageSize: pagination.limit,
-              total: pagination.total,
-            }}
-            onChange={onTableChange}
-          />
-        </div>
-      </Card>
+  const apiURL = `users/${idNew}`;
+
+  const deleteOwner = () => {
+    axiosInstance
+      .delete(apiURL, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    onTableChange();
+  };
+
+  return (
+    <div
+      className="profile"
+      style={{
+        marginTop: 30,
+      }}
+    >
+      <div>
+        <Row gutter={24}>
+          <Col className="gutter-row" span={6}>
+            <h2>All Garage Owner</h2>
+          </Col>
+          <Col className="gutter-row" span={15}></Col>
+          <Col className="gutter-row" span={3}>
+            <Button onClick={handleAdd}>Add Owner</Button>
+          </Col>
+        </Row>
+      </div>
+
+      {/* --------------------------- */}
+      <div
+        style={{
+          marginBottom: 20,
+        }}
+      >
+        <Row gutter={24}>
+          <Col className="gutter-row" span={8}>
+            <Space.Compact
+              style={{
+                position: 'relative',
+              }}
+              block
+            >
+              <Select defaultValue={type} allowClear onChange={handleTypeChange}>
+                <Option value="Name">Name</Option>
+                <Option value="Email">Email</Option>
+              </Select>
+              <Search
+                onChange={onInputChange}
+                value={value}
+                allowClear
+                onSearch={onSearch}
+                style={{
+                  width: '100%',
+                }}
+              />
+            </Space.Compact>
+          </Col>
+          <Col span={10}></Col>
+        </Row>
+      </div>
+
+      <Table
+        rowKey="id"
+        dataSource={owners}
+        columns={columns}
+        pagination={{
+          current: pagination.page,
+          pageSize: pagination.limit,
+          total: pagination.total,
+        }}
+        onChange={onTableChange}
+      />
     </div>
   );
 };
-export default Owners;
+
+
+export default Owner;
+
