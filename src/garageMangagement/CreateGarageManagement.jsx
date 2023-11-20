@@ -2,10 +2,10 @@ import { Button, Col, Row, Breadcrumb, Space, TimePicker, Form, Input, Checkbox 
 import '../assets/styles/creategarage.css';
 import { useNavigate } from 'react-router';
 import dayjs from 'dayjs';
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { createGarage } from '../store/reducers/management';
-import axiosInstance from '../services/axios.service';
+import { fetchServices } from '../store/reducers/service';
 
 const CreateGarageManagement = ({ value }) => {
   const navigate = useNavigate();
@@ -16,9 +16,9 @@ const CreateGarageManagement = ({ value }) => {
 
   const [formSubmitted, setFormSubmitted] = useState(false);
 
-  const allServices = ['Service 1', 'Service 2', 'Service 3', 'Service 4', 'Service 5'];
+  // const allServices = [];
   const [filterValue, setFilterValue] = useState('');
-  const filteredServices = allServices.filter((service) => service.includes(filterValue));
+  // const filteredServices = allServices.filter((service) => service.includes(filterValue));
 
   const handleInputChange = (e) => {
     setFilterValue(e.target.value);
@@ -59,6 +59,17 @@ const CreateGarageManagement = ({ value }) => {
       });
   };
 
+  // call api service
+  const { serviceIds } = useSelector((state) => state.service);
+
+  console.log(serviceIds, 'serviceId');
+
+  useEffect(() => {
+    dispatch(fetchServices());
+  }, []);
+
+  if (!serviceIds) return;
+
   return (
     <div className="garage-create-management">
       <Breadcrumb
@@ -90,7 +101,7 @@ const CreateGarageManagement = ({ value }) => {
             closeTime: '',
             description: '',
             policy: '',
-            services: [''],
+            serviceIds: [''],
           }}
         >
           <Row className="row-management">
@@ -156,15 +167,15 @@ const CreateGarageManagement = ({ value }) => {
                   width: '90%',
                 }}
               >
-                <Form.Item name="services" label="Services">
+                <Form.Item name="serviceIds" label="Services">
                   <Input placeholder="Enter your services " onChange={handleInputChange} value={filterValue} />
-                  <Checkbox.Group>
+                  {/* <Checkbox.Group>
                     {filteredServices.map((service) => (
                       <div key={service}>
                         <Checkbox value={service}>{service}</Checkbox>
                       </div>
                     ))}
-                  </Checkbox.Group>
+                  </Checkbox.Group> */}
                 </Form.Item>
               </div>
             </Col>
