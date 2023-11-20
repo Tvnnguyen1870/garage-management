@@ -6,7 +6,7 @@ const initialState = {
     profiles: [],
 }
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjcxYzM1M2Q1LWQxOGMtNGJjOC05MWQ2LWI1ZjM5Mzk5ZjljMyIsImVtYWlsIjoibmhvbTJAZ3JyLmxhIiwiZnVsbE5hbWUiOiJOaMOzbSAyIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzAwMTg3NjA3LCJleHAiOjE3MDAyMjM2MDd9.muqeQwFcHw0gs0HWMYQIyj2tkA3SWqHaAMJpHsjRG0w';
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjcxYzM1M2Q1LWQxOGMtNGJjOC05MWQ2LWI1ZjM5Mzk5ZjljMyIsImVtYWlsIjoibmhvbTJAZ3JyLmxhIiwiZnVsbE5hbWUiOiJOaMOzbSAyIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzAwNDU0NjM0LCJleHAiOjE3MDA0OTA2MzR9.bkgWCpQMAgilmE7NpAaUEVCBT0Y5kh9vmwas7a7ORLQ';
 
 localStorage.setItem('accessToken', token)
 

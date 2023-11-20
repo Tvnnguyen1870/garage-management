@@ -135,7 +135,7 @@ const Service = () => {
   useEffect(() => {
     // call API
     fetchService();
-  }, [query, owners]);
+  }, [query]);
 
   //-------------------------
   let idNew = null;
