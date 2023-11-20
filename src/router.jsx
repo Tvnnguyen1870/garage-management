@@ -19,6 +19,7 @@ import Owners from './garageOwner/Owner';
 import Create from './garageOwner/create';
 
 import Edit from './garageOwner/edit';
+
 import GarageDetails from './garageOwner/detalis';
 // import Edit from './garageOwner/edit';
 // import GarageDetails from './garageOwner/detalis';
