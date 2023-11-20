@@ -5,7 +5,7 @@ const initialState = {
     management: null,
 }
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFlYjJjNzAxLTc4MWYtNDQyZS1hODQyLTc3ZDdlZTIxZmJiMCIsImVtYWlsIjoibmhvbTFAZ3JyLmxhIiwiZnVsbE5hbWUiOiJuZ3V5ZW4iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2OTk5NTE4NjIsImV4cCI6MTY5OTk4Nzg2Mn0.0FPKLl0NZGLosf_PKZuO57JbFrTRWZQp_j32C0XhSA0';
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjcxYzM1M2Q1LWQxOGMtNGJjOC05MWQ2LWI1ZjM5Mzk5ZjljMyIsImVtYWlsIjoibmhvbTJAZ3JyLmxhIiwiZnVsbE5hbWUiOiJOaMOzbSAyIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzAwMTAzODQ4LCJleHAiOjE3MDAxMzk4NDh9.NtxeFzlEAQoty_v5WEacC-O_1Zg2jLiz0oQKFtHIN54';
 
 localStorage.setItem('accessToken', token)
 
@@ -26,11 +26,9 @@ export const getManagement = createAsyncThunk(
 export const fetchGarageById = createAsyncThunk('management/fetchGarageById', async (payload) => {
     try {
 
-      const result = await axiosInstance(`users/${payload}`, {
-
-        params: payload,
-      });
-      return result.data.data.items;
+      const result = await axiosInstance(`garages/${payload}`);
+    //   console.log(result.data.data, 'result');
+      return result.data.data;
     } catch (error) {
       console.log(error); 
     }
@@ -40,17 +38,15 @@ export const managementSlice = createSlice({
     name: 'management',
     initialState,
     reducers: {
-        removeManagement: (state, action) => {
-            const index = state.management.findIndex((management) => management.id === action.payload.id);
-            if (index !== -1) {
-                state.management.splice(index, 1);
-            }
-        },
+        
     },
     extraReducers: (builder) => {
         builder.addCase(getManagement.fulfilled, (state, actions) => {
             state.management = actions.payload;
-        })
+        });
+        builder.addCase(fetchGarageById.fulfilled, (state, action) => {
+            state.garageById = action.payload;
+          });
     }
 })
 

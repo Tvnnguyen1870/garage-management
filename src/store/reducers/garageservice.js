@@ -1,20 +1,4 @@
-// /* eslint-disable no-useless-catch */
-// import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-// import axiosInstance from "../../services/axios.service"
-// axiosInstance.defaults.headers.common['Authorization'] = localStorage.getItem('accessToken') ?? '';
-// const initialState = {
 
-//   description: '',
-
-// garages: [],
-// Id : '',
-// maxPrice : 0,
-// minPrice : 0,
-// name: '',
-
- 
- 
- 
 // }
 
 // const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjcxYzM1M2Q1LWQxOGMtNGJjOC05MWQ2LWI1ZjM5Mzk5ZjljMyIsImVtYWlsIjoibmhvbTJAZ3JyLmxhIiwiZnVsbE5hbWUiOiJOaMOzbSAyIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzAwMDI1MTI2LCJleHAiOjE3MDAwNjExMjZ9.8CcCP24zMlRD4lFd3LaaSaT8EaP5fIB_wjWWF1bOtbM'
@@ -78,3 +62,4 @@
 // })
 // const serviceReducer = ownerSlice.reducer
 // export default serviceReducer
+
