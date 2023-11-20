@@ -21,11 +21,6 @@
     padding: 4px;
 }
 
-.garage-create-management .garage-create .row-management {
-    padding-top: 8px;
-    padding-bottom: 12px;
-}
-
 .garage-create-management .garage-create .des-management textarea {
     height: 120px;
     width: 95%;
@@ -35,27 +30,5 @@
 
 .garage-create-management .garage-create .time-management {
     width: 90%;
-}
-
-.garage-create-management .garage-create .name-span {
-    font-weight: 400;
-    color: rgb(122, 117, 117);
-}
-
-.row-management .btn-add-management {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 6px 16px 5px 16px;
-    margin-right: 20px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-}
-
-.row-management button:hover {
-    transition: ease-in 0.3s;
-    color:rgb(0, 153, 255) ;
-    border-color: rgb(0, 153, 255);
 }
 

@@ -1,6 +1,8 @@
+
 import { Button, Col, Row, Select, Space, Table } from 'antd';
 import { useEffect, useState } from 'react';
 import axiosInstance from '../services/axios.service';
+
 
 import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
@@ -12,7 +14,9 @@ import Search from 'antd/es/input/Search';
 const Owner = () => {
   const columns = [
     {
+
       title: '#',
+
       dataIndex: 'id',
       key: 'id',
     },
@@ -35,7 +39,6 @@ const Owner = () => {
       title: 'Status',
       dataIndex: 'status',
       key: 'status',
-
       render: (value) => (
         <div
           style={{
@@ -46,15 +49,18 @@ const Owner = () => {
         </div>
       ),
     },
+
     {
       title: 'Action',
       dataIndex: 'action',
       key: 'action',
       render: (_, param2) => (
+
         <div>
           <Link to={`/detailowner/${param2.id}`}>
             <EyeOutlined />
           </Link>
+
           <EditOutlined
             style={{
               paddingLeft: 12,
@@ -71,23 +77,30 @@ const Owner = () => {
 
   const [query, setQuery] = useState({
     page: 1,
+
     limit: 5,
+
     name: '',
     email: '',
     status: '',
   });
 
+
   const navigate = useNavigate();
+
   const [owners, setOwners] = useState([]);
   const [pagination, setPagination] = useState({});
   const [type, setType] = useState('name');
   const [value, setValue] = useState('');
 
+
   const dispatch = useDispatch();
+
   const fetchOwners = async () => {
     const response = await axiosInstance.get('/users', {
       params: query,
     });
+    dispatch(fetchOwnersById(response));
 
     dispatch(fetchOwnersById(response));
 
@@ -233,4 +246,6 @@ const Owner = () => {
   );
 };
 
+
 export default Owner;
+

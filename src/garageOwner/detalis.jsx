@@ -9,7 +9,9 @@ import { useState } from 'react';
 const GarageDetails = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   // const [garageName, setGarageName] = useState([]);
+
 
   const ownerByIdData = useSelector((state) => state.owner?.ownerByIdData);
 
@@ -24,12 +26,14 @@ const GarageDetails = () => {
   };
   console.log(66, ownerByIdData);
 
+
   const garageName = ownerByIdData.garages;
   console.log(ownerByIdData.fullName);
   // // setGarageName(ownerByIdData.garages);
   // // console.log(garageName);
   // // garageName === [] ? garageName : null;
   console.log(77, garageName);
+
 
   const handleDelete = () => {
     navigate('/owner');
@@ -44,6 +48,7 @@ const GarageDetails = () => {
               <Col span={12}>
                 <div className="detail-label">Name:</div>
                 <div className="detail-value">{ownerByIdData?.fullName}</div>
+
               </Col>
               <Col span={12}>
                 <div className="detail-label">Email:</div>
@@ -69,11 +74,13 @@ const GarageDetails = () => {
               <Col span={12}>
                 <div className="detail-label">Role:</div>
                 <div className="detail-value">{ownerByIdData?.role}</div>
+
               </Col>
             </Row>
 
             <Row gutter={[16, 24]}>
               <Col span={12}>
+
                 <div className="detail-label">Status:</div>
                 <div className="detail-value">{ownerByIdData?.status}</div>
               </Col>
@@ -82,6 +89,7 @@ const GarageDetails = () => {
                 <div className="detail-value"></div>
               </Col>
             </Row>
+
           </Card>
         </Col>
       </Row>
