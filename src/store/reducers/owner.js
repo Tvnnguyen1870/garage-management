@@ -8,8 +8,7 @@ const initialState = {
 
 };
 
-const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjcxYzM1M2Q1LWQxOGMtNGJjOC05MWQ2LWI1ZjM5Mzk5ZjljMyIsImVtYWlsIjoibmhvbTJAZ3JyLmxhIiwiZnVsbE5hbWUiOiJOaMOzbSAyIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzAwNDY1NzI3LCJleHAiOjE3MDA1MDE3Mjd9.jHaP_mQLN0bJRTjlwUY0u6phpEJzs-IF_4j9lf4RJ4Y';
+const token =  localStorage.getItem('accessToken') ?? '';
 
 localStorage.setItem('accessToken', token);
 
@@ -66,12 +65,6 @@ const ownerSlice = createSlice({
     });
     builder.addCase(fetchOwnersById.fulfilled, (state, action) => {
       state.ownerByIdData = action.payload;
-
-    });
-
-    builder.addCase(deleteOwners.fulfilled, (state, action) => {
-      state.manageOwner = action.payload;
-      (owner) => owner.id !== action.payload.id;
 
     });
   },

@@ -60,7 +60,7 @@ const LayOut = () => {
             {
               key: '2',
               icon: <UserOutlined />,
-              label: 'User',
+              label: <Link to="/owner">User</Link>,
             },
             {
               key: '3',
