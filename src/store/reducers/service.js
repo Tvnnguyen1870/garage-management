@@ -7,8 +7,7 @@ const initialState = {
 
 }
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjcxYzM1M2Q1LWQxOGMtNGJjOC05MWQ2LWI1ZjM5Mzk5ZjljMyIsImVtYWlsIjoibmhvbTJAZ3JyLmxhIiwiZnVsbE5hbWUiOiJOaMOzbSAyIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzAwMTkyODMzLCJleHAiOjE3MDAyMjg4MzN9.UB6iHmxAELaEy0VOMJ7ZMd4h6gKhDneI5s24Ax56cxE'
-
+const token =  localStorage.getItem('accessToken') ?? '';
 localStorage.setItem('accessToken', token )
 export const fetchServices = createAsyncThunk('service/fetchServices', async (payload) => {
   try {

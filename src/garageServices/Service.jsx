@@ -1,4 +1,4 @@
-import { Button, Col, Row, Select, Space, Table } from 'antd';
+import { Button, Col, Row, Select, Space, Table, notification } from 'antd';
 import { useEffect, useState } from 'react';
 import axiosInstance from '../services/axios.service';
 
@@ -78,7 +78,7 @@ const Service = () => {
   });
 
   const navigate = useNavigate();
-  const [service, setService] = useState([]);
+  const [owners, setService] = useState([]);
   const [pagination, setPagination] = useState({});
   const [type, setType] = useState('name');
   const [value, setValue] = useState('');
@@ -90,7 +90,7 @@ const Service = () => {
     });
 
     dispatch(fetchServicesById(response));
-
+    console.log(response);
     setService(response.data.data.items);
     setPagination(response.data.data.pagination);
   };
@@ -139,7 +139,7 @@ const Service = () => {
 
   //-------------------------
   let idNew = null;
-  const data = service;
+  const data = owners;
   if (data && data.length > 0) {
     idNew = data[0].id;
   }
@@ -161,6 +161,9 @@ const Service = () => {
       })
       .catch((error) => {
         console.error(error);
+        notification.open({
+          message: error.response.data.message,
+        });
       });
 
     onTableChange();
@@ -220,7 +223,7 @@ const Service = () => {
 
       <Table
         rowKey="id"
-        dataSource={service}
+        dataSource={owners}
         columns={columns}
         pagination={{
           current: pagination.page,

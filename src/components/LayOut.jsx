@@ -16,6 +16,11 @@ const LayOut = () => {
     navigate('/profile');
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('accessToken') ?? '';
+    window.location.href = '/login';
+  };
+
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -88,7 +93,9 @@ const LayOut = () => {
             <div className="dropAdmin">
               <ul>
                 <li onClick={toProfile}>Profile</li>
-                <li className="logout-profile">Log Out</li>
+                <li onClick={handleLogout} className="logout-profile">
+                  Log Out
+                </li>
               </ul>
             </div>
           </div>
