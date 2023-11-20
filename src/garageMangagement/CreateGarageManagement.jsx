@@ -1,11 +1,11 @@
-import { Button, Col, Row, Breadcrumb, Space, TimePicker, Form, Input, Checkbox } from 'antd';
+import { Button, Col, Row, Breadcrumb, Space, TimePicker, Form, Input } from 'antd';
 import '../assets/styles/creategarage.css';
 import { useNavigate } from 'react-router';
 import dayjs from 'dayjs';
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { createGarage } from '../store/reducers/management';
-import { fetchServices } from '../store/reducers/service';
+import axiosInstance from '../services/axios.service';
 
 const CreateGarageManagement = ({ value }) => {
   const navigate = useNavigate();
@@ -60,15 +60,23 @@ const CreateGarageManagement = ({ value }) => {
   };
 
   // call api service
-  const { serviceIds } = useSelector((state) => state.service);
+  const token = localStorage.getItem('accessToken') ?? '';
 
-  console.log(serviceIds, 'serviceId');
+  const apiURL = `services`;
 
-  useEffect(() => {
-    dispatch(fetchServices());
-  }, []);
-
-  if (!serviceIds) return;
+  axiosInstance
+    .get(apiURL, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((result) => {
+      console.log(result);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 
   return (
     <div className="garage-create-management">

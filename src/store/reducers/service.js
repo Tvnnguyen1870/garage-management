@@ -7,7 +7,7 @@ const initialState = {
 
 }
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjcxYzM1M2Q1LWQxOGMtNGJjOC05MWQ2LWI1ZjM5Mzk5ZjljMyIsImVtYWlsIjoibmhvbTJAZ3JyLmxhIiwiZnVsbE5hbWUiOiJOaMOzbSAyIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzAwNDU0NjM0LCJleHAiOjE3MDA0OTA2MzR9.bkgWCpQMAgilmE7NpAaUEVCBT0Y5kh9vmwas7a7ORLQ'
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjcxYzM1M2Q1LWQxOGMtNGJjOC05MWQ2LWI1ZjM5Mzk5ZjljMyIsImVtYWlsIjoibmhvbTJAZ3JyLmxhIiwiZnVsbE5hbWUiOiJOaMOzbSAyIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzAwNDYyMDA3LCJleHAiOjE3MDA0OTgwMDd9.F8ErXEkHhA3CzE3Jb1wxjy-3Ei08hcr3djOVIJih3yI'
 
 localStorage.setItem('accessToken', token )
 export const fetchServices = createAsyncThunk('service/fetchServices', async (payload) => {
@@ -20,7 +20,6 @@ export const fetchServices = createAsyncThunk('service/fetchServices', async (pa
     throw error; 
   }
 });
-
 
 // export const fetchServicesById = createAsyncThunk('owner/fetchServicesById', async (payload) => {
 //   try {
@@ -56,7 +55,6 @@ const ownerSlice = createSlice({
   name: 'service',
   initialState,
   reducers: {
-    
 
   },
   extraReducers: (builder) => {
@@ -66,6 +64,7 @@ const ownerSlice = createSlice({
     builder.addCase(fetchServicesById.fulfilled, (state, action) => {
       state.serviceByIdData = action.payload;
     });
+    
   
   },
 })
