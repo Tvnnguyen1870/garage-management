@@ -6,6 +6,7 @@ import { createNewService } from '../../src/store/reducers/service';
 import { useNavigate } from 'react-router-dom';
 
 const CreateService = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: 'string',
     description: 'string',
@@ -30,7 +31,7 @@ const CreateService = () => {
         setShowAlert(true);
       });
   }, [form]);
-  // const navigate = useNavigate();
+
   const handleSubmit = () => {
     setIsSubmited(true);
     form
@@ -66,20 +67,12 @@ const CreateService = () => {
         console.error('Lỗi khi xác thực biểu mẫu', error);
       });
 
-    // navigate('/service');
+    navigate('/service');
   };
-
-  const navigate = useNavigate();
 
   const clickCancel = () => {
     navigate('/service');
   };
-
-  // const handleFormReset = () => {
-  //   form.resetFields();
-  //   setIsSubmited(false);
-  //   setShowAlert(false);
-  // };
 
   const validateNumber = async (rule, value) => {
     if (value === '') {

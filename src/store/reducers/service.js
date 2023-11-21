@@ -33,7 +33,6 @@ export const fetchServices = createAsyncThunk('service/fetchServices', async (pa
 export const fetchServicesById = createAsyncThunk('service/fetchServicesById', async (payload) => {
   try {
     const response = await axiosInstance.get(`/services/${payload}`);
-    console.log(response);
     return response.data.data;
   } catch (error) {
     throw error;
