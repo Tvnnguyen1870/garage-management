@@ -35,6 +35,7 @@ const router = createBrowserRouter([
         path: '/changepassword',
         element: <ChangePassword />,
       },
+
       {
         path: '/managementall',
         element: <GarageManagementAll />,
@@ -51,10 +52,11 @@ const router = createBrowserRouter([
         path: '/managementedit',
         element: <EditManagement />,
       },
-      // {
-      //   path: '/editservice',
-      //   element: <EditGarageService />,
-      // },
+
+      {
+        path: '/service',
+        element: <Service />,
+      },
       {
         path: '/detailservice/:id',
         element: <DetailGarageService />,

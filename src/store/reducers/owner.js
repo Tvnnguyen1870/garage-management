@@ -62,12 +62,6 @@ const ownerSlice = createSlice({
       state.ownerByIdData = action.payload;
 
     });
-
-    builder.addCase(deleteOwners.fulfilled, (state, action) => {
-      state.manageOwner = action.payload;
-      (owner) => owner.id !== action.payload.id;
-
-    });
   },
 });
 
