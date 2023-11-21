@@ -1,8 +1,8 @@
 import { Button, Form, Input, notification } from 'antd';
 import '../assets/styles/login.css';
-
 import { loginAPI } from '../services/UserService';
 import { Link, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ const Login = () => {
 
     openNotification();
 
-    navigate('/');
+    navigate('/managementall');
   };
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
@@ -27,8 +27,8 @@ const Login = () => {
   };
   return (
     <div className="loginContainer">
-      <h1>welcome</h1>
-      <h3>Login to your account</h3>
+      <h1 className="heading-login">welcome</h1>
+      <h3 className="heading-login">Login to your account</h3>
       <Form
         name="basic"
         style={{
@@ -71,7 +71,9 @@ const Login = () => {
           <Button block type="primary" htmlType="submit">
             Login
           </Button>
-          <Link to="/forgot">forgot pass</Link>
+          <div style={{ marginTop: 12 }}>
+            <Link to="/forgot">forgot password</Link>
+          </div>
         </div>
       </Form>
     </div>

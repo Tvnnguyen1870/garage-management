@@ -26,8 +26,6 @@ export const fetchOwners = createAsyncThunk('owner/fetchOwners', async () => {
 export const fetchOwnersById = createAsyncThunk('owner/fetchOwnersById', async (payload) => {
   try {
     const response = await axiosInstance.get(`/users/${payload}`);
-
-
     console.log(12, response.data.data);
     return response.data.data;
   } catch (error) {

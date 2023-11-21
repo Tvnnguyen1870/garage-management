@@ -26,7 +26,7 @@ export const getManagement = createAsyncThunk(
 export const fetchGarageById = createAsyncThunk('management/fetchGarageById', async (payload) => {
     try {
 
-      const result = await axiosInstance(`garages/${payload}`);
+      const result = await axiosInstance.get(`garages/${payload}`);
     //   console.log(result.data.data, 'result');
       return result.data.data;
     } catch (error) {
@@ -60,7 +60,7 @@ export const managementSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { removeManagement } = managementSlice.actions;
+// export const { removeManagement } = managementSlice.actions;
 
 const managementReducer = managementSlice.reducer;
 

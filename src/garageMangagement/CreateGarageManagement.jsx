@@ -1,4 +1,4 @@
-import { Button, Col, Row, Breadcrumb, Space, TimePicker, Form, Input } from 'antd';
+import { Button, Col, Row, Breadcrumb, Space, TimePicker, Form, Input, Checkbox } from 'antd';
 import '../assets/styles/creategarage.css';
 import { useNavigate } from 'react-router';
 import dayjs from 'dayjs';
@@ -16,14 +16,6 @@ const CreateGarageManagement = ({ value }) => {
 
   const [formSubmitted, setFormSubmitted] = useState(false);
 
-  // const allServices = [];
-  const [filterValue, setFilterValue] = useState('');
-  // const filteredServices = allServices.filter((service) => service.includes(filterValue));
-
-  const handleInputChange = (e) => {
-    setFilterValue(e.target.value);
-  };
-
   const [form] = Form.useForm();
 
   const format = 'HH:mm';
@@ -39,6 +31,16 @@ const CreateGarageManagement = ({ value }) => {
         </Button>
       </Space>
     );
+  };
+
+  const [filterValue, setFilterValue] = useState('');
+  const allServices = ['Service 1', 'Service 2', 'Service 3', 'Service 4', 'Service 5'];
+  const filteredServices = allServices.filter((service) => service.includes(filterValue));
+
+  // const filteredServices = filterValue.filter((service) => service.includes(filterValue));
+
+  const handleInputChange = (e) => {
+    setFilterValue(e.target.value);
   };
 
   const dispatch = useDispatch();
@@ -72,7 +74,7 @@ const CreateGarageManagement = ({ value }) => {
       },
     })
     .then((result) => {
-      console.log(result);
+      // setFilterValue(result.data.data.items);
     })
     .catch((error) => {
       console.error(error);
@@ -177,13 +179,13 @@ const CreateGarageManagement = ({ value }) => {
               >
                 <Form.Item name="serviceIds" label="Services">
                   <Input placeholder="Enter your services " onChange={handleInputChange} value={filterValue} />
-                  {/* <Checkbox.Group>
+                  <Checkbox.Group>
                     {filteredServices.map((service) => (
                       <div key={service}>
                         <Checkbox value={service}>{service}</Checkbox>
                       </div>
                     ))}
-                  </Checkbox.Group> */}
+                  </Checkbox.Group>
                 </Form.Item>
               </div>
             </Col>

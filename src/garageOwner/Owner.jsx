@@ -1,8 +1,6 @@
-
 import { Button, Col, Row, Select, Space, Table } from 'antd';
 import { useEffect, useState } from 'react';
 import axiosInstance from '../services/axios.service';
-
 
 import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
@@ -14,7 +12,6 @@ import Search from 'antd/es/input/Search';
 const Owner = () => {
   const columns = [
     {
-
       title: '#',
 
       dataIndex: 'id',
@@ -55,7 +52,6 @@ const Owner = () => {
       dataIndex: 'action',
       key: 'action',
       render: (_, param2) => (
-
         <div>
           <Link to={`/detailowner/${param2.id}`}>
             <EyeOutlined />
@@ -85,14 +81,12 @@ const Owner = () => {
     status: '',
   });
 
-
   const navigate = useNavigate();
 
   const [owners, setOwners] = useState([]);
   const [pagination, setPagination] = useState({});
   const [type, setType] = useState('name');
   const [value, setValue] = useState('');
-
 
   const dispatch = useDispatch();
 
@@ -180,72 +174,67 @@ const Owner = () => {
   };
 
   return (
-    <div
-      className="profile"
-      style={{
-        marginTop: 30,
-      }}
-    >
-      <div>
-        <Row gutter={24}>
-          <Col className="gutter-row" span={6}>
-            <h2>All Garage Owner</h2>
-          </Col>
-          <Col className="gutter-row" span={15}></Col>
-          <Col className="gutter-row" span={3}>
-            <Button onClick={handleAdd}>Add Owner</Button>
-          </Col>
-        </Row>
-      </div>
+    <div>
+      <div className="profile">
+        <div>
+          <Row gutter={24}>
+            <Col className="gutter-row" span={6}>
+              <h2>All Garage Owner</h2>
+            </Col>
+            <Col className="gutter-row" span={15}></Col>
+            <Col className="gutter-row" span={3}>
+              <Button onClick={handleAdd}>Add Owner</Button>
+            </Col>
+          </Row>
+        </div>
 
-      {/* --------------------------- */}
-      <div
-        style={{
-          marginBottom: 20,
-        }}
-      >
-        <Row gutter={24}>
-          <Col className="gutter-row" span={8}>
-            <Space.Compact
-              style={{
-                position: 'relative',
-              }}
-              block
-            >
-              <Select defaultValue={type} allowClear onChange={handleTypeChange}>
-                <Option value="Name">Name</Option>
-                <Option value="Email">Email</Option>
-              </Select>
-              <Search
-                onChange={onInputChange}
-                value={value}
-                allowClear
-                onSearch={onSearch}
+        {/* --------------------------- */}
+        <div
+          style={{
+            marginBottom: 20,
+          }}
+        >
+          <Row gutter={24}>
+            <Col className="gutter-row" span={8}>
+              <Space.Compact
                 style={{
-                  width: '100%',
+                  position: 'relative',
                 }}
-              />
-            </Space.Compact>
-          </Col>
-          <Col span={10}></Col>
-        </Row>
-      </div>
+                block
+              >
+                <Select defaultValue={type} allowClear onChange={handleTypeChange}>
+                  <Option value="Name">Name</Option>
+                  <Option value="Email">Email</Option>
+                </Select>
+                <Search
+                  onChange={onInputChange}
+                  value={value}
+                  allowClear
+                  onSearch={onSearch}
+                  style={{
+                    width: '100%',
+                  }}
+                />
+              </Space.Compact>
+            </Col>
+            <Col span={10}></Col>
+          </Row>
+        </div>
 
-      <Table
-        rowKey="id"
-        dataSource={owners}
-        columns={columns}
-        pagination={{
-          current: pagination.page,
-          pageSize: pagination.limit,
-          total: pagination.total,
-        }}
-        onChange={onTableChange}
-      />
+        <Table
+          rowKey="id"
+          dataSource={owners}
+          columns={columns}
+          pagination={{
+            current: pagination.page,
+            pageSize: pagination.limit,
+            total: pagination.total,
+          }}
+          onChange={onTableChange}
+        />
+      </div>
     </div>
   );
 };
 
-
 export default Owner;
-
