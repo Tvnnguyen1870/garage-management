@@ -10,9 +10,8 @@ const DetailService = () => {
   const dispatch = useDispatch();
   const serviceByIdData = useSelector((state) => state.service?.serviceByIdData);
   const navigate = useNavigate();
-
   const params = useParams();
-  console.log(params);
+
   useEffect(() => {
     dispatch(fetchServicesById(params.id));
   }, []);
@@ -21,7 +20,6 @@ const DetailService = () => {
     navigate(`/editowner/${params.id}`);
   };
 
-  console.log(serviceByIdData);
   return (
     <div
       style={{
@@ -67,22 +65,6 @@ const DetailService = () => {
                   <div className="detail-value">{serviceByIdData?.minPrice}</div>
                 </Col>
               </Row>
-              {/* <Row gutter={[16, 24]}>
-              <Col span={12}>
-                <div className="detail-label">Gender:</div>
-                <div className="detail-value">{serviceByIdData?.gender}</div>
-              </Col>
-              <Col span={12}>
-                <div className="detail-label">Role:</div>
-                <div className="detail-value">{serviceByIdData?.role}</div>
-              </Col>
-            </Row>
-            <Row gutter={[16, 24]}>
-              <Col span={24}>
-                <div className="detail-label">Garage:</div>
-                <Link to={serviceByIdData?.garage}>{serviceByIdData?.garage}</Link>
-              </Col>
-            </Row> */}
             </Card>
           </Col>
         </Row>

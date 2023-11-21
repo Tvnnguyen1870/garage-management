@@ -1,12 +1,10 @@
-import { Button, Card, Col, Form, Input, Row, Select, Space, notification, Alert, DatePicker } from 'antd';
+import { Button, Col, Form, Input, Row, Select, Space, notification, Alert, DatePicker, Breadcrumb } from 'antd';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import axiosInstance from '../services/axios.service';
 import { useNavigate } from 'react-router-dom';
 import { createNewOwner } from '../store/reducers/owner';
-// import { getManagement } from '../store/reducers/management';
-// import { createNewOwner } from '../store/reducers/owner';
-// import { AddfetchOwners, fetchOwners } from '../store/reducers/Owner';
+
 const { Option } = Select;
 const Create = () => {
   const [formData, setFormData] = useState({
@@ -24,7 +22,6 @@ const Create = () => {
   const [isFormValid, setIsFormValid] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [isSubmited, setIsSubmited] = useState(false);
-  // const dateFormat = 'YYYY/MM/DD';
 
   useEffect(() => {
     form
@@ -80,8 +77,6 @@ const Create = () => {
         setShowAlert(true);
         console.error('Lỗi khi xác thực biểu mẫu', error);
       });
-
-    // navigate('/service');
   };
 
   const navigate = useNavigate();
@@ -100,25 +95,39 @@ const Create = () => {
   const [id, setId] = useState('');
   const getManagement = async () => {
     const response = await axiosInstance.get('garages');
-
     setGarages(response.data.data.items);
   };
 
+  // call API
   useEffect(() => {
-    // call API
     getManagement();
   }, []);
 
-  console.log(77, garages);
-
   const handleChange = (value) => {
     setId(value);
-    console.log(`selected ${value}`);
   };
-  console.log(12, id);
 
   return (
-    <Card>
+    <div
+      style={{
+        marginTop: 30,
+      }}
+    >
+      <Breadcrumb
+        style={{
+          marginLeft: 40,
+          fontSize: 22,
+        }}
+        separator=">"
+        items={[
+          {
+            title: 'All Owner',
+          },
+          {
+            title: 'Add a new owner',
+          },
+        ]}
+      />
       <div
         className="profile"
         style={{
@@ -250,7 +259,7 @@ const Create = () => {
           </div>
         </div>
       </div>
-    </Card>
+    </div>
   );
 };
 export default Create;

@@ -23,12 +23,7 @@ export const profileSlice = createSlice({
   name: 'profile',
   initialState,
   reducers: {
-    editProfile: (state, action) => {
-      state.profiles.push(action.payload);
-    },
-    addProfile: (state, action) => {
-      state.profiles.push(action.payload);
-    },
+    
   },
   extraReducers: (builder) => {
     builder.addCase(getProfile.fulfilled, (state, actions) => {
@@ -38,7 +33,7 @@ export const profileSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { editProfile, addProfile } = profileSlice.actions;
+// export const { editProfile, addProfile } = profileSlice.actions;
 
 const profileReducer = profileSlice.reducer;
 

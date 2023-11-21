@@ -14,8 +14,6 @@ localStorage.setItem('accessToken', token);
 export const fetchOwners = createAsyncThunk('owner/fetchOwners', async () => {
   try {
     const response = await axiosInstance.get('users');
-
-    console.log(2, response.data.data);
     return response.data.data;
   } catch (error) {
     console.log(error);
@@ -25,11 +23,9 @@ export const fetchOwners = createAsyncThunk('owner/fetchOwners', async () => {
 export const fetchOwnersById = createAsyncThunk('/owner/fetchOwnersById', async (payload) => {
   try {
     const response = await axiosInstance.get(`/users/${payload}`);
-
-    console.log(12, response.data.data);
     return response.data.data;
   } catch (error) {
-    return error;
+    console.log(error);
   }
 });
 
@@ -38,19 +34,9 @@ export const createNewOwner = createAsyncThunk('/owner/createNewOwner', async (o
     const response = await axiosInstance.post('users', ownerData);
     return response.data.data;
   } catch (error) {
-    throw error;
+    console.log(error);
   }
 });
-
-// export const deleteOwners = createAsyncThunk('owner/deleteOwners', async () => {
-//   try {
-//     const response = await axiosInstance.delete('users');
-//     console.log(4, response.data.data);
-//     return response.data.data.id;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// });
 
 const ownerSlice = createSlice({
   name: 'owner',
