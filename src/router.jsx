@@ -10,6 +10,7 @@ import GarageManagementAll from './garageMangagement/GarageManagementAll';
 import CreateGarageManagement from './garageMangagement/CreateGarageManagement';
 import EditManagement from './garageMangagement/EditManagement';
 import DetailGarageService from './garageServices/DetailGarageService';
+import EditGarageService from './garageServices/EditGarageService';
 import GarageManagementDetail from './garageMangagement/GarageManagementDetail';
 import ChangePassword from './myprofile/ChangePassword';
 import Service from './garageServices/Service';
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
       {
         path: '/createservice',
         element: <CreateService />,
+      },
+      {
+        path: '/editservice/:id',
+        element: <EditGarageService />,
       },
       {
         path: '/owner',

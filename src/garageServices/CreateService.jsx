@@ -85,7 +85,7 @@ const CreateService = () => {
     if (value === '') {
       return;
     } else if (isNaN(value)) {
-      throw new Error('Please enter a valid number');
+      throw new Error('JUST ENTER NUMBER');
     }
   };
 
@@ -97,14 +97,7 @@ const CreateService = () => {
       }}
     >
       {showAlert && isSubmited && (
-        <Alert
-          message="Error"
-          description="Please fill form."
-          type="error"
-          showIcon
-          closable
-          onClose={() => setShowAlert(false)}
-        />
+        <Alert message="Error" description="" type="error" showIcon closable onClose={() => setShowAlert(false)} />
       )}
       <div>
         <div>
@@ -112,23 +105,23 @@ const CreateService = () => {
             <Row gutter={16}>
               <Col className="gutter-row" span={6}>
                 <Form.Item name="name" label="Name" rules={[{ required: true }]}>
-                  <Input placeholder="Enter your name" />
+                  <Input placeholder="Enter your name here" />
                 </Form.Item>
               </Col>
               <Col className="gutter-row" span={6}>
                 <Form.Item
                   name="minPrice"
                   label="Min price"
-                  rules={[{ required: true, message: 'enter min price' }, { validator: validateNumber }]}
+                  rules={[{ required: true, message: 'ENTER MIN PRICE SERVICE' }, { validator: validateNumber }]}
                 >
-                  <Input placeholder="Enter min price" />
+                  <Input placeholder="Enter min price service" />
                 </Form.Item>
               </Col>
               <Col className="gutter-row" span={6}>
                 <Form.Item
                   name="maxPrice"
                   label="Max price"
-                  rules={[{ required: true, message: 'enter maxprice' }, { validator: validateNumber }]}
+                  rules={[{ required: true, message: 'ENTER MAX PRICE SERVICE' }, { validator: validateNumber }]}
                 >
                   <Input placeholder="Enter max price" />
                 </Form.Item>
@@ -136,7 +129,7 @@ const CreateService = () => {
             </Row>
             <div>
               <Form.Item name="description" label="Description">
-                <Input.TextArea placeholder="Description" />
+                <Input.TextArea placeholder="Description SERVICE" />
               </Form.Item>
             </div>
           </Form>
