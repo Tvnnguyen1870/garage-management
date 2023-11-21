@@ -1,21 +1,21 @@
-import { Card, Col, Row, Button, Space, Breadcrumb } from 'antd';
+import { Card, Col, Row, Button, Space } from 'antd';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { fetchOwnersById } from '../store/reducers/owner';
+import { useState } from 'react';
 // import { fetchOwners, fetchOwnersById } from '../store/reducers/owner';
 
 const GarageDetails = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-
   // const [garageName, setGarageName] = useState([]);
 
   const ownerByIdData = useSelector((state) => state.owner?.ownerByIdData);
 
   const params = useParams();
-
+  console.log(params);
   useEffect(() => {
     dispatch(fetchOwnersById(params.id));
   }, []);
@@ -23,7 +23,6 @@ const GarageDetails = () => {
   const handleEdit = () => {
     navigate(`/editowner/${params.id}`);
   };
-
   console.log(66, ownerByIdData);
 
   // const garageName = ownerByIdData.garages;
@@ -33,13 +32,11 @@ const GarageDetails = () => {
   // // garageName === [] ? garageName : null;
   // console.log(77, garageName);
 
-
   const handleDelete = () => {
     navigate('/owner');
   };
 
   return (
-
     <div className="profile">
       <Row gutter={[16, 24]}>
         <Col span={24}>
@@ -83,7 +80,13 @@ const GarageDetails = () => {
               </Col>
               <Col span={12}>
                 <div className="detail-label">Garages:</div>
-                {/* <div className="detail-value">{ownerByIdData.garages.length > 0 ? 1 : null}</div> */}
+                <div className="detail-value">
+                  {ownerByIdData.garages.map((owner) => {
+                    {
+                      owner.length > 0 ? owner.name : null;
+                    }
+                  })}
+                </div>
               </Col>
             </Row>
           </Card>
@@ -98,7 +101,6 @@ const GarageDetails = () => {
           Delete
         </Button>
       </Space>
-
     </div>
   );
 };

@@ -1,10 +1,10 @@
 import { Button, Card, Col, Form, Input, Row, Select, Space, notification, Alert, DatePicker } from 'antd';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import axiosInstance from '../services/axios.service';
 import { useNavigate } from 'react-router-dom';
 import { createNewOwner } from '../store/reducers/owner';
-// import { getManagement } from '../store/reducers/management';
+import { getManagement } from '../store/reducers/management';
 // import { createNewOwner } from '../store/reducers/owner';
 // import { AddfetchOwners, fetchOwners } from '../store/reducers/Owner';
 const { Option } = Select;
@@ -17,7 +17,7 @@ const Create = () => {
     gender: 'Gender',
     dob: '',
     role: 'Role',
-    garage: [],
+    garageIds: [],
   });
   const dispatch = useDispatch();
   const [form] = Form.useForm();
@@ -41,20 +41,13 @@ const Create = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (id !== '') return JSON.stringify(garages.filter((garage) => garage.id === id));
+    if (id !== '') alert(JSON.stringify(garages.filter((garage) => garage.id === id)));
     setIsSubmited(true);
     form
       .validateFields()
       .then((values) => {
         const formattedValues = {
-          fullName: values.fullName,
-          email: values.email,
-          password: values.password,
-          phoneNumber: values.phoneNumber,
-          gender: values.gender,
-          dob: values.dob,
-          role: values.role,
-          gerageIds: garages.filter((garage) => garage.id === id),
+          ...values,
         };
 
         dispatch(createNewOwner(formattedValues))
@@ -98,6 +91,7 @@ const Create = () => {
 
   const [garages, setGarages] = useState([]);
   const [id, setId] = useState('');
+  const [list, setList] = useState([]);
   const getManagement = async () => {
     const response = await axiosInstance.get('garages');
 
@@ -110,13 +104,11 @@ const Create = () => {
   }, []);
 
   console.log(77, garages);
-
   const handleChange = (value) => {
     setId(value);
     console.log(`selected ${value}`);
   };
   console.log(12, id);
-
   return (
     <Card>
       <div
@@ -221,23 +213,35 @@ const Create = () => {
                   </Form.Item>
                 </Col>
 
-                <Space>
+                <Col className="gutter-row" span={6}>
                   <Form.Item
-                    name="gerageIds"
-                    label="gerageIds"
-                    rules={[{ required: true, message: 'Please select gender!' }]}
+                    name="garageIds"
+                    label="garageIds"
+                    rules={[{ required: true, message: 'Please select Role!' }]}
                   >
-                    <Select value={id} placeholder="Please select" onChange={handleChange}>
+                    <Select placeholder="select your gender">
                       {garages.map((garage) => (
-                        <option key={garage.id} value={garage.id}>
-                          {/* {id !== '' ? JSON.stringify(garages.filter((garage) => garage.id === id)) : null} */}
-                          {/* {id !== '' ? garage.name : null} */}
-                          {garage.name}
-                        </option>
+                        <Option key={garage.id} value={garage.id}>
+                          {id !== '' ? setList(JSON.stringify(garages.filter((garage) => garage.id === id))) : null}
+                        </Option>
                       ))}
                     </Select>
                   </Form.Item>
-                </Space>
+                </Col>
+
+                {/* <Form.Item
+                  name="gerageIds"
+                  label="gerageIds"
+                  rules={[{ required: true, message: 'Please select gender!' }]}
+                >
+                  <Select value={id} placeholder="Please select" onChange={handleChange}>
+                    {garages.map((garage) => (
+                      <Option key={garage.id} value={garage.id}>
+                        {id !== '' ? JSON.stringify(garages.filter((garage) => garage.id === id)) : null}
+                      </Option>
+                    ))}
+                  </Select>
+                </Form.Item> */}
               </Row>
             </Form>
 

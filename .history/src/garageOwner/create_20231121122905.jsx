@@ -1,10 +1,10 @@
 import { Button, Card, Col, Form, Input, Row, Select, Space, notification, Alert, DatePicker } from 'antd';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import axiosInstance from '../services/axios.service';
 import { useNavigate } from 'react-router-dom';
 import { createNewOwner } from '../store/reducers/owner';
-// import { getManagement } from '../store/reducers/management';
+import { getManagement } from '../store/reducers/management';
 // import { createNewOwner } from '../store/reducers/owner';
 // import { AddfetchOwners, fetchOwners } from '../store/reducers/Owner';
 const { Option } = Select;
@@ -110,13 +110,11 @@ const Create = () => {
   }, []);
 
   console.log(77, garages);
-
   const handleChange = (value) => {
     setId(value);
     console.log(`selected ${value}`);
   };
   console.log(12, id);
-
   return (
     <Card>
       <div

@@ -1,10 +1,10 @@
 import { Button, Card, Col, Form, Input, Row, Select, Space, notification, Alert, DatePicker } from 'antd';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import axiosInstance from '../services/axios.service';
 import { useNavigate } from 'react-router-dom';
 import { createNewOwner } from '../store/reducers/owner';
-// import { getManagement } from '../store/reducers/management';
+import { getManagement } from '../store/reducers/management';
 // import { createNewOwner } from '../store/reducers/owner';
 // import { AddfetchOwners, fetchOwners } from '../store/reducers/Owner';
 const { Option } = Select;
@@ -39,22 +39,13 @@ const Create = () => {
       });
   }, [form]);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (id !== '') return JSON.stringify(garages.filter((garage) => garage.id === id));
+  const handleSubmit = () => {
     setIsSubmited(true);
     form
       .validateFields()
       .then((values) => {
         const formattedValues = {
-          fullName: values.fullName,
-          email: values.email,
-          password: values.password,
-          phoneNumber: values.phoneNumber,
-          gender: values.gender,
-          dob: values.dob,
-          role: values.role,
-          gerageIds: garages.filter((garage) => garage.id === id),
+          ...values,
         };
 
         dispatch(createNewOwner(formattedValues))
@@ -96,8 +87,10 @@ const Create = () => {
   //   dispatch(AddfetchOwners(values));
   // }, [values]);
 
+  const handleChange = (value) => {
+    console.log(`selected ${value}`);
+  };
   const [garages, setGarages] = useState([]);
-  const [id, setId] = useState('');
   const getManagement = async () => {
     const response = await axiosInstance.get('garages');
 
@@ -111,12 +104,21 @@ const Create = () => {
 
   console.log(77, garages);
 
-  const handleChange = (value) => {
-    setId(value);
-    console.log(`selected ${value}`);
-  };
-  console.log(12, id);
+  // const [options, setOptions] = useState([]);
+  // setOptions(garages);
+  // console.log(options);
 
+  const garageById = garages.map((a, b) => {
+    return a.name;
+  });
+
+  console.log(44, garageById);
+
+  // for (let i = options.length; i <= options.length; i++) {
+  //   options.push({
+  //     garageById,
+  //   });
+  // }
   return (
     <Card>
       <div
@@ -227,15 +229,14 @@ const Create = () => {
                     label="gerageIds"
                     rules={[{ required: true, message: 'Please select gender!' }]}
                   >
-                    <Select value={id} placeholder="Please select" onChange={handleChange}>
-                      {garages.map((garage) => (
-                        <option key={garage.id} value={garage.id}>
-                          {/* {id !== '' ? JSON.stringify(garages.filter((garage) => garage.id === id)) : null} */}
-                          {/* {id !== '' ? garage.name : null} */}
-                          {garage.name}
-                        </option>
-                      ))}
-                    </Select>
+                    <Select
+                      mode="multiple"
+                      allowClear
+                      style={{ width: '100%' }}
+                      placeholder="Please select"
+                      onChange={handleChange}
+                      // options={options}
+                    />
                   </Form.Item>
                 </Space>
               </Row>
