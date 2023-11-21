@@ -242,7 +242,7 @@
 // };
 
 import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
-import { Button, Input, Select, Table, Card, Col, Row, Space, notification } from 'antd';
+import { Button, Input, Select, Table, Card, Col, Row, Space } from 'antd';
 import { useEffect, useState } from 'react';
 import axiosInstance from '../services/axios.service';
 import { Link, useNavigate } from 'react-router-dom';
@@ -303,7 +303,7 @@ const Owner = () => {
               paddingRight: 12,
             }}
           />
-          <DeleteOutlined onClick={deleteOwner} />
+          <DeleteOutlined />
         </div>
       ),
     },
@@ -359,36 +359,6 @@ const Owner = () => {
   const navigate = useNavigate();
   const handleAdd = () => {
     navigate('/createowner');
-  };
-
-  let idNew = null;
-  const data = owners;
-  if (data && data.length > 0) {
-    idNew = data[0].id;
-  }
-
-  const token = localStorage.getItem('accessToken') ?? '';
-
-  const apiURL = `services/${idNew}`;
-  const deleteOwner = () => {
-    axiosInstance
-      .delete(apiURL, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((error) => {
-        console.error(error);
-        notification.open({
-          message: error.response.data.message,
-        });
-      });
-
-    onTableChange();
   };
   return (
     <div>

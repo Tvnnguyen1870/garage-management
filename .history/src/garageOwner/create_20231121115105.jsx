@@ -41,20 +41,13 @@ const Create = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (id !== '') return JSON.stringify(garages.filter((garage) => garage.id === id));
+    if (id !== '') alert(JSON.stringify(garages.filter((garage) => garage.id === id)));
     setIsSubmited(true);
     form
       .validateFields()
       .then((values) => {
         const formattedValues = {
-          fullName: values.fullName,
-          email: values.email,
-          password: values.password,
-          phoneNumber: values.phoneNumber,
-          gender: values.gender,
-          dob: values.dob,
-          role: values.role,
-          gerageIds: garages.filter((garage) => garage.id === id),
+          ...values,
         };
 
         dispatch(createNewOwner(formattedValues))
@@ -135,7 +128,22 @@ const Create = () => {
         )}
         <div>
           <div>
-            <Form form={form} name="validateOnly" layout="vertical" autoComplete="off">
+            <Form
+              form={form}
+              name="validateOnly"
+              layout="vertical"
+              autoComplete="off"
+              initialValues={{
+                fullName: '',
+                email: '',
+                password: '',
+                phoneNumber: 0,
+                gender: 'Gender',
+                dob: '',
+                role: 'Role',
+                gerageIds: [],
+              }}
+            >
               <Row gutter={16}>
                 <Col className="gutter-row" span={6}>
                   <Form.Item name="fullName" label="Name" rules={[{ required: true }]}>
@@ -228,8 +236,6 @@ const Create = () => {
                     <Select value={id} placeholder="Please select" onChange={handleChange}>
                       {garages.map((garage) => (
                         <option key={garage.id} value={garage.id}>
-                          {/* {id !== '' ? JSON.stringify(garages.filter((garage) => garage.id === id)) : null} */}
-                          {/* {id !== '' ? garage.name : null} */}
                           {garage.name}
                         </option>
                       ))}

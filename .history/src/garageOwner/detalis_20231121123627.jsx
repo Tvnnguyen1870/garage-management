@@ -80,7 +80,13 @@ const GarageDetails = () => {
               </Col>
               <Col span={12}>
                 <div className="detail-label">Garages:</div>
-                {/* <div className="detail-value">{ownerByIdData.garages.length > 0 ? 1 : null}</div> */}
+                <div className="detail-value">
+                  {ownerByIdData.map((owner) => {
+                    {
+                      owner.garages.length > 0 ? owner.garages.name : null;
+                    }
+                  })}
+                </div>
               </Col>
             </Row>
           </Card>

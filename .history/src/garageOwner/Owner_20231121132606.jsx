@@ -372,7 +372,7 @@ const Owner = () => {
   const apiURL = `services/${idNew}`;
   const deleteOwner = () => {
     axiosInstance
-      .delete(apiURL, {
+      .delete(apiUrl, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,

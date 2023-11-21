@@ -39,22 +39,13 @@ const Create = () => {
       });
   }, [form]);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (id !== '') return JSON.stringify(garages.filter((garage) => garage.id === id));
+  const handleSubmit = () => {
     setIsSubmited(true);
     form
       .validateFields()
       .then((values) => {
         const formattedValues = {
-          fullName: values.fullName,
-          email: values.email,
-          password: values.password,
-          phoneNumber: values.phoneNumber,
-          gender: values.gender,
-          dob: values.dob,
-          role: values.role,
-          gerageIds: garages.filter((garage) => garage.id === id),
+          ...values,
         };
 
         dispatch(createNewOwner(formattedValues))
@@ -111,6 +102,7 @@ const Create = () => {
 
   console.log(77, garages);
   const handleChange = (value) => {
+    console.log(value);
     setId(value);
     console.log(`selected ${value}`);
   };
@@ -228,8 +220,7 @@ const Create = () => {
                     <Select value={id} placeholder="Please select" onChange={handleChange}>
                       {garages.map((garage) => (
                         <option key={garage.id} value={garage.id}>
-                          {/* {id !== '' ? JSON.stringify(garages.filter((garage) => garage.id === id)) : null} */}
-                          {/* {id !== '' ? garage.name : null} */}
+                          {' '}
                           {garage.name}
                         </option>
                       ))}
