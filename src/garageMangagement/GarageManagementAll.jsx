@@ -1,11 +1,11 @@
-import { Button, Col, Row, Select, Space, Table } from 'antd';
+import { Button, Col, Row, Select, Space, Table, notification } from 'antd';
 import { Option } from 'antd/es/mentions';
 import { useNavigate } from 'react-router';
 import { useEffect, useState } from 'react';
 import Search from 'antd/es/input/Search';
 import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
-import { useDispatch, useSelector } from 'react-redux';
-import { getManagement } from '../store/reducers/management';
+import { useDispatch } from 'react-redux';
+import { fetchGarageById } from '../store/reducers/management';
 import { Link } from 'react-router-dom';
 import axiosInstance from '../services/axios.service';
 
@@ -30,7 +30,7 @@ const GarageManagementAll = () => {
     {
       title: 'Phone Number',
       dataIndex: 'phoneNumber',
-      key: 'phone number',
+      key: 'phoneNumber',
     },
     {
       title: 'Status',
@@ -68,12 +68,6 @@ const GarageManagementAll = () => {
     },
   ];
 
-  //------------------------------------
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const [type, setType] = useState('name');
-  const [value, setValue] = useState('');
-
   //  chuyển trang
   const toAddGarage = () => {
     navigate('/managementcreate');
@@ -83,10 +77,18 @@ const GarageManagementAll = () => {
     navigate('/managementedit');
   };
 
+  //------------------------------------
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [garages, setGarages] = useState([]);
+  const [pagination, setPagination] = useState({});
+  const [type, setType] = useState('name');
+  const [value, setValue] = useState('');
+
   //---------------------------
-  const [params, setParams] = useState({
+  const [query, setQuery] = useState({
     page: 1,
-    limit: 2,
+    limit: 5,
     name: '',
     email: '',
     status: '',
@@ -94,23 +96,45 @@ const GarageManagementAll = () => {
 
   //-------------------------
 
-  // call API
-  const { management } = useSelector((state) => state.management);
+  const fetchGarage = async () => {
+    const result = await axiosInstance.get('/garages', {
+      params: query,
+    });
 
+    dispatch(fetchGarageById(result));
+    setGarages(result.data.data.items);
+    setPagination(result.data.data.pagination);
+  };
+
+  // call API
   useEffect(() => {
-    dispatch(getManagement(params));
-  }, [params]);
+    fetchGarage();
+  }, [query]);
 
   // tìm kiếm
   const onSearch = () => {
-    if (type === 'name') {
-      setParams({ ...params, name: value });
+    if (type === 'Name') {
+      setQuery({ ...query, name: value });
     } else {
-      setParams({ ...params, email: value });
+      setQuery({ ...query, email: value });
     }
   };
+
+  const onInputChange = (event) => {
+    const value = event.target.value;
+    setValue(value);
+  };
+
+  const handleTypeChange = (value) => {
+    setType(value);
+  };
+
+  const onTableChange = (values) => {
+    setQuery({ ...query, page: values.current });
+  };
+
   let idNew = null;
-  const data = management?.items;
+  const data = garages;
   if (data && data.length > 0) {
     idNew = data[0].id;
   }
@@ -132,38 +156,15 @@ const GarageManagementAll = () => {
       })
       .catch((error) => {
         console.error(error);
+        notification.open({
+          message: error.response.data.message,
+        });
       });
   };
 
-  const pagination = management?.pagination;
-
-  const onTableChange = (pagination) => {
-    setParams({ ...params, page: pagination.current, limit: pagination.pageSize });
-  };
-
-  const handleTypeChange = (value) => {
-    setType(value);
-  };
-
-  const onInputChange = (event) => {
-    const value = event.target.value;
-    setValue(value);
-  };
-
-  if (!management) return;
-
   return (
-    <div
-      className="profile"
-      style={{
-        marginTop: 30,
-      }}
-    >
-      <div
-        style={{
-          marginBottom: 16,
-        }}
-      >
+    <div className="profile">
+      <div>
         <Row gutter={24}>
           <Col className="gutter-row" span={3}>
             <h2>All Garages</h2>
@@ -189,7 +190,7 @@ const GarageManagementAll = () => {
             >
               <Select defaultValue={type} allowClear onChange={handleTypeChange}>
                 <Option value="Name">Name</Option>
-                <Option value="Email">Email</Option>
+                <Option value="email">Email</Option>
               </Select>
               <Search
                 onChange={onInputChange}
@@ -210,8 +211,8 @@ const GarageManagementAll = () => {
       <div>
         <Table
           rowKey="id"
+          dataSource={garages}
           columns={columns}
-          dataSource={data}
           pagination={{
             current: pagination.page,
             pageSize: pagination.limit,

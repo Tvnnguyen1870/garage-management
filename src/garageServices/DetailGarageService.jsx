@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable react/prop-types */
-import { Button, Card, Col, Row, Space } from 'antd';
+import { Breadcrumb, Button, Card, Col, Row, Space } from 'antd';
 import { useEffect } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { fetchServicesById } from '../store/reducers/service';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -23,31 +23,51 @@ const DetailService = () => {
 
   console.log(serviceByIdData);
   return (
-    <div className="profile">
-      <Row gutter={[16, 24]}>
-        <Col span={24}>
-          <Card title="Infomation" bordered={false}>
-            <Row gutter={[16, 24]}>
-              <Col span={12}>
-                <div className="detail-label">Name:</div>
-                <div className="detail-value">{serviceByIdData?.name}</div>
-              </Col>
-              <Col span={12}>
-                <div className="detail-label">Description:</div>
-                <div className="detail-value">{serviceByIdData?.description}</div>
-              </Col>
-            </Row>
-            <Row gutter={[16, 24]}>
-              <Col span={12}>
-                <div className="detail-label">Max price:</div>
-                <div className="detail-value">{serviceByIdData?.maxPrice}</div>
-              </Col>
-              <Col span={12}>
-                <div className="detail-label">Min price:</div>
-                <div className="detail-value">{serviceByIdData?.minPrice}</div>
-              </Col>
-            </Row>
-            {/* <Row gutter={[16, 24]}>
+    <div
+      style={{
+        marginTop: 30,
+      }}
+    >
+      <Breadcrumb
+        style={{
+          fontSize: 22,
+          marginLeft: 40,
+        }}
+        separator=">"
+        items={[
+          {
+            title: 'All garages',
+          },
+          {
+            title: `${serviceByIdData?.name}`,
+          },
+        ]}
+      />
+      <div className="profile">
+        <Row gutter={[16, 24]}>
+          <Col span={24}>
+            <Card title="Infomation" bordered={false}>
+              <Row gutter={[16, 24]}>
+                <Col span={12}>
+                  <div className="detail-label">Name:</div>
+                  <div className="detail-value">{serviceByIdData?.name}</div>
+                </Col>
+                <Col span={12}>
+                  <div className="detail-label">Description:</div>
+                  <div className="detail-value">{serviceByIdData?.description}</div>
+                </Col>
+              </Row>
+              <Row gutter={[16, 24]}>
+                <Col span={12}>
+                  <div className="detail-label">Max price:</div>
+                  <div className="detail-value">{serviceByIdData?.maxPrice}</div>
+                </Col>
+                <Col span={12}>
+                  <div className="detail-label">Min price:</div>
+                  <div className="detail-value">{serviceByIdData?.minPrice}</div>
+                </Col>
+              </Row>
+              {/* <Row gutter={[16, 24]}>
               <Col span={12}>
                 <div className="detail-label">Gender:</div>
                 <div className="detail-value">{serviceByIdData?.gender}</div>
@@ -63,16 +83,17 @@ const DetailService = () => {
                 <Link to={serviceByIdData?.garage}>{serviceByIdData?.garage}</Link>
               </Col>
             </Row> */}
-          </Card>
-        </Col>
-      </Row>
-      <Space style={{ marginTop: 20 }}>
-        <Button type="primary" onClick={handleEdit}>
-          Edit
-        </Button>
+            </Card>
+          </Col>
+        </Row>
+        <Space style={{ marginTop: 20 }}>
+          <Button type="primary" onClick={handleEdit}>
+            Edit
+          </Button>
 
-        <Button type="danger">Delete</Button>
-      </Space>
+          <Button type="danger">Delete</Button>
+        </Space>
+      </div>
     </div>
   );
 };

@@ -1,3 +1,4 @@
+
 // import { Button, Col, Row, Select, Space, Table } from 'antd';
 // import { useEffect, useState } from 'react';
 // import axiosInstance from '../services/axios.service';
@@ -245,6 +246,7 @@ import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
 import { Button, Input, Select, Table, Card, Col, Row, Space, notification } from 'antd';
 import { useEffect, useState } from 'react';
 import axiosInstance from '../services/axios.service';
+
 import { Link, useNavigate } from 'react-router-dom';
 import { Option } from 'rc-select';
 import Search from 'antd/es/input/Search';
@@ -315,6 +317,8 @@ const Owner = () => {
     email: '',
     status: '',
   });
+
+
 
   const [owners, setOwners] = useState([]);
   const [pagination, setPagination] = useState({});
@@ -392,6 +396,7 @@ const Owner = () => {
   };
   return (
     <div>
+
       <Card>
         <Button onClick={handleAdd}>Add owner</Button>
         <div
@@ -425,6 +430,7 @@ const Owner = () => {
             <Col span={10}></Col>
           </Row>
         </div>
+
         <Table
           rowKey="id"
           dataSource={owners}
@@ -437,6 +443,7 @@ const Owner = () => {
           onChange={onTableChange}
         />
       </Card>
+
     </div>
   );
 };

@@ -34,7 +34,7 @@ const Forgot = () => {
   };
   return (
     <div className="loginContainer">
-      <h3>Forgot password</h3>
+      <h3 className="heading-login">Forgot password</h3>
       <Form
         name="basic"
         style={{
