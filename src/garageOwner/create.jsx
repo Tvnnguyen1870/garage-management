@@ -1,12 +1,10 @@
-import { Button, Card, Col, Form, Input, Row, Select, Space, notification, Alert, DatePicker } from 'antd';
+import { Button, Col, Form, Input, Row, Select, Space, notification, Alert, DatePicker, Breadcrumb } from 'antd';
 import { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import axiosInstance from '../services/axios.service';
 import { useNavigate } from 'react-router-dom';
 import { createNewOwner } from '../store/reducers/owner';
-import { getManagement } from '../store/reducers/management';
-// import { createNewOwner } from '../store/reducers/owner';
-// import { AddfetchOwners, fetchOwners } from '../store/reducers/Owner';
+
 const { Option } = Select;
 const Create = () => {
   const [formData, setFormData] = useState({
@@ -24,7 +22,6 @@ const Create = () => {
   const [isFormValid, setIsFormValid] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [isSubmited, setIsSubmited] = useState(false);
-  // const dateFormat = 'YYYY/MM/DD';
 
   useEffect(() => {
     form
@@ -39,13 +36,22 @@ const Create = () => {
       });
   }, [form]);
 
-  const handleSubmit = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (id !== '') return JSON.stringify(garages.filter((garage) => garage.id === id));
     setIsSubmited(true);
     form
       .validateFields()
       .then((values) => {
         const formattedValues = {
-          ...values,
+          fullName: values.fullName,
+          email: values.email,
+          password: values.password,
+          phoneNumber: values.phoneNumber,
+          gender: values.gender,
+          dob: values.dob,
+          role: values.role,
+          gerageIds: garages.filter((garage) => garage.id === id),
         };
 
         dispatch(createNewOwner(formattedValues))
@@ -71,8 +77,6 @@ const Create = () => {
         setShowAlert(true);
         console.error('Lỗi khi xác thực biểu mẫu', error);
       });
-
-    // navigate('/service');
   };
 
   const navigate = useNavigate();
@@ -87,40 +91,43 @@ const Create = () => {
   //   dispatch(AddfetchOwners(values));
   // }, [values]);
 
-  const handleChange = (value) => {
-    console.log(`selected ${value}`);
-  };
   const [garages, setGarages] = useState([]);
+  const [id, setId] = useState('');
   const getManagement = async () => {
     const response = await axiosInstance.get('garages');
-
     setGarages(response.data.data.items);
   };
 
+  // call API
   useEffect(() => {
-    // call API
     getManagement();
   }, []);
 
-  console.log(77, garages);
+  const handleChange = (value) => {
+    setId(value);
+  };
 
-  // const [options, setOptions] = useState([]);
-  // setOptions(garages);
-  // console.log(options);
-
-  const garageById = garages.map((a, b) => {
-    return a.name;
-  });
-
-  console.log(44, garageById);
-
-  // for (let i = options.length; i <= options.length; i++) {
-  //   options.push({
-  //     garageById,
-  //   });
-  // }
   return (
-    <Card>
+    <div
+      style={{
+        marginTop: 30,
+      }}
+    >
+      <Breadcrumb
+        style={{
+          marginLeft: 40,
+          fontSize: 22,
+        }}
+        separator=">"
+        items={[
+          {
+            title: 'All Owner',
+          },
+          {
+            title: 'Add a new owner',
+          },
+        ]}
+      />
       <div
         className="profile"
         style={{
@@ -229,14 +236,15 @@ const Create = () => {
                     label="gerageIds"
                     rules={[{ required: true, message: 'Please select gender!' }]}
                   >
-                    <Select
-                      mode="multiple"
-                      allowClear
-                      style={{ width: '100%' }}
-                      placeholder="Please select"
-                      onChange={handleChange}
-                      // options={options}
-                    />
+                    <Select value={id} placeholder="Please select" onChange={handleChange}>
+                      {garages.map((garage) => (
+                        <option key={garage.id} value={garage.id}>
+                          {/* {id !== '' ? JSON.stringify(garages.filter((garage) => garage.id === id)) : null} */}
+                          {/* {id !== '' ? garage.name : null} */}
+                          {garage.name}
+                        </option>
+                      ))}
+                    </Select>
                   </Form.Item>
                 </Space>
               </Row>
@@ -244,14 +252,14 @@ const Create = () => {
 
             <Space>
               <Button type="primary" htmlType="button" onClick={handleSubmit}>
-                Create
+                Save
               </Button>
               <Button onClick={clickCancel}>Cancel</Button>
             </Space>
           </div>
         </div>
       </div>
-    </Card>
+    </div>
   );
 };
 export default Create;

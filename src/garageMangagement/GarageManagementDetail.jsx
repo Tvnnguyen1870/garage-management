@@ -7,9 +7,7 @@ import { fetchGarageById } from '../store/reducers/management';
 
 const GarageManagementDetail = () => {
   const navigate = useNavigate();
-
   const params = useParams();
-
   const dispatch = useDispatch();
 
   const garageById = useSelector((state) => state.management?.garageById);
@@ -18,11 +16,8 @@ const GarageManagementDetail = () => {
     dispatch(fetchGarageById(params.id));
   }, []);
 
-  console.log('12345', garageById?.id);
-
   //---------------------------
   const [form] = Form.useForm();
-
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const SubmitButton = ({ form }) => {
@@ -46,7 +41,7 @@ const GarageManagementDetail = () => {
             title: 'All garages',
           },
           {
-            title: 'Gara 1',
+            title: `${garageById?.name}`,
           },
         ]}
       />

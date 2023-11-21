@@ -28,16 +28,16 @@ const ChangePassword = () => {
   const onFinish = (values) => {
     console.log(values);
   };
+  const navigate = useNavigate();
 
   const [password, setPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const navigate = useNavigate();
-
   const clickCancel = () => {
     navigate('/profile');
   };
+
   const token = localStorage.getItem('accessToken');
 
   const apiUrl = 'auth/change-password';

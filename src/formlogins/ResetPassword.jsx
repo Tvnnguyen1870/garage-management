@@ -46,6 +46,7 @@ const Login = () => {
         autoComplete="off"
         layout="vertical"
       >
+        <h3 className="heading-login">Reset password</h3>
         <Form.Item
           label="Password"
           name="password"

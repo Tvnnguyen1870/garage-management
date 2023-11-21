@@ -3,7 +3,6 @@ import { MenuFoldOutlined, MenuUnfoldOutlined, GroupOutlined, UserOutlined, Idca
 import { Layout, Menu, Button, theme } from 'antd';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import '../assets/styles/headerlayout.css';
-import { key } from 'localforage';
 
 const { Header, Sider } = Layout;
 
@@ -17,8 +16,10 @@ const LayOut = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('accessToken') ?? '';
-    window.location.href = '/login';
+    localStorage.clear();
+    navigate('/login');
+    // localStorage.removeItem('accessToken') ?? '';
+    // window.location.href = '/login';
   };
 
   const {
@@ -60,7 +61,7 @@ const LayOut = () => {
             {
               key: '2',
               icon: <UserOutlined />,
-              label: 'User',
+              label: <Link to="/owner">User</Link>,
             },
             {
               key: '3',

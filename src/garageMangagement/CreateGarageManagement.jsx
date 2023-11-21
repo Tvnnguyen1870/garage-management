@@ -1,10 +1,10 @@
-import { Button, Col, Row, Breadcrumb, Space, TimePicker, Form, Input } from 'antd';
+import { Button, Col, Row, Breadcrumb, Space, TimePicker, Form, Input, Checkbox } from 'antd';
 import '../assets/styles/creategarage.css';
 import { useNavigate } from 'react-router';
 import dayjs from 'dayjs';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { createGarage } from '../store/reducers/management';
+import { createGarage, fetchGarageById } from '../store/reducers/management';
 import axiosInstance from '../services/axios.service';
 
 const CreateGarageManagement = ({ value }) => {
@@ -15,14 +15,6 @@ const CreateGarageManagement = ({ value }) => {
   };
 
   const [formSubmitted, setFormSubmitted] = useState(false);
-
-  // const allServices = [];
-  const [filterValue, setFilterValue] = useState('');
-  // const filteredServices = allServices.filter((service) => service.includes(filterValue));
-
-  const handleInputChange = (e) => {
-    setFilterValue(e.target.value);
-  };
 
   const [form] = Form.useForm();
 
@@ -59,24 +51,21 @@ const CreateGarageManagement = ({ value }) => {
       });
   };
 
-  // call api service
-  const token = localStorage.getItem('accessToken') ?? '';
+  const [dataService, setDataService] = useState();
 
-  const apiURL = `services`;
+  const fetchService = async () => {
+    const result = await axiosInstance.get('/services');
 
-  axiosInstance
-    .get(apiURL, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    .then((result) => {
-      console.log(result);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+    dispatch(fetchGarageById(result));
+    setDataService(result.data.data.items);
+  };
+
+  console.log(dataService, '11');
+
+  // call API
+  useEffect(() => {
+    fetchService();
+  }, []);
 
   return (
     <div className="garage-create-management">
@@ -176,14 +165,12 @@ const CreateGarageManagement = ({ value }) => {
                 }}
               >
                 <Form.Item name="serviceIds" label="Services">
-                  <Input placeholder="Enter your services " onChange={handleInputChange} value={filterValue} />
-                  {/* <Checkbox.Group>
-                    {filteredServices.map((service) => (
-                      <div key={service}>
-                        <Checkbox value={service}>{service}</Checkbox>
-                      </div>
-                    ))}
-                  </Checkbox.Group> */}
+                  <Input placeholder="Enter your services " />
+                  <Checkbox.Group>
+                    <div>
+                      <Checkbox>service</Checkbox>
+                    </div>
+                  </Checkbox.Group>
                 </Form.Item>
               </div>
             </Col>

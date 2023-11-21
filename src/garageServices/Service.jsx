@@ -1,11 +1,10 @@
 import { Button, Col, Row, Select, Space, Table, notification } from 'antd';
 import { useEffect, useState } from 'react';
 import axiosInstance from '../services/axios.service';
-
 import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { fetchServicesById } from '../store/reducers/service';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Option } from 'rc-select';
 import Search from 'antd/es/input/Search';
 
@@ -67,8 +66,6 @@ const Service = () => {
     },
   ];
 
-  // const navigate = useNavigate();
-
   const [query, setQuery] = useState({
     page: 1,
     limit: 5,
@@ -80,7 +77,7 @@ const Service = () => {
   const navigate = useNavigate();
   const [owners, setService] = useState([]);
   const [pagination, setPagination] = useState({});
-  const [type, setType] = useState('name');
+  const [type, setType] = useState('Name');
   const [value, setValue] = useState('');
 
   const dispatch = useDispatch();
@@ -90,7 +87,6 @@ const Service = () => {
     });
 
     dispatch(fetchServicesById(response));
-    console.log(response);
     setService(response.data.data.items);
     setPagination(response.data.data.pagination);
   };
@@ -105,23 +101,11 @@ const Service = () => {
 
   const onInputChange = (event) => {
     const value = event.target.value;
-
     setValue(value);
   };
 
-  const handleSubmit = (a) => {
-    console.log(a);
-  };
-
-  const toServiceDetail = () => {
-    // navigate('/managementdetail');
-  };
-  const toEditService = () => {
-    // navigate('/managementedit');
-  };
-
   const onSearch = () => {
-    if (type === 'name') {
+    if (type === 'Name') {
       setQuery({ ...query, name: value });
     } else {
       setQuery({ ...query, email: value });

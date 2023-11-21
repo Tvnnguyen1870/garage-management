@@ -51,10 +51,10 @@ const router = createBrowserRouter([
         path: '/managementedit',
         element: <EditManagement />,
       },
-      {
-        path: '/service',
-        element: <Service />,
-      },
+      // {
+      //   path: '/editservice',
+      //   element: <EditGarageService />,
+      // },
       {
         path: '/detailservice/:id',
         element: <DetailGarageService />,

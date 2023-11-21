@@ -25,7 +25,6 @@ const Profile = () => {
   }, []);
 
   const { profile } = useSelector((state) => state.profile);
-  console.log(profile);
 
   if (!profile) return;
 
