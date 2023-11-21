@@ -41,7 +41,7 @@ const Create = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (id !== '') return JSON.stringify(garages.filter((garage) => garage.id === id));
+    if (id !== '') alert(JSON.stringify(garages.filter((garage) => garage.id === id)));
     setIsSubmited(true);
     form
       .validateFields()

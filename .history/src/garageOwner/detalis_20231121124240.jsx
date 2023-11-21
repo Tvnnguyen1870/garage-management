@@ -25,12 +25,12 @@ const GarageDetails = () => {
   };
   console.log(66, ownerByIdData);
 
-  // const garageName = ownerByIdData.garages;
+  const garageName = ownerByIdData.garages;
   // console.log(ownerByIdData.fullName);
   // // setGarageName(ownerByIdData.garages);
   // // console.log(garageName);
   // // garageName === [] ? garageName : null;
-  // console.log(77, garageName);
+  console.log(77, garageName);
 
   const handleDelete = () => {
     navigate('/owner');
@@ -80,7 +80,13 @@ const GarageDetails = () => {
               </Col>
               <Col span={12}>
                 <div className="detail-label">Garages:</div>
-                {/* <div className="detail-value">{ownerByIdData.garages.length > 0 ? 1 : null}</div> */}
+                <div className="detail-value">
+                  {/* {
+                  garageName.length > 0 ? {garageName.map((owner) =>{
+                    owner.name
+                  })}: null
+                } */}
+                </div>
               </Col>
             </Row>
           </Card>

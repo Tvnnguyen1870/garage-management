@@ -25,12 +25,12 @@ const GarageDetails = () => {
   };
   console.log(66, ownerByIdData);
 
-  // const garageName = ownerByIdData.garages;
+  const garageName = ownerByIdData[garages];
   // console.log(ownerByIdData.fullName);
   // // setGarageName(ownerByIdData.garages);
   // // console.log(garageName);
   // // garageName === [] ? garageName : null;
-  // console.log(77, garageName);
+  console.log(77, garageName);
 
   const handleDelete = () => {
     navigate('/owner');

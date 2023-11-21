@@ -41,7 +41,7 @@ const Create = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (id !== '') return JSON.stringify(garages.filter((garage) => garage.id === id));
+    if (id !== '') alert(JSON.stringify(garages.filter((garage) => garage.id === id)));
     setIsSubmited(true);
     form
       .validateFields()
@@ -229,8 +229,8 @@ const Create = () => {
                       {garages.map((garage) => (
                         <option key={garage.id} value={garage.id}>
                           {/* {id !== '' ? JSON.stringify(garages.filter((garage) => garage.id === id)) : null} */}
-                          {/* {id !== '' ? garage.name : null} */}
-                          {garage.name}
+                          {id !== '' ? garage.name : null}
+                          {/* {garage.name} */}
                         </option>
                       ))}
                     </Select>
