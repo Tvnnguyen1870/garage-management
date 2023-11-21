@@ -1,6 +1,7 @@
 /* eslint-disable no-useless-catch */
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import axiosInstance from "../../services/axios.service"
+import { useState } from "react";
 axiosInstance.defaults.headers.common['Authorization'] = localStorage.getItem('accessToken') ?? '';
 const initialState = {
   service: null,
@@ -50,6 +51,26 @@ export const createNewService = createAsyncThunk('service/createNewService', asy
   }
 });
 
+export const FormInput = (initValue) => {
+  const [value, setValue] = useState(initValue)
+
+  const onChangeHandle = (event) => {
+      if (event) {
+          setValue(event.target.value)
+      } else {
+          setValue('')
+      }
+  }
+
+
+
+  const inputValue = {
+      value: value,
+      onChange: onChangeHandle,
+  }
+
+  return inputValue;
+}
 
 const ownerSlice = createSlice({
   name: 'service',

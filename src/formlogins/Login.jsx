@@ -67,11 +67,11 @@ const Login = () => {
         >
           <Input.Password />
         </Form.Item>
+        <Link to="/forgot">forgot password</Link>
         <div className="button">
           <Button block type="primary" htmlType="submit">
             Login
           </Button>
-          <Link to="/forgot">forgot pass</Link>
         </div>
       </Form>
     </div>
